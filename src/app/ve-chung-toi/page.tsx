@@ -55,7 +55,7 @@ export default function AboutPage() {
         <PhotoSlot want="đội ngũ Đơm Hoa" tone="light" className="min-h-[320px] rounded-[var(--radius-panel)]" />
       </section>
 
-      <section className="container-site mt-28" aria-labelledby="values-title">
+      <section id="gia-tri" className="container-site mt-28 scroll-mt-28" aria-labelledby="values-title">
         <SectionHeading
           id="values-title"
           title="Bốn giá trị chúng tôi gìn giữ"

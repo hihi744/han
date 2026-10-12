@@ -81,7 +81,7 @@ export default function JourneyPage() {
         ))}
       </div>
 
-      <section className="container-site mt-28" aria-labelledby="academy-title">
+      <section id="hoc-vien" className="container-site mt-28 scroll-mt-28" aria-labelledby="academy-title">
         <div className="on-dark rounded-[var(--radius-panel)] bg-moss-deep p-8 text-on-dark sm:p-12">
           <h2 id="academy-title" className="max-w-2xl text-[32px] text-on-dark md:text-[44px]">
             Học viện Đơm Hoa: bốn mô-đun, học bằng tay

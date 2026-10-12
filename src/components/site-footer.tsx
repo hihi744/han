@@ -35,6 +35,7 @@ const columns = [
       { href: "/ve-chung-toi", label: "Về chúng tôi" },
       { href: "/ve-chung-toi#phap-ly", label: "Pháp lý" },
       { href: "/bao-mat", label: "Cam kết bảo mật" },
+      { href: "/lien-he", label: "Liên hệ" },
     ],
   },
 ];

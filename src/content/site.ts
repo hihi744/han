@@ -16,12 +16,32 @@ export const org = {
   license: "[Số giấy phép NHNN]",
 } as const;
 
-export const nav = [
-  { href: "/san-pham", label: "Khoản vay" },
-  { href: "/hanh-trinh", label: "Hành trình" },
-  { href: "/ve-chung-toi", label: "Về Đơm Hoa" },
-  { href: "/doi-tac", label: "Đối tác & tài trợ" },
-] as const;
+export type NavLink = { href: string; label: string; description?: string };
+export type NavItem = NavLink | { label: string; children: NavLink[] };
+
+export const nav: NavItem[] = [
+  { href: "/", label: "Trang chủ" },
+  {
+    label: "Về chúng tôi",
+    children: [
+      { href: "/ve-chung-toi", label: "Câu chuyện và sứ mệnh", description: "Ý nghĩa cái tên, tầm nhìn, sứ mệnh" },
+      { href: "/ve-chung-toi#gia-tri", label: "Giá trị cốt lõi", description: "Gieo, Ươm, Vun, Nở" },
+      { href: "/ve-chung-toi#phap-ly", label: "Pháp lý", description: "Giấy phép và khung pháp lý" },
+      { href: "/bao-mat", label: "Cam kết bảo mật", description: "Cách chúng tôi giữ kín thông tin" },
+    ],
+  },
+  {
+    label: "Sản phẩm",
+    children: [
+      { href: "/san-pham", label: "Khoản vay ReStart", description: "Vay từ 5 triệu, không cần thế chấp" },
+      { href: "/hanh-trinh", label: "Hành trình Gieo – Nở", description: "Đồng hành từ ổn định đến tự chủ" },
+      { href: "/doi-tac", label: "Dự án Trao cần câu", description: "Học nghề có việc làm chờ sẵn" },
+    ],
+  },
+  { href: "/san-pham#tinh-thu", label: "Công cụ tính khoản vay" },
+  { href: "/hanh-trinh#hoc-vien", label: "Đơm Hoa Academy" },
+  { href: "/lien-he", label: "Liên hệ" },
+];
 
 export const journey = [
   {
