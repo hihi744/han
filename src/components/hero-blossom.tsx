@@ -27,7 +27,7 @@ const example = summarize(8_000_000, 12, 0.09);
 export type HeroTreatment = "none" | "glow" | "shadow" | "glass" | "aura" | "soft-white";
 
 // Backdrops behind the flower. Purely decorative, sized relative to the art box.
-function Backdrop({ treatment }: { treatment: HeroTreatment }) {
+function Backdrop({ treatment, auraStrength = 1 }: { treatment: HeroTreatment; auraStrength?: number }) {
   switch (treatment) {
     case "glow":
       return <div aria-hidden="true" className="absolute inset-[-10%] rounded-full bg-[#f6f7f2]/35 blur-[70px]" />;
@@ -38,14 +38,19 @@ function Backdrop({ treatment }: { treatment: HeroTreatment }) {
           className="absolute inset-[-8%] rounded-full bg-white/[0.07] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_30px_80px_-30px_rgba(0,0,0,0.6)] ring-1 ring-white/20 backdrop-blur-xl"
         />
       );
-    case "aura":
+    case "aura": {
+      // Logo colours as blurred light: red behind the bloom, orange right, yellow below.
+      const a = (base: number) => Math.min(1, base * auraStrength);
+      const blob = "absolute rounded-full blur-[60px]";
+      const size = `${45 + (auraStrength - 1) * 12}%`;
       return (
         <div aria-hidden="true" className="absolute inset-[-12%]">
-          <div className="absolute left-[30%] top-[2%] size-[45%] rounded-full bg-petal-red/60 blur-[60px]" />
-          <div className="absolute right-[2%] top-[30%] size-[45%] rounded-full bg-petal-orange/50 blur-[60px]" />
-          <div className="absolute bottom-[4%] left-[8%] size-[45%] rounded-full bg-petal-yellow/45 blur-[60px]" />
+          <div className={blob} style={{ left: "30%", top: "2%", width: size, height: size, background: `rgba(186,53,59,${a(0.6)})` }} />
+          <div className={blob} style={{ right: "2%", top: "30%", width: size, height: size, background: `rgba(254,157,67,${a(0.5)})` }} />
+          <div className={blob} style={{ left: "8%", bottom: "4%", width: size, height: size, background: `rgba(255,243,161,${a(0.45)})` }} />
         </div>
       );
+    }
     case "soft-white":
       return <div aria-hidden="true" className="absolute inset-[-6%] rounded-full bg-[#f6f7f2]/90 blur-[28px]" />;
     default:
@@ -55,14 +60,21 @@ function Backdrop({ treatment }: { treatment: HeroTreatment }) {
 
 const shadowed: HeroTreatment[] = ["shadow", "soft-white", "glass"];
 
-export function HeroBlossom({ treatment = "aura" }: { treatment?: HeroTreatment }) {
+export function HeroBlossom({
+  treatment = "aura",
+  auraStrength = 1,
+}: {
+  treatment?: HeroTreatment;
+  /** 1 = default; below 1 is softer, above 1 is stronger and wider. */
+  auraStrength?: number;
+}) {
   const reduce = useReducedMotion();
   const ease = [0.22, 1, 0.36, 1] as const;
 
   return (
     <div className="relative mx-auto w-full max-w-[460px] lg:max-w-none">
       <div className="relative mx-auto aspect-square w-[78%] lg:w-[72%]">
-        <Backdrop treatment={treatment} />
+        <Backdrop treatment={treatment} auraStrength={auraStrength} />
         <svg
           viewBox="0 0 440 440"
           className="relative size-full overflow-visible"
