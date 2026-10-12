@@ -56,7 +56,7 @@ export default function HomePage() {
                 </li>
               </ul>
             </div>
-            <HeroBlossom treatment="aura" />
+            <HeroBlossom treatment="aura" auraStrength={0.5} />
           </div>
         </div>
       </section>
