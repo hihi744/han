@@ -24,14 +24,56 @@ const labels = [
 
 const example = summarize(8_000_000, 12, 0.09);
 
-export function HeroBlossom() {
+export type HeroTreatment = "none" | "glow" | "shadow" | "glass" | "aura" | "soft-white";
+
+// Backdrops behind the flower. Purely decorative, sized relative to the art box.
+function Backdrop({ treatment }: { treatment: HeroTreatment }) {
+  switch (treatment) {
+    case "glow":
+      return <div aria-hidden="true" className="absolute inset-[-10%] rounded-full bg-[#f6f7f2]/35 blur-[70px]" />;
+    case "glass":
+      return (
+        <div
+          aria-hidden="true"
+          className="absolute inset-[-8%] rounded-full bg-white/[0.07] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_30px_80px_-30px_rgba(0,0,0,0.6)] ring-1 ring-white/20 backdrop-blur-xl"
+        />
+      );
+    case "aura":
+      return (
+        <div aria-hidden="true" className="absolute inset-[-12%]">
+          <div className="absolute left-[30%] top-[2%] size-[45%] rounded-full bg-petal-red/60 blur-[60px]" />
+          <div className="absolute right-[2%] top-[30%] size-[45%] rounded-full bg-petal-orange/50 blur-[60px]" />
+          <div className="absolute bottom-[4%] left-[8%] size-[45%] rounded-full bg-petal-yellow/45 blur-[60px]" />
+        </div>
+      );
+    case "soft-white":
+      return <div aria-hidden="true" className="absolute inset-[-6%] rounded-full bg-[#f6f7f2]/90 blur-[28px]" />;
+    default:
+      return null;
+  }
+}
+
+const shadowed: HeroTreatment[] = ["shadow", "soft-white", "glass"];
+
+export function HeroBlossom({ treatment = "none" }: { treatment?: HeroTreatment }) {
   const reduce = useReducedMotion();
   const ease = [0.22, 1, 0.36, 1] as const;
 
   return (
     <div className="relative mx-auto w-full max-w-[460px] lg:max-w-none">
       <div className="relative mx-auto aspect-square w-[78%] lg:w-[72%]">
-        <svg viewBox="0 0 440 440" className="size-full overflow-visible" role="img" aria-labelledby="hero-art-title">
+        <Backdrop treatment={treatment} />
+        <svg
+          viewBox="0 0 440 440"
+          className="relative size-full overflow-visible"
+          style={
+            shadowed.includes(treatment)
+              ? { filter: "drop-shadow(0 22px 28px rgba(10,20,8,0.45)) drop-shadow(0 4px 6px rgba(10,20,8,0.25))" }
+              : undefined
+          }
+          role="img"
+          aria-labelledby="hero-art-title"
+        >
           <title id="hero-art-title">
             Bông hoa Đơm Hoa lớn dần qua bốn chặng: Gieo, Ươm, Vun, Nở
           </title>
