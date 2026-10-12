@@ -39,9 +39,9 @@ export function PhotoSlot({
     );
   }
   const palette = {
-    dark: { bg: "bg-[radial-gradient(120%_90%_at_80%_10%,#4d6a46_0%,#2c3f27_55%,#1f2d1b_100%)]", petal: "#e88b92", leaf: "#8db07f", seed: "#fff3a1", tag: "bg-moss-ink/60 text-on-dark" },
-    light: { bg: "bg-[radial-gradient(120%_90%_at_20%_0%,#ffffff_0%,#e6ece0_70%)]", petal: "#e88b92", leaf: "#6d8466", seed: "#f3df6b", tag: "bg-paper/80 text-ink-muted" },
-    blossom: { bg: "bg-[radial-gradient(120%_90%_at_80%_0%,#fff_0%,#fbe8e9_70%)]", petal: "#d9707a", leaf: "#e8a3a8", seed: "#fe9d43", tag: "bg-paper/80 text-ink-muted" },
+    dark: { bg: "bg-[radial-gradient(120%_90%_at_80%_10%,#4d6a46_0%,#2c3f27_55%,#1f2d1b_100%)]", petal: "#ba353b", leaf: "#8db07f", seed: "#fff3a1", tag: "bg-moss-ink/60 text-on-dark" },
+    light: { bg: "bg-[radial-gradient(120%_90%_at_20%_0%,#ffffff_0%,#e6ece0_70%)]", petal: "#ba353b", leaf: "#6d8466", seed: "#f3df6b", tag: "bg-paper/80 text-ink-muted" },
+    blossom: { bg: "bg-[radial-gradient(120%_90%_at_80%_0%,#fff_0%,#fbe8e9_70%)]", petal: "#ba353b", leaf: "#e8a3a8", seed: "#fe9d43", tag: "bg-paper/80 text-ink-muted" },
   }[tone];
   return (
     <div className={`overflow-hidden ${palette.bg} ${positioned(className)}`} role="img" aria-label={alt || want}>
@@ -99,7 +99,7 @@ export function CtaBand({
           <path d={petalPaths.leafRight} fill="#8db07f" />
           <path d={petalPaths.seed} fill="#8db07f" />
           <path d={petalPaths.sprout} fill="#8db07f" />
-          <path d={petalPaths.bloom} fill="#e88b92" />
+          <path d={petalPaths.bloom} fill="#ba353b" />
         </svg>
         <div className="relative max-w-xl">
           <h2 id="cta-title" className="text-[32px] text-on-dark md:text-[48px]">

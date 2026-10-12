@@ -23,12 +23,13 @@ export const stageColors = {
     leafRight: "var(--color-petal-orange)",
     bloom: "var(--color-petal-red)",
   },
+  // Same colours as the logo; the hero sets them on a light halo so the greens stay visible.
   onDark: {
     seed: "var(--color-petal-yellow)",
-    sprout: "#8db07f",
-    leafLeft: "#8db07f",
+    sprout: "var(--color-leaf)",
+    leafLeft: "var(--color-leaf)",
     leafRight: "var(--color-petal-orange)",
-    bloom: "var(--color-blossom)",
+    bloom: "var(--color-petal-red)",
   },
 } as const;
 

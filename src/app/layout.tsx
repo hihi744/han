@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/bricolage-grotesque";
 import "@fontsource-variable/manrope";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";

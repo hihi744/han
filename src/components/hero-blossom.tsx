@@ -31,7 +31,15 @@ export function HeroBlossom() {
   return (
     <div className="relative mx-auto w-full max-w-[460px] lg:max-w-none">
       <div className="relative mx-auto aspect-square w-[78%] lg:w-[72%]">
-        <svg viewBox="0 0 440 440" className="size-full overflow-visible" role="img" aria-labelledby="hero-art-title">
+        {/* Light halo so the logo's dark greens read against the moss background */}
+        <motion.div
+          aria-hidden="true"
+          initial={reduce ? false : { opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.1, ease }}
+          className="absolute inset-[-9%] rounded-full bg-mist"
+        />
+        <svg viewBox="0 0 440 440" className="relative size-full overflow-visible" role="img" aria-labelledby="hero-art-title">
           <title id="hero-art-title">
             Bông hoa Đơm Hoa lớn dần qua bốn chặng: Gieo, Ươm, Vun, Nở
           </title>
