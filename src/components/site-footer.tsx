@@ -6,9 +6,9 @@ const columns = [
   {
     title: "Dành cho bạn",
     links: [
-      { href: "/san-pham", label: "Khoản vay ReStart" },
+      { href: "/san-pham", label: "Sản phẩm tài chính" },
       { href: "/san-pham#tinh-thu", label: "Tính thử khoản vay" },
-      { href: "/hanh-trinh", label: "Học viện Đơm Hoa" },
+      { href: "/hanh-trinh", label: "Sản phẩm phi tài chính" },
       { href: "/dang-ky", label: "Đăng ký tư vấn" },
     ],
   },

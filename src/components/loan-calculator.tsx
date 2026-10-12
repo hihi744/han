@@ -41,7 +41,7 @@ export function LoanCalculator() {
           </label>
           <span className="rounded-full bg-sprout px-3 py-1 text-sm font-medium text-moss">{round}</span>
         </div>
-        <output htmlFor={`${id}-amount`} className="tabular mt-2 block text-[40px] font-semibold tracking-tight text-moss-ink sm:text-[52px]">
+        <output htmlFor={`${id}-amount`} className="font-display tabular mt-2 block text-[40px] font-semibold tracking-tight text-moss-ink sm:text-[52px]">
           {formatVnd(amount)}
         </output>
         <input
@@ -95,7 +95,7 @@ export function LoanCalculator() {
       {/* Results */}
       <div className="on-dark flex flex-col bg-moss-deep p-6 text-on-dark sm:p-10" aria-live="polite">
         <p className="text-[15px] text-on-dark-muted">Tháng đầu tiên bạn trả</p>
-        <p className="tabular mt-1 text-[40px] font-semibold tracking-tight sm:text-[52px]">
+        <p className="font-display tabular mt-1 text-[40px] font-semibold tracking-tight sm:text-[52px]">
           {formatVnd(result.firstPayment)}
         </p>
         <p className="tabular text-[15px] text-on-dark-muted">

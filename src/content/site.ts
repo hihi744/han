@@ -33,13 +33,12 @@ export const nav: NavItem[] = [
   {
     label: "Sản phẩm",
     children: [
-      { href: "/san-pham", label: "Khoản vay ReStart", description: "Vay từ 5 triệu, không cần thế chấp" },
-      { href: "/hanh-trinh", label: "Hành trình Gieo – Nở", description: "Đồng hành từ ổn định đến tự chủ" },
-      { href: "/doi-tac", label: "Dự án Trao cần câu", description: "Học nghề có việc làm chờ sẵn" },
+      { href: "/san-pham", label: "Sản phẩm tài chính", description: "Khoản vay ReStart, tiết kiệm Bước Vững" },
+      { href: "/hanh-trinh", label: "Sản phẩm phi tài chính", description: "Hệ sinh thái Gieo – Ươm – Vun – Nở" },
     ],
   },
   { href: "/san-pham#tinh-thu", label: "Công cụ tính khoản vay" },
-  { href: "/hanh-trinh#hoc-vien", label: "Đơm Hoa Academy" },
+  { href: "/du-an", label: "Dự án" },
   { href: "/lien-he", label: "Liên hệ" },
 ];
 

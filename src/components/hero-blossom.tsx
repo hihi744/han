@@ -70,7 +70,7 @@ export function HeroBlossom() {
         className="relative mx-auto -mt-4 w-full max-w-[300px] rounded-2xl bg-paper p-5 text-ink shadow-[0_24px_60px_-20px_rgba(10,20,8,0.55)] lg:mr-0"
       >
         <figcaption className="text-sm font-medium text-ink-muted">Ví dụ một khoản vay đầu tiên</figcaption>
-        <p className="tabular mt-1 text-[28px] font-semibold tracking-tight text-moss-ink">
+        <p className="font-display tabular mt-1 text-[28px] font-semibold tracking-tight text-moss-ink">
           8.000.000 đ
         </p>
         <dl className="mt-3 space-y-1.5 text-[15px]">

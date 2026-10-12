@@ -5,7 +5,7 @@ import { StageGlyph } from "@/components/petals";
 import { journey } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Hành trình Gieo, Ươm, Vun, Nở",
+  title: "Sản phẩm phi tài chính",
   description:
     "Bốn chặng đồng hành của Đơm Hoa: Điểm tựa, Học viện Đơm Hoa, Vườn Ươm Sinh Kế và Đồng hành Nở Hoa. Vốn, kiến thức và việc làm đi cùng nhau.",
 };
@@ -28,8 +28,8 @@ export default function JourneyPage() {
   return (
     <>
       <PageIntro
-        title="Từ hạt mầm đến ngày nở rộ"
-        body="Như một bông hoa, hành trình của mỗi người ở Đơm Hoa đi qua bốn chặng. Bạn bắt đầu ở chặng phù hợp với mình, và tham gia tư vấn tâm lý không bao giờ là điều kiện để được vay."
+        title="Sản phẩm phi tài chính"
+        body="Hệ sinh thái Đơm Hoa: từ hạt mầm đến ngày nở rộ. Như một bông hoa, hành trình của mỗi người ở Đơm Hoa đi qua bốn chặng. Bạn bắt đầu ở chặng phù hợp với mình, và tham gia tư vấn tâm lý không bao giờ là điều kiện để được vay."
       />
 
       <nav aria-label="Các chặng" className="sticky top-[84px] z-30 mt-10 px-3">

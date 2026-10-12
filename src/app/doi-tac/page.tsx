@@ -80,7 +80,7 @@ export default function PartnersPage() {
           {targets.map((t) => (
             <div key={t.label} className="flex flex-col rounded-[var(--radius-card)] bg-paper p-7 ring-1 ring-sprout-line">
               <dt className="order-2 mt-3 font-medium text-moss-ink">{t.label}</dt>
-              <dd className="tabular order-1 text-[48px] font-medium leading-none tracking-tight text-moss-ink">{t.value}</dd>
+              <dd className="font-display tabular order-1 text-[48px] font-medium leading-none tracking-tight text-moss-ink">{t.value}</dd>
               <dd className="order-3 mt-1 text-sm text-ink-muted">{t.note}</dd>
             </div>
           ))}
@@ -136,7 +136,7 @@ export default function PartnersPage() {
               }`}
             >
               <h3 className={`text-[19px] ${"featured" in p && p.featured ? "text-on-dark" : "text-moss-ink"}`}>{p.name}</h3>
-              <p className={`tabular mt-4 text-[26px] font-semibold tracking-tight ${"featured" in p && p.featured ? "text-blossom" : "text-moss-ink"}`}>{p.value}</p>
+              <p className={`font-display tabular mt-4 text-[26px] font-semibold tracking-tight ${"featured" in p && p.featured ? "text-blossom" : "text-moss-ink"}`}>{p.value}</p>
               <p className={`mt-3 text-[15px] ${"featured" in p && p.featured ? "text-on-dark-muted" : "text-ink-muted"}`}>{p.meaning}</p>
             </li>
           ))}

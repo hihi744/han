@@ -29,7 +29,8 @@
   --color-on-dark: #f6f7f2;
   --color-on-dark-muted: #c3cdbd;
 
-  --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Manrope Variable", ui-sans-serif, sans-serif;
 
   --radius-panel: 28px;
   --radius-card: 20px;
@@ -59,9 +60,11 @@
   h1,
   h2,
   h3 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
     /* Vietnamese stacks two marks above capitals (Ấ, Ổ); keep leading generous */
-    line-height: 1.18;
-    letter-spacing: -0.022em;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
     text-wrap: balance;
     font-weight: 600;
   }

@@ -75,7 +75,7 @@ export default function AboutPage() {
           ))}
         </ul>
         <figure className="mx-auto mt-20 max-w-3xl text-center">
-          <blockquote className="text-[28px] font-medium leading-snug tracking-tight text-moss-ink md:text-[38px]">
+          <blockquote className="font-display text-[28px] font-medium leading-snug tracking-tight text-moss-ink md:text-[38px]">
             “{org.philosophy}”
           </blockquote>
           <figcaption className="mt-5 text-ink-muted">Triết lý cốt lõi của Đơm Hoa</figcaption>

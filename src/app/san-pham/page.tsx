@@ -6,7 +6,7 @@ import { LinkButton, SectionHeading, Tbc } from "@/components/ui";
 import { applicantGroups, faqs, loanRounds, loanTerms, repaymentByTrade } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Khoản vay ReStart",
+  title: "Sản phẩm tài chính",
   description:
     "Khoản vay ReStart của Đơm Hoa: vay từ 5 đến 10 triệu đồng ở vòng đầu, lãi tính theo dư nợ giảm dần, trả trước hạn không phạt, lịch trả theo nhịp làm ăn của bạn.",
 };
@@ -22,8 +22,8 @@ export default function ProductPage() {
   return (
     <>
       <PageIntro
-        title="Khoản vay ReStart"
-        body="Bắt đầu từ khoản vay nhỏ, vừa sức trả. Mỗi kỳ trả đúng hạn là một bước bạn xây lại uy tín của chính mình."
+        title="Sản phẩm tài chính"
+        body="Khoản vay ReStart và tiết kiệm Bước Vững. Bắt đầu từ khoản vay nhỏ, vừa sức trả. Mỗi kỳ trả đúng hạn là một bước bạn xây lại uy tín của chính mình."
         aside={
           <div className="flex flex-wrap gap-3 lg:justify-end">
             <LinkButton href="/dang-ky" variant="primary">
@@ -47,7 +47,7 @@ export default function ProductPage() {
               }`}
             >
               <h2 className={`text-[22px] ${i === 0 ? "text-blossom" : "text-blossom-deep"}`}>{r.name}</h2>
-              <p className={`tabular mt-4 text-[40px] font-semibold tracking-tight sm:text-[48px] ${i === 0 ? "text-on-dark" : "text-moss-ink"}`}>
+              <p className={`font-display tabular mt-4 text-[40px] font-semibold tracking-tight sm:text-[48px] ${i === 0 ? "text-on-dark" : "text-moss-ink"}`}>
                 {r.amount}
               </p>
               <p className={i === 0 ? "text-on-dark-muted" : "text-ink-muted"}>{r.amountNote}</p>

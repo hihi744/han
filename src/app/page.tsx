@@ -91,7 +91,7 @@ export default function HomePage() {
               <p className="flex items-center gap-2 text-[14px] font-medium text-moss">
                 <ShieldCheck size={18} weight="fill" /> Hồ sơ đã duyệt
               </p>
-              <p className="tabular mt-2 text-[24px] font-semibold tracking-tight">8.000.000 đ</p>
+              <p className="font-display tabular mt-2 text-[24px] font-semibold tracking-tight">8.000.000 đ</p>
               <div className="mt-3 flex justify-between border-t border-sprout-line pt-2 text-[13px] text-ink-muted">
                 <span>Vòng 1</span>
                 <span>12 tháng</span>
@@ -171,21 +171,21 @@ export default function HomePage() {
         <dl className="mt-14 grid gap-12 text-center md:grid-cols-3 md:gap-8">
           <div className="flex flex-col items-center">
             <dt className="order-1"><Pill tone="pollen">Phí hồ sơ</Pill></dt>
-            <dd className="order-2 tabular mt-6 text-[64px] font-medium leading-none tracking-tight text-moss-ink md:text-[80px]">0 đ</dd>
+            <dd className="order-2 font-display tabular mt-6 text-[64px] font-medium leading-none tracking-tight text-moss-ink md:text-[80px]">0 đ</dd>
             <dd className="order-3 mt-5 max-w-[17rem] text-ink-muted">
               <Tbc>Không thu phí để được vay.</Tbc>
             </dd>
           </div>
           <div className="flex flex-col items-center">
             <dt className="order-1"><Pill tone="sprout">Mức trả nợ an toàn</Pill></dt>
-            <dd className="order-2 tabular mt-6 text-[64px] font-medium leading-none tracking-tight text-moss-ink md:text-[80px]">≤ 50%</dd>
+            <dd className="order-2 font-display tabular mt-6 text-[64px] font-medium leading-none tracking-tight text-moss-ink md:text-[80px]">≤ 50%</dd>
             <dd className="order-3 mt-5 max-w-[17rem] text-ink-muted">
               Khoản trả mỗi tháng không vượt quá một nửa số tiền bạn còn lại sau chi tiêu gia đình.
             </dd>
           </div>
           <div className="flex flex-col items-center">
             <dt className="order-1"><Pill tone="blossom">Việc làm sau học nghề</Pill></dt>
-            <dd className="order-2 tabular mt-6 text-[64px] font-medium leading-none tracking-tight text-moss-ink md:text-[80px]">2/3</dd>
+            <dd className="order-2 font-display tabular mt-6 text-[64px] font-medium leading-none tracking-tight text-moss-ink md:text-[80px]">2/3</dd>
             <dd className="order-3 mt-5 max-w-[17rem] text-ink-muted">
               Số học viên đạt sát hạch tối thiểu được xưởng đối tác nhận vào làm.
             </dd>
