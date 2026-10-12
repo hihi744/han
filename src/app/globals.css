@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand */
+  --color-moss: #3b5336;
+  --color-moss-deep: #243320;
+  --color-moss-ink: #1b2617;
+  --color-moss-soft: #6d8466;
+  --color-sprout: #e6ece0;
+  --color-sprout-line: #d3dccb;
+
+  --color-mist: #f6f7f2;
+  --color-paper: #ffffff;
+
+  --color-blossom: #e88b92;
+  --color-blossom-deep: #b0505a;
+  --color-blossom-tint: #fbe8e9;
+
+  /* Logo petals: illustration only */
+  --color-petal-red: #ba353b;
+  --color-petal-orange: #fe9d43;
+  --color-petal-yellow: #fff3a1;
+  --color-pollen-tint: #fbf6dc;
+  --color-leaf: #0d6b3d;
+
+  /* Text */
+  --color-ink: #1b2617;
+  --color-ink-muted: #56614f;
+  --color-on-dark: #f6f7f2;
+  --color-on-dark-muted: #c3cdbd;
+
+  --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-panel: 28px;
+  --radius-card: 20px;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 96px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    background: var(--color-mist);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    /* Vietnamese stacks two marks above capitals (Ấ, Ổ); keep leading generous */
+    line-height: 1.18;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+    font-weight: 600;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-blossom-deep);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-blossom);
+  }
+  ::selection {
+    background: var(--color-blossom-tint);
+    color: var(--color-moss-ink);
+  }
+}
+
+@utility container-site {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 20px;
+  @media (width >= 768px) {
+    padding-inline: 32px;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Loan amount slider */
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 44px;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.range::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--color-moss) 0 var(--pct),
+    var(--color-sprout) var(--pct) 100%
+  );
+}
+.range::-moz-range-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-sprout);
+}
+.range::-moz-range-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-moss);
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  margin-top: -10px;
+  border-radius: 999px;
+  background: var(--color-paper);
+  border: 3px solid var(--color-moss);
+  box-shadow: 0 4px 14px -4px rgba(27, 38, 23, 0.4);
+  transition: transform 150ms ease;
+}
+.range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--color-paper);
+  border: 3px solid var(--color-moss);
+}
+.range:active::-webkit-slider-thumb {
+  transform: scale(1.1);
+}
+.range:focus-visible {
+  outline: none;
+}
+.range:focus-visible::-webkit-slider-thumb {
+  outline: 3px solid var(--color-blossom-deep);
+  outline-offset: 3px;
+}
+.range:focus-visible::-moz-range-thumb {
+  outline: 3px solid var(--color-blossom-deep);
+  outline-offset: 3px;
+}
