@@ -55,7 +55,7 @@ function Backdrop({ treatment }: { treatment: HeroTreatment }) {
 
 const shadowed: HeroTreatment[] = ["shadow", "soft-white", "glass"];
 
-export function HeroBlossom({ treatment = "none" }: { treatment?: HeroTreatment }) {
+export function HeroBlossom({ treatment = "aura" }: { treatment?: HeroTreatment }) {
   const reduce = useReducedMotion();
   const ease = [0.22, 1, 0.36, 1] as const;
 
