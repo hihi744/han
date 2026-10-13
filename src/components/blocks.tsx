@@ -39,9 +39,9 @@ export function PhotoSlot({
     );
   }
   const palette = {
-    dark: { bg: "bg-[radial-gradient(120%_90%_at_80%_10%,#4d6a46_0%,#2c3f27_55%,#1f2d1b_100%)]", petal: "#ba353b", leaf: "#8db07f", seed: "#fff3a1", tag: "bg-moss-ink/60 text-on-dark" },
-    light: { bg: "bg-[radial-gradient(120%_90%_at_20%_0%,#ffffff_0%,#e6ece0_70%)]", petal: "#ba353b", leaf: "#6d8466", seed: "#f3df6b", tag: "bg-paper/80 text-ink-muted" },
-    blossom: { bg: "bg-[radial-gradient(120%_90%_at_80%_0%,#fff_0%,#fbe8e9_70%)]", petal: "#ba353b", leaf: "#e8a3a8", seed: "#fe9d43", tag: "bg-paper/80 text-ink-muted" },
+    dark: { bg: "bg-[radial-gradient(120%_90%_at_80%_10%,#4d6a46_0%,#2c3f27_55%,#1f2d1b_100%)]", petal: "#b93636", leaf: "#7d9c65", seed: "#fff2a0", tag: "bg-moss-ink/60 text-on-dark" },
+    light: { bg: "bg-[radial-gradient(120%_90%_at_20%_0%,#ffffff_0%,#e6ece0_70%)]", petal: "#b93636", leaf: "#7d9c65", seed: "#fff2a0", tag: "bg-paper/80 text-ink-muted" },
+    blossom: { bg: "bg-[radial-gradient(120%_90%_at_80%_0%,#fff_0%,#fbe8e9_70%)]", petal: "#b93636", leaf: "#e8a3a8", seed: "#ff9c4c", tag: "bg-paper/80 text-ink-muted" },
   }[tone];
   return (
     <div className={`overflow-hidden ${palette.bg} ${positioned(className)}`} role="img" aria-label={alt || want}>
@@ -95,11 +95,11 @@ export function CtaBand({
     <section className="container-site mt-24" aria-labelledby="cta-title">
       <div className="on-dark relative overflow-hidden rounded-[var(--radius-panel)] bg-moss-deep px-6 py-14 text-on-dark sm:px-14 sm:py-20">
         <svg viewBox="0 0 440 440" className="absolute -right-16 -top-10 h-[130%] opacity-[0.12] sm:right-6" aria-hidden="true">
-          <path d={petalPaths.leafLeft} fill="#8db07f" />
-          <path d={petalPaths.leafRight} fill="#8db07f" />
-          <path d={petalPaths.seed} fill="#8db07f" />
-          <path d={petalPaths.sprout} fill="#8db07f" />
-          <path d={petalPaths.bloom} fill="#ba353b" />
+          <path d={petalPaths.leafLeft} fill="#7d9c65" />
+          <path d={petalPaths.leafRight} fill="#7d9c65" />
+          <path d={petalPaths.seed} fill="#7d9c65" />
+          <path d={petalPaths.sprout} fill="#7d9c65" />
+          <path d={petalPaths.bloom} fill="#b93636" />
         </svg>
         <div className="relative max-w-xl">
           <h2 id="cta-title" className="text-[32px] text-on-dark md:text-[48px]">

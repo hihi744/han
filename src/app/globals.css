@@ -17,11 +17,12 @@
   --color-blossom-tint: #fbe8e9;
 
   /* Logo petals: illustration only */
-  --color-petal-red: #ba353b;
-  --color-petal-orange: #fe9d43;
-  --color-petal-yellow: #fff3a1;
+  --color-petal-red: #b93636;
+  --color-petal-orange: #ff9c4c;
+  --color-petal-yellow: #fff2a0;
   --color-pollen-tint: #fbf6dc;
-  --color-leaf: #0d6b3d;
+  --color-leaf: #0c6a3b;
+  --color-sage: #7d9c65;
 
   /* Text */
   --color-ink: #1b2617;

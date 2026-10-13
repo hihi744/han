@@ -39,6 +39,6 @@ Colours, radii and the type family are defined in `src/app/globals.css` under `@
 - Moss `#3B5336` for primary actions; deep moss `#243320` for dark panels.
 - Mist `#F6F7F2` as the page background.
 - Blossom pink `#E88B92` for shapes and for text on dark backgrounds. On light backgrounds, pink text uses `#B0505A`, because `#E88B92` doesn't meet contrast requirements there.
-- The logo's red, orange and yellow appear only in the petal illustrations.
+- Logo colours (from the brand palette): green `#0C6A3B`, sage `#7D9C65`, red `#B93636`, orange `#FF9C4C`, yellow `#FFF2A0`. They are used in the petal illustrations.
 
-Typeface: Be Vietnam Pro (self-hosted via Fontsource), chosen for its complete Vietnamese diacritic support.
+Typeface: Manrope (self-hosted via Fontsource), with full Vietnamese diacritic support.

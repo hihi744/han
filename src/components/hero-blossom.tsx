@@ -45,9 +45,9 @@ function Backdrop({ treatment, auraStrength = 1 }: { treatment: HeroTreatment; a
       const size = `${45 + (auraStrength - 1) * 12}%`;
       return (
         <div aria-hidden="true" className="absolute inset-[-12%]">
-          <div className={blob} style={{ left: "30%", top: "2%", width: size, height: size, background: `rgba(186,53,59,${a(0.6)})` }} />
-          <div className={blob} style={{ right: "2%", top: "30%", width: size, height: size, background: `rgba(254,157,67,${a(0.5)})` }} />
-          <div className={blob} style={{ left: "8%", bottom: "4%", width: size, height: size, background: `rgba(255,243,161,${a(0.45)})` }} />
+          <div className={blob} style={{ left: "30%", top: "2%", width: size, height: size, background: `rgba(185,54,54,${a(0.6)})` }} />
+          <div className={blob} style={{ right: "2%", top: "30%", width: size, height: size, background: `rgba(255,156,76,${a(0.5)})` }} />
+          <div className={blob} style={{ left: "8%", bottom: "4%", width: size, height: size, background: `rgba(255,242,160,${a(0.45)})` }} />
         </div>
       );
     }
