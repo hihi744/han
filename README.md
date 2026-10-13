@@ -42,3 +42,14 @@ Colours, radii and the type family are defined in `src/app/globals.css` under `@
 - Logo colours (from the brand palette): green `#0C6A3B`, sage `#7D9C65`, red `#B93636`, orange `#FF9C4C`, yellow `#FFF2A0`. They are used in the petal illustrations.
 
 Typeface: Manrope (self-hosted via Fontsource), with full Vietnamese diacritic support.
+
+## Shareable preview
+
+`tools/preview/` turns the site into plain static pages (no Next.js runtime, relative links) so it can be viewed on any static host, including as a Claude Artifact:
+
+```bash
+rm -rf out && PREVIEW_EXPORT=1 npx next build
+python3 tools/preview/build.py   # writes preview/
+```
+
+`tools/preview/preview.js` re-implements the interactive parts (menus, loan calculator, forms, hero animation) for that copy. When those components change, update it too.
