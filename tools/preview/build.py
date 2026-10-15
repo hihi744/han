@@ -33,10 +33,11 @@ HERO_DELAYS = [0.15, 0.45, 0.8, 0.95, 1.35, 0.35, 0.65, 1.1, 1.55, 1.8]
 
 
 def page_file(path: str) -> str:
-    """Map a site route to its preview file name."""
+    """Map a site route to its preview file name. Nested routes are flattened
+    (/san-pham/tai-chinh -> san-pham-tai-chinh.html) so every page sits side by side."""
     if path in ("", "/"):
         return "trang-chu.html"
-    return path.strip("/") + ".html"
+    return path.strip("/").replace("/", "-") + ".html"
 
 
 def rewrite_href(match: re.Match) -> str:
@@ -100,10 +101,11 @@ def main():
     shutil.copytree(os.path.join(OUT, "brand"), os.path.join(DEST, "brand"))
     shutil.copy(os.path.join(OUT, "icon.png"), os.path.join(DEST, "icon.png"))
 
-    for src in glob.glob(os.path.join(OUT, "*.html")):
-        name = os.path.basename(src)
-        if name == "404.html":
+    for src in glob.glob(os.path.join(OUT, "**/*.html"), recursive=True):
+        rel = os.path.relpath(src, OUT)
+        if rel == "404.html":
             continue
+        name = "index.html" if rel == "index.html" else page_file("/" + rel[: -len(".html")])
         html = clean(open(src, encoding="utf-8").read())
         title, metas, body = split_document(html)
         full = (
