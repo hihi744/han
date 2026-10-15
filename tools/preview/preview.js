@@ -1,6 +1,6 @@
 // Interactive behaviour for the static preview (no Next.js runtime).
-// Mirrors the React components: header menus, loan calculator, contact form
-// and self-assessment. Forms are front-end only; nothing is sent or stored.
+// Mirrors the React components: header menus, loan calculator and contact form.
+// Forms are front-end only; nothing is sent or stored.
 (function () {
   "use strict";
 
@@ -303,100 +303,11 @@
     });
   }
 
-  /* ---------- Self-assessment ---------- */
-  const RESULTS = [
-    {
-      min: 70, range: "70 – 100 điểm", title: "Chúc mừng chị, hạt mầm đã sẵn sàng!",
-      body: [
-        "Dựa trên những chia sẻ của chị, hồ sơ của chị phù hợp với các gói hỗ trợ của Đơm Hoa. Kế hoạch của chị đã có hình hài, và chúng tôi rất muốn được đồng hành cùng chị ở bước tiếp theo.",
-        "Chị có thể đặt lịch một buổi tư vấn riêng với cán bộ tín dụng nữ, trong không gian kín đáo, để cùng chọn gói vay phù hợp nhất. Chị không cần mang theo gì cả, và có thể dừng lại bất cứ lúc nào.",
-      ],
-      actions: [["Đăng ký tư vấn riêng", "lien-he.html#dang-ky"]],
-    },
-    {
-      min: 50, range: "50 – 69 điểm", title: "Mầm đã nhú, mình cùng chăm thêm nhé",
-      body: [
-        "Chị đã có nền tảng tốt để bắt đầu. Với một chút hướng dẫn thêm về kế hoạch và cách điều chỉnh khoản vay, chị hoàn toàn có thể tự tin bước tiếp.",
-        "Đơm Hoa sẽ cùng chị đi qua buổi tập huấn đầu vào, sau đó trò chuyện với cán bộ tín dụng để chọn khoản vay nhỏ hoặc khóa học nghề phù hợp. Chị không phải đi một mình.",
-      ],
-      actions: [["Đăng ký tư vấn riêng", "lien-he.html#dang-ky"], ["Tìm hiểu Gói học nghề", "san-pham-tai-chinh.html#goi-3"]],
-    },
-    {
-      min: 0, range: "Dưới 50 điểm", title: "Chưa phải lúc vay, nhưng Đơm Hoa vẫn ở đây",
-      body: [
-        "Ở thời điểm này, chị có thể cần thêm thời gian để chuẩn bị cho kế hoạch của mình. Đây không phải lời từ chối. Mỗi hạt giống đều có nhịp nảy mầm riêng, và chúng tôi sẵn lòng chờ cùng chị.",
-        "Chị có thể tham gia lớp giáo dục tài chính, trò chuyện về chọn nghề, hoặc bắt đầu bằng tiết kiệm mục tiêu. Sau khoảng 2–3 tháng, chúng ta cùng xem lại để chị bước tiếp thật vững vàng.",
-      ],
-      actions: [["Tham gia lớp giáo dục tài chính", "san-pham-cong-dong.html#giao-duc-tai-chinh"], ["Đặt lịch xem lại sau", "lien-he.html#dang-ky"]],
-    },
-  ];
-  const btn = (variant) =>
-    `inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-[15px] font-semibold transition-[background-color,transform] duration-200 ease-out cursor-pointer ${
-      variant === "blossom" ? "bg-blossom text-moss-ink hover:bg-[#ef9da3]" : "text-on-dark ring-1 ring-inset ring-on-dark/35 hover:bg-on-dark/10"
-    }`;
-
-  function initAssessment() {
-    const submit = $$("button").find((b) => b.textContent.trim() === "Xem kết quả");
-    if (!submit) return;
-    const form = submit.closest("form");
-    const fieldsets = $$("fieldset", form);
-    const counter = submit.parentElement.querySelector("p span");
-    let notice, result;
-
-    const answers = () => fieldsets.map((fs) => $("input:checked", fs)).map((i) => (i ? Number(i.value) : null));
-    form.addEventListener("change", () => {
-      counter.textContent = `${answers().filter((v) => v !== null).length}/5`;
-    });
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const a = answers();
-      fieldsets.forEach((fs, i) => {
-        const missing = a[i] === null;
-        fs.classList.toggle("ring-2", missing);
-        fs.classList.toggle("ring-blossom-deep", missing);
-        fs.classList.toggle("ring-sprout-line", !missing);
-      });
-      notice?.remove();
-      result?.remove();
-      if (a.some((v) => v === null)) {
-        notice = document.createElement("p");
-        notice.tabIndex = -1;
-        notice.setAttribute("role", "alert");
-        notice.className = "mt-6 rounded-[var(--radius-card)] bg-pollen-tint p-5 font-medium text-moss-ink outline-none";
-        notice.textContent = "Chị còn vài câu chưa chọn. Chị cứ thong thả, hoàn thành đủ 5 tiêu chí để xem kết quả nhé.";
-        form.appendChild(notice);
-        notice.focus();
-        return;
-      }
-      const total = a.reduce((s, v) => s + v, 0);
-      const r = RESULTS.find((x) => total >= x.min);
-      result = document.createElement("div");
-      result.tabIndex = -1;
-      result.setAttribute("role", "status");
-      result.className = "on-dark mt-8 scroll-mt-32 rounded-[var(--radius-panel)] bg-moss-deep p-8 text-on-dark outline-none sm:p-12";
-      result.innerHTML = `<div class="flex flex-wrap items-end justify-between gap-6"><div><p class="text-[15px] text-on-dark-muted">Tổng điểm của chị</p><p class="tabular text-[64px] font-extrabold leading-none tracking-tight text-petal-yellow">${total}<span class="text-[28px] text-on-dark-muted">/100</span></p></div><p class="rounded-full bg-on-dark/10 px-4 py-1.5 text-sm font-semibold text-on-dark">${r.range}</p></div><h3 class="mt-8 text-[28px] text-on-dark md:text-[34px]">${r.title}</h3>${r.body
-        .map((p) => `<p class="mt-4 max-w-3xl text-lg text-on-dark-muted">${p}</p>`)
-        .join("")}<div class="mt-8 flex flex-wrap gap-3">${r.actions
-        .map(([label, href], i) => `<a href="${href}" class="${btn(i === 0 ? "blossom" : "outline")}">${label}</a>`)
-        .join("")}<button type="button" data-reset class="${btn("outline")}">Làm lại</button></div><p class="mt-8 border-t border-on-dark/15 pt-5 text-[14px] text-on-dark-muted">Kết quả chỉ mang tính tham khảo ban đầu, không thay thế buổi tư vấn và thẩm định riêng. Đơm Hoa không lưu câu trả lời của chị.</p>`;
-      form.appendChild(result);
-      $("[data-reset]", result).addEventListener("click", () => {
-        form.reset();
-        result.remove();
-        counter.textContent = "0/5";
-        document.getElementById("buoc-2")?.scrollIntoView({ block: "start" });
-      });
-      result.focus();
-    });
-  }
-
   function init() {
     initHeader();
     const pkgFieldset = $$("fieldset").find((f) => $("legend", f)?.textContent === "Chọn gói vay");
     if (pkgFieldset) initCalculator(pkgFieldset);
     initContactForm();
-    initAssessment();
   }
 
   document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", init) : init();

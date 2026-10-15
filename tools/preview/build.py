@@ -3,7 +3,8 @@
 The preview runs without the Next.js runtime so it works on any static host,
 including under an unknown sub-path: every link and asset is relative, pages
 sit side by side as *.html, and tools/preview/preview.js re-implements the
-interactive parts (menus, loan calculator, forms, hero animation).
+interactive parts (menus, loan calculator, forms, hero animation); public/js/site.js
+runs as-is for scroll motion, the journey, tabs and the quiz.
 
 Usage (from the repo root):
     rm -rf out && PREVIEW_EXPORT=1 npx next build
@@ -26,7 +27,18 @@ FONTS = (
     '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&display=swap">'
 )
 HEAD_ASSETS = FONTS + '<link rel="stylesheet" href="assets/site.css">'
-TAIL_ASSETS = '<script src="assets/preview.js" charset="utf-8" defer></script>'
+# site.js (scroll reveals, journey, tabs, quiz wizard) is shared with the Next.js site. Its links
+# come from site routes, so the preview hands it the same route -> flat file mapping as page_file().
+HREF_MAP = (
+    "<script>window.__domhoaAuto=true;window.__domhoaHref=function(u){"
+    "var f=u.split('#'),p=f[0].split('?'),r=p[0].replace(/^\\/|\\/$/g,'');"
+    "return (r?r.replace(/\\//g,'-'):'trang-chu')+'.html'+(p[1]?'?'+p[1]:'')+(f[1]?'#'+f[1]:'')}</script>"
+)
+TAIL_ASSETS = (
+    HREF_MAP
+    + '<script src="assets/site.js" charset="utf-8" defer></script>'
+    + '<script src="assets/preview.js" charset="utf-8" defer></script>'
+)
 
 # Hero entrance delays, in document order: five petals, four stage labels, the example card.
 HERO_DELAYS = [0.15, 0.45, 0.8, 0.95, 1.35, 0.35, 0.65, 1.1, 1.55, 1.8]
@@ -51,8 +63,9 @@ def rewrite_href(match: re.Match) -> str:
 
 
 def clean(html: str) -> str:
-    # Drop the Next.js runtime: every script, script preloads and the original stylesheet link.
-    html = re.sub(r"<script\b[^>]*>.*?</script>", "", html, flags=re.S)
+    # Drop the Next.js runtime: every script (but JSON data blocks), script preloads and the
+    # original stylesheet link.
+    html = re.sub(r'<script\b(?![^>]*type="application/json")[^>]*>.*?</script>', "", html, flags=re.S)
     html = re.sub(r'<link rel="(?:preload|modulepreload)"[^>]*as="(?:script|font)"[^>]*/?>', "", html)
     html = re.sub(r'<link rel="stylesheet" href="/_next/[^"]+"[^>]*/?>', "", html)
     html = re.sub(r'<link rel="preload" as="image"[^>]*/?>', "", html)
@@ -98,6 +111,7 @@ def main():
 """
     open(os.path.join(DEST, "assets/site.css"), "w", encoding="utf-8").write(css)
     shutil.copy(os.path.join(HERE, "preview.js"), os.path.join(DEST, "assets/preview.js"))
+    shutil.copy(os.path.join(OUT, "js/site.js"), os.path.join(DEST, "assets/site.js"))
     shutil.copytree(os.path.join(OUT, "brand"), os.path.join(DEST, "brand"))
     shutil.copy(os.path.join(OUT, "icon.png"), os.path.join(DEST, "icon.png"))
 
