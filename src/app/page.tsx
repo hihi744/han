@@ -1,23 +1,39 @@
 import Link from "next/link";
 import {
   ArrowUpRight,
-  EyeSlash,
-  GraduationCap,
-  HandCoins,
-  Handshake,
+  Brain,
+  HandHeart,
   LockKey,
-  ShieldCheck,
-  UsersThree,
+  Storefront,
+  Student,
+  UserCircleCheck,
 } from "@phosphor-icons/react/dist/ssr";
 import { HeroBlossom } from "@/components/hero-blossom";
-import { LoanCalculator } from "@/components/loan-calculator";
-import { StoryRail } from "@/components/story-rail";
-import { CtaBand, Faq, PhotoSlot } from "@/components/blocks";
+import { CtaBand, PhotoSlot } from "@/components/blocks";
 import { StageGlyph } from "@/components/petals";
-import { LinkButton, Pill, SectionHeading, Tbc } from "@/components/ui";
-import { faqs, journey, privacyPromises } from "@/content/site";
+import { LinkButton } from "@/components/ui";
+import { fiveYearGoals, home, loanPackages, org, stories, values } from "@/content/site";
 
-const promiseIcons = [EyeSlash, LockKey, ShieldCheck, UsersThree];
+const community = [
+  {
+    href: "/san-pham/cong-dong#tham-van",
+    icon: Brain,
+    title: "Tham vấn và hỗ trợ tâm lý",
+    body: "Giảm mặc cảm, lo âu khi trở về cộng đồng. Tự nguyện, miễn phí, không ảnh hưởng đến việc xét vay.",
+  },
+  {
+    href: "/san-pham/cong-dong#giao-duc-tai-chinh",
+    icon: Student,
+    title: "Chồi Xanh: Giáo dục tài chính và khởi nghiệp",
+    body: "Quản lý chi tiêu, hiểu vay trả, lập kế hoạch kinh doanh nhỏ. Dành cho cả người vay và không vay.",
+  },
+  {
+    href: "/san-pham/cong-dong#cua-hang-xa-hoi",
+    icon: Storefront,
+    title: "Cửa hàng xã hội thực hành",
+    body: "1–3 tháng thực hành bán hàng, thu ngân, quản lý kho và bán online để có kinh nghiệm làm việc thật.",
+  },
+];
 
 export default function HomePage() {
   return (
@@ -27,32 +43,30 @@ export default function HomePage() {
         <div className="on-dark relative mx-auto max-w-[1400px] overflow-hidden rounded-[var(--radius-panel)] bg-[radial-gradient(90%_80%_at_85%_20%,#3f5a39_0%,#2a3c25_45%,#1f2d1b_100%)] text-on-dark">
           <div className="container-site grid items-center gap-12 pb-12 pt-14 md:pt-20 lg:grid-cols-[1.1fr_1fr] lg:gap-6 lg:pb-20">
             <div>
-              <h1 id="hero-title" className="text-[42px] font-semibold text-on-dark sm:text-[56px] lg:text-[66px]">
-                Mỗi hạt giống đều xứng đáng được đơm hoa.
+              <h1 id="hero-title" className="text-[42px] font-bold text-on-dark sm:text-[56px] lg:text-[66px]">
+                {home.quote}
               </h1>
-              <p className="mt-6 max-w-[34rem] text-lg text-on-dark-muted md:text-xl">
-                Đơm Hoa cho vay vốn nhỏ, dạy nghề và đồng hành cùng phụ nữ đang bắt đầu lại sau thời gian chấp hành án. Thủ tục đơn giản, không cần thế chấp, thông tin của bạn được giữ kín.
-              </p>
+              <p className="mt-6 max-w-[36rem] text-lg text-on-dark-muted md:text-xl">{home.lead}</p>
               <div className="mt-9 flex flex-wrap gap-3">
-                <LinkButton href="/dang-ky" variant="blossom">
-                  Đăng ký tư vấn vay
+                <LinkButton href="/lien-he#dang-ky" variant="blossom">
+                  Đăng ký tư vấn
                 </LinkButton>
-                <LinkButton href="#tinh-thu" variant="outline-light">
-                  Tính thử khoản vay
+                <LinkButton href="/san-pham/tai-chinh" variant="outline-light">
+                  Tìm hiểu sản phẩm
                 </LinkButton>
               </div>
               <ul className="mt-12 grid gap-4 text-[15px] text-on-dark-muted sm:grid-cols-3">
                 <li className="flex items-center gap-2.5">
-                  <HandCoins size={22} className="shrink-0 text-blossom" aria-hidden="true" />
-                  Vay từ 5 triệu đồng
+                  <HandHeart size={22} className="shrink-0 text-blossom" aria-hidden="true" />
+                  Không cần tài sản thế chấp
                 </li>
                 <li className="flex items-center gap-2.5">
-                  <ShieldCheck size={22} className="shrink-0 text-blossom" aria-hidden="true" />
-                  Trả trước hạn không phạt
+                  <UserCircleCheck size={22} className="shrink-0 text-blossom" aria-hidden="true" />
+                  Tư vấn riêng với cán bộ nữ
                 </li>
                 <li className="flex items-center gap-2.5">
                   <LockKey size={22} className="shrink-0 text-blossom" aria-hidden="true" />
-                  Không công khai quá khứ
+                  Thông tin riêng tư được giữ kín
                 </li>
               </ul>
             </div>
@@ -61,216 +75,206 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Three ways we help */}
-      <section className="container-site mt-28" aria-labelledby="pillars-title">
-        <SectionHeading
-          id="pillars-title"
-          title="Vốn, kiến thức và người đồng hành, đi cùng nhau."
-          intro="Chỉ cho vay thôi là chưa đủ. Mỗi khoản vay ở Đơm Hoa đi kèm lớp học, cơ hội việc làm và một người theo sát bạn."
-        />
-        <div className="mt-14 grid gap-5 lg:grid-cols-[1fr_1.45fr]">
-          <Link href="/hanh-trinh#uom" className="group on-dark relative flex min-h-[420px] flex-col justify-end overflow-hidden rounded-[var(--radius-card)] text-on-dark">
-            <PhotoSlot want="lớp học nhỏ, chụp tay đang làm" className="absolute inset-0" tone="dark" />
-            <div className="absolute inset-0 bg-gradient-to-t from-moss-ink/90 via-moss-ink/30 to-transparent" aria-hidden="true" />
-            <div className="relative p-7 sm:p-9">
-              <GraduationCap size={28} className="text-blossom" aria-hidden="true" />
-              <h3 className="mt-4 text-[28px] text-on-dark">Học viện Đơm Hoa</h3>
-              <p className="mt-2 max-w-sm text-on-dark-muted">
-                Quản lý tiền, khởi nghiệp nhỏ, kỹ năng đi làm và học nghề theo nhu cầu tuyển dụng.
-              </p>
-            </div>
-            <span aria-hidden="true" className="absolute right-5 top-5 grid size-11 place-items-center rounded-full bg-blossom text-moss-ink transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
-              <ArrowUpRight size={18} weight="bold" />
-            </span>
-          </Link>
-
-          <Link href="/san-pham" className="group on-dark relative flex min-h-[420px] flex-col justify-end overflow-hidden rounded-[var(--radius-card)] text-on-dark">
-            <PhotoSlot want="quầy hàng nhỏ, không lộ mặt" className="absolute inset-0" tone="dark" />
-            <div className="absolute inset-0 bg-gradient-to-t from-moss-ink/90 via-moss-ink/25 to-transparent" aria-hidden="true" />
-            <div className="absolute left-6 top-14 w-[230px] rounded-2xl bg-paper p-4 text-ink shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)] sm:left-9 sm:top-9 sm:w-[260px]" aria-hidden="true">
-              <p className="flex items-center gap-2 text-[14px] font-medium text-moss">
-                <ShieldCheck size={18} weight="fill" /> Hồ sơ đã duyệt
-              </p>
-              <p className="font-display tabular mt-2 text-[24px] font-semibold tracking-tight">8.000.000 đ</p>
-              <div className="mt-3 flex justify-between border-t border-sprout-line pt-2 text-[13px] text-ink-muted">
-                <span>Vòng 1</span>
-                <span>12 tháng</span>
-              </div>
-            </div>
-            <div className="relative p-7 sm:p-9">
-              <h3 className="text-[28px] text-on-dark md:text-[34px]">Khoản vay ReStart</h3>
-              <p className="mt-2 max-w-md text-on-dark-muted">
-                Khoản vay đầu tiên từ 5 đến 10 triệu đồng, xét theo khả năng trả thực tế. Trả tốt thì vòng sau được vay đến 30 triệu.
-              </p>
-            </div>
-            <span aria-hidden="true" className="absolute right-5 top-5 grid size-11 place-items-center rounded-full bg-blossom text-moss-ink transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
-              <ArrowUpRight size={18} weight="bold" />
-            </span>
-          </Link>
-        </div>
-
-        <Link href="/doi-tac" className="group mt-5 flex flex-col gap-6 rounded-[var(--radius-card)] bg-paper p-7 ring-1 ring-sprout-line transition-shadow duration-300 hover:shadow-[0_20px_50px_-30px_rgba(27,38,23,0.4)] sm:flex-row sm:items-center sm:justify-between sm:p-9">
-          <div className="flex items-start gap-5">
-            <span className="grid size-12 shrink-0 place-items-center rounded-full bg-blossom-tint text-blossom-deep">
-              <Handshake size={24} aria-hidden="true" />
-            </span>
-            <div>
-              <h3 className="text-[22px] text-moss-ink">Học nghề có việc làm chờ sẵn</h3>
-              <p className="mt-1 max-w-2xl text-ink-muted">
-                Lớp may gia công hai tháng, xưởng đối tác cam kết nhận tối thiểu 2/3 học viên đạt sát hạch vào làm, có hợp đồng và bảo hiểm.
-              </p>
-            </div>
-          </div>
-          <span className="inline-flex shrink-0 items-center gap-1.5 font-semibold text-moss group-hover:text-blossom-deep">
-            Tìm hiểu dự án <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
-          </span>
-        </Link>
-      </section>
-
-      {/* Journey */}
-      <section className="container-site mt-28" aria-labelledby="journey-title">
-        <SectionHeading
-          id="journey-title"
-          title="Từ hạt mầm đến ngày nở rộ"
-          intro="Hành trình ở Đơm Hoa đi qua bốn chặng. Bạn bắt đầu ở chặng phù hợp với mình, không ai bị bỏ lại."
-        />
-        <ol className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {journey.map((step, i) => (
-            <li key={step.key} className="flex flex-col rounded-[var(--radius-card)] bg-paper p-7 ring-1 ring-sprout-line">
-              <div className="flex items-center justify-between">
-                <StageGlyph stage={step.key} className="size-14" />
-                <span className="tabular text-sm font-medium text-ink-muted">Chặng {i + 1}</span>
-              </div>
-              <h3 className="mt-8 text-[30px] text-moss-ink">{step.stage}</h3>
-              <p className="font-medium text-blossom-deep">{step.value}</p>
-              <p className="mt-4 text-[15px] text-ink-muted">{step.summary}</p>
-              <Link href={`/hanh-trinh#${step.key}`} className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[15px] font-semibold text-moss hover:text-blossom-deep">
-                {step.product}
-                <ArrowUpRight size={14} weight="bold" aria-hidden="true" />
-              </Link>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* Calculator */}
-      <section id="tinh-thu" className="container-site mt-28 scroll-mt-28" aria-labelledby="calc-title">
-        <SectionHeading
-          id="calc-title"
-          title="Biết trước mình sẽ trả bao nhiêu"
-          intro="Kéo để chọn số tiền. Bạn sẽ thấy ngay số tiền trả mỗi tháng và tổng chi phí, bằng con số cụ thể."
-        />
-        <div className="mt-12">
-          <LoanCalculator />
-        </div>
-      </section>
-
-      {/* Numbers we commit to */}
-      <section className="container-site mt-28" aria-labelledby="numbers-title">
-        <SectionHeading id="numbers-title" title="Những con số chúng tôi cam kết" />
-        <dl className="mt-14 grid gap-12 text-center md:grid-cols-3 md:gap-8">
-          <div className="flex flex-col items-center">
-            <dt className="order-1"><Pill tone="pollen">Phí hồ sơ</Pill></dt>
-            <dd className="order-2 font-display tabular mt-6 text-[64px] font-medium leading-none tracking-tight text-moss-ink md:text-[80px]">0 đ</dd>
-            <dd className="order-3 mt-5 max-w-[17rem] text-ink-muted">
-              <Tbc>Không thu phí để được vay.</Tbc>
-            </dd>
-          </div>
-          <div className="flex flex-col items-center">
-            <dt className="order-1"><Pill tone="sprout">Mức trả nợ an toàn</Pill></dt>
-            <dd className="order-2 font-display tabular mt-6 text-[64px] font-medium leading-none tracking-tight text-moss-ink md:text-[80px]">≤ 50%</dd>
-            <dd className="order-3 mt-5 max-w-[17rem] text-ink-muted">
-              Khoản trả mỗi tháng không vượt quá một nửa số tiền bạn còn lại sau chi tiêu gia đình.
-            </dd>
-          </div>
-          <div className="flex flex-col items-center">
-            <dt className="order-1"><Pill tone="blossom">Việc làm sau học nghề</Pill></dt>
-            <dd className="order-2 font-display tabular mt-6 text-[64px] font-medium leading-none tracking-tight text-moss-ink md:text-[80px]">2/3</dd>
-            <dd className="order-3 mt-5 max-w-[17rem] text-ink-muted">
-              Số học viên đạt sát hạch tối thiểu được xưởng đối tác nhận vào làm.
-            </dd>
-          </div>
-        </dl>
-      </section>
-
-      {/* Privacy */}
-      <section className="container-site mt-28" aria-labelledby="privacy-title">
-        <div className="grid gap-10 rounded-[var(--radius-panel)] bg-sprout p-7 sm:p-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+      {/* Short introduction + the four stages */}
+      <section className="container-site mt-24" aria-labelledby="intro-title">
+        <div className="grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:gap-20">
           <div>
-            <h2 id="privacy-title" className="text-[32px] text-moss-ink md:text-[44px]">
-              Câu chuyện của bạn là của riêng bạn
+            <h2 id="intro-title" className="text-[32px] text-moss-ink md:text-[44px]">
+              Một cơ hội để bắt đầu lại
             </h2>
-            <p className="mt-4 text-lg text-ink-muted">
-              Chúng tôi nhìn bạn bằng con người hiện tại. Những gì bạn chia sẻ chỉ dùng để giúp bạn, và được giữ kín.
-            </p>
-            <Link href="/bao-mat" className="mt-6 inline-flex items-center gap-1.5 font-semibold text-moss hover:text-blossom-deep">
-              Đọc cam kết bảo mật <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
+            <p className="mt-6 text-xl leading-relaxed text-ink-muted">{home.intro}</p>
+            <Link href="/gioi-thieu" className="mt-8 inline-flex items-center gap-1.5 font-semibold text-moss hover:text-blossom-deep">
+              Về Đơm Hoa <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
             </Link>
           </div>
-          <ul className="grid gap-x-8 gap-y-8 sm:grid-cols-2">
-            {privacyPromises.map((p, i) => {
-              const Icon = promiseIcons[i];
-              return (
-                <li key={p.title}>
-                  <Icon size={26} className="text-moss" aria-hidden="true" />
-                  <h3 className="mt-3 text-[19px] text-moss-ink">{p.title}</h3>
-                  <p className="mt-1.5 text-[15px] text-ink-muted">{p.body}</p>
+          <div>
+            <h3 className="text-[15px] font-semibold tracking-normal text-ink-muted">Bốn chặng đồng hành</h3>
+            <ol className="mt-4 divide-y divide-sprout-line border-y border-sprout-line">
+              {values.map((v) => (
+                <li key={v.key} className="flex items-center gap-5 py-5">
+                  <StageGlyph stage={v.key} className="size-12 shrink-0" />
+                  <p className="text-[22px] font-bold tracking-tight text-moss-ink">
+                    {v.stage} <span className="font-medium text-ink-muted">– {v.value}</span>
+                  </p>
                 </li>
-              );
-            })}
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* Five-year goals: a bold band in the logo's yellow */}
+      <section className="mt-24 bg-petal-yellow py-20" aria-labelledby="goals-title">
+        <div className="container-site">
+          <h2 id="goals-title" className="shout max-w-3xl text-[34px] text-moss-ink md:text-[52px]">
+            Mục tiêu 5 năm
+            <span className="block text-[20px] font-bold normal-case tracking-normal text-moss md:text-[24px]">2027 – 2031</span>
+          </h2>
+          <dl className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            {fiveYearGoals.map((g) => (
+              <div key={g.label} className="flex flex-col border-t-2 border-moss-ink pt-5">
+                <dt className="order-2 mt-3 text-[17px] text-moss-ink">
+                  <span className="font-bold">{g.unit}</span> {g.label}
+                </dt>
+                <dd className="order-1 tabular text-[64px] font-extrabold leading-none tracking-tight text-petal-red md:text-[76px]">
+                  {g.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      {/* Financial products: heading left, cards right */}
+      <section className="container-site mt-24" aria-labelledby="finance-title">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_2fr] lg:gap-14">
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <h2 id="finance-title" className="shout text-[34px] text-moss-ink md:text-[44px]">
+              Sản phẩm tài chính
+            </h2>
+            <p className="mt-4 text-lg text-ink-muted">
+              Bốn gói vay và hai sản phẩm tiết kiệm tự nguyện. Lãi tính trên dư nợ giảm dần, lịch trả nợ được giải thích rõ trước khi ký.
+            </p>
+            <LinkButton href="/san-pham/tai-chinh" variant="primary" className="mt-6">
+              Xem sản phẩm tài chính
+            </LinkButton>
+          </div>
+          <ul className="grid gap-5 sm:grid-cols-2">
+            {loanPackages.map((p) => (
+              <li key={p.id}>
+                <Link
+                  href={`/san-pham/tai-chinh#${p.id}`}
+                  className="group flex h-full flex-col rounded-[var(--radius-card)] bg-paper p-7 ring-1 ring-sprout-line transition-shadow duration-300 hover:shadow-[0_20px_50px_-30px_rgba(27,38,23,0.45)]"
+                >
+                  <p className="text-[15px] font-semibold text-blossom-deep">
+                    Gói {p.number}
+                    {p.name ? `: ${p.name}` : ""}
+                  </p>
+                  <h3 className="mt-2 text-[22px] text-moss-ink">{p.title}</h3>
+                  <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-sprout-line pt-5">
+                    <div>
+                      <dt className="text-sm text-ink-muted">Hạn mức</dt>
+                      <dd className="tabular mt-1 text-lg font-bold text-moss-ink">{p.highlight.amount}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-sm text-ink-muted">Lãi suất</dt>
+                      <dd className="tabular mt-1 whitespace-nowrap text-lg font-bold text-moss-ink">{p.highlight.rate}</dd>
+                    </div>
+                  </dl>
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[15px] font-semibold text-moss group-hover:text-blossom-deep">
+                    Xem chi tiết <ArrowUpRight size={14} weight="bold" aria-hidden="true" />
+                  </span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </section>
 
-      {/* Stories */}
-      <section className="mt-28" aria-labelledby="stories-title">
-        <StoryRail />
+      {/* Community products */}
+      <section className="container-site mt-24" aria-labelledby="community-title">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_2fr] lg:gap-14">
+          <div>
+            <h2 id="community-title" className="shout text-[34px] text-moss-ink md:text-[44px]">
+              Sản phẩm cộng đồng
+            </h2>
+            <p className="mt-4 text-lg text-ink-muted">
+              Vốn, kiến thức và sự hỗ trợ tinh thần luôn đi cùng nhau. Không ai đơn độc.
+            </p>
+            <LinkButton href="/san-pham/cong-dong" variant="primary" className="mt-6">
+              Xem sản phẩm cộng đồng
+            </LinkButton>
+          </div>
+          <ul className="grid gap-5 md:grid-cols-3">
+            {community.map(({ href, icon: Icon, title, body }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className="group flex h-full flex-col rounded-[var(--radius-card)] bg-sprout p-7 transition-colors duration-300 hover:bg-[#dde6d5]"
+                >
+                  <Icon size={30} className="text-moss" aria-hidden="true" />
+                  <h3 className="mt-5 text-[20px] text-moss-ink">{title}</h3>
+                  <p className="mt-2 text-[15px] text-ink-muted">{body}</p>
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[15px] font-semibold text-moss group-hover:text-blossom-deep">
+                    Tìm hiểu <ArrowUpRight size={14} weight="bold" aria-hidden="true" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
-      {/* For partners */}
-      <section className="container-site mt-24" aria-labelledby="partner-title">
-        <div className="grid overflow-hidden rounded-[var(--radius-panel)] bg-paper ring-1 ring-sprout-line md:grid-cols-2">
-          <PhotoSlot want="xưởng may đối tác" tone="blossom" className="min-h-[260px]" />
-          <div className="p-7 sm:p-12">
-            <p className="text-[15px] font-medium text-blossom-deep">Dành cho doanh nghiệp và nhà tài trợ</p>
-            <h2 id="partner-title" className="mt-3 text-[30px] text-moss-ink md:text-[40px]">
-              6 triệu đồng giúp một người học nghề đến khi có việc làm.
+      {/* Where to start: the reference layout's dark "how can you help" band */}
+      <section className="mt-28" aria-labelledby="start-title">
+        <div className="on-dark slant-top relative overflow-hidden bg-moss-deep text-on-dark">
+          <PhotoSlot want="ảnh nền: lớp học hoặc buổi tư vấn, chụp từ phía sau" tone="dark" className="absolute inset-0 opacity-60" />
+          <div className="container-site relative grid gap-12 pb-20 pt-28 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+            <h2 id="start-title" className="shout text-[40px] text-on-dark md:text-[60px]">
+              Bắt đầu <span className="text-petal-yellow">từ đâu?</span>
             </h2>
-            <p className="mt-4 text-ink-muted">
-              Dự án “Trao cần câu, không trao con cá” đào tạo nghề gắn với đầu ra cam kết trước. Bạn có thể tài trợ một học viên, cả một lớp, hoặc nhận học viên vào làm.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <LinkButton href="/doi-tac" variant="primary">
-                Xem gói tài trợ
-              </LinkButton>
-              <LinkButton href="/doi-tac#lien-he-doi-tac" variant="ghost">
-                Liên hệ hợp tác
-              </LinkButton>
+            <div className="grid gap-12 sm:grid-cols-2">
+              <div>
+                <h3 className="shout text-[26px] text-on-dark">Chị cần hỗ trợ</h3>
+                <ul className="mt-4 space-y-2 text-on-dark-muted">
+                  <li>Tư vấn riêng với cán bộ tín dụng nữ</li>
+                  <li>Tự đánh giá mức độ phù hợp trong 2 phút</li>
+                  <li>Học nghề có việc làm chờ sẵn</li>
+                </ul>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <LinkButton href="/tu-danh-gia" variant="blossom">
+                    Làm bài tự đánh giá
+                  </LinkButton>
+                </div>
+              </div>
+              <div>
+                <h3 className="shout text-[26px] text-on-dark">Bạn muốn đồng hành</h3>
+                <ul className="mt-4 space-y-2 text-on-dark-muted">
+                  <li>Tài trợ dự án “Hạt mầm trong tay”</li>
+                  <li>Nhận học viên vào làm sau đào tạo</li>
+                  <li>Doanh nghiệp xã hội: gói Chung Vườn</li>
+                </ul>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link href="/du-an" className="inline-flex min-h-12 items-center justify-center rounded-full bg-petal-yellow px-6 text-[15px] font-semibold text-moss-ink transition-colors duration-200 hover:bg-[#fff7c4]">
+                    Xem dự án
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="container-site mt-28" aria-labelledby="faq-title">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.8fr] lg:gap-16">
-          <div>
-            <h2 id="faq-title" className="text-[32px] text-moss-ink md:text-[44px]">
-              Bạn đang băn khoăn?
-            </h2>
-            <p className="mt-4 text-lg text-ink-muted">
-              Những câu hỏi chị em hay hỏi nhất. Nếu chưa thấy câu trả lời, cứ để lại số điện thoại, cán bộ sẽ gọi lại.
-            </p>
-          </div>
-          <Faq items={faqs} />
+      {/* Stories */}
+      <section className="relative mt-24 pb-4" aria-labelledby="stories-title">
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[300px] bg-petal-yellow [clip-path:polygon(0_0,62%_0,52%_100%,0_100%)]" />
+        <div className="container-site relative pt-12">
+          <h2 id="stories-title" className="shout max-w-md text-[34px] text-moss-ink md:text-[48px]">
+            Những mùa hoa đầu tiên
+          </h2>
+          <ul className="mt-12 grid gap-6 md:grid-cols-3">
+            {stories.slice(0, 3).map((s, i) => (
+              <li key={`${s.who}-${s.role}`} className="flex flex-col overflow-hidden rounded-[var(--radius-card)] bg-paper ring-1 ring-sprout-line">
+                <PhotoSlot want={`câu chuyện ${s.who}`} tone={i % 2 ? "light" : "blossom"} className="aspect-[4/3]" />
+                <figure className="flex flex-1 flex-col p-6">
+                  <blockquote className="text-[18px] leading-relaxed text-moss-ink">“{s.excerpt}”</blockquote>
+                  <figcaption className="mt-auto pt-5 text-[15px] font-semibold text-ink-muted">
+                    {s.who}, {s.role.toLowerCase()}
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+          <Link href="/gioi-thieu/cau-chuyen" className="mt-8 inline-flex items-center gap-1.5 font-semibold text-moss hover:text-blossom-deep">
+            Đọc thêm câu chuyện <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
+          </Link>
         </div>
       </section>
 
       <CtaBand
-        title="Bắt đầu từ một cuộc gọi."
-        body="Để lại tên và số điện thoại. Cán bộ Đơm Hoa sẽ gọi lại vào giờ bạn chọn, lắng nghe và cùng bạn tính xem bước đầu tiên nên là gì."
-        primary={{ href: "/dang-ky", label: "Đăng ký tư vấn" }}
-        secondary={{ href: "/san-pham", label: "Xem chi tiết khoản vay" }}
+        title={`“${org.philosophy}”`}
+        body="Dù chị đang cần một khởi đầu mới hay bạn muốn trao cơ hội cho người khác, Đơm Hoa luôn sẵn lòng lắng nghe."
+        primary={{ href: "/lien-he", label: "Liên hệ ngay" }}
       />
     </>
   );

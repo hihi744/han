@@ -22,7 +22,8 @@ const labels = [
   { text: "Nở", sub: "Tự chủ", className: "right-[6%] top-[-2%]", delay: 1.55 },
 ];
 
-const example = summarize(8_000_000, 12, 0.09);
+// Gói Nảy Mầm, first cycle: 0,8%/tháng on the declining balance.
+const example = summarize(10_000_000, 12, 0.008);
 
 export type HeroTreatment = "none" | "glow" | "shadow" | "glass" | "aura" | "soft-white";
 
@@ -123,9 +124,9 @@ export function HeroBlossom({
         transition={{ duration: 0.7, delay: 1.8, ease }}
         className="relative mx-auto -mt-4 w-full max-w-[300px] rounded-2xl bg-paper p-5 text-ink shadow-[0_24px_60px_-20px_rgba(10,20,8,0.55)] lg:mr-0"
       >
-        <figcaption className="text-sm font-medium text-ink-muted">Ví dụ một khoản vay đầu tiên</figcaption>
+        <figcaption className="text-sm font-medium text-ink-muted">Ví dụ gói Nảy Mầm, chu kỳ đầu</figcaption>
         <p className="font-display tabular mt-1 text-[28px] font-semibold tracking-tight text-moss-ink">
-          8.000.000 đ
+          10.000.000 đ
         </p>
         <dl className="mt-3 space-y-1.5 text-[15px]">
           <div className="flex justify-between gap-4">
@@ -142,7 +143,7 @@ export function HeroBlossom({
           </div>
         </dl>
         <p className="mt-3 border-t border-sprout-line pt-3 text-[13px] leading-snug text-ink-muted">
-          Tính với lãi suất minh họa 9%/năm, chưa phải lãi suất chính thức.
+          Lãi suất 0,8%/tháng, tính trên dư nợ giảm dần. Không cần tài sản thế chấp.
         </p>
       </motion.figure>
     </div>

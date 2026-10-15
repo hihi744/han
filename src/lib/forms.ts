@@ -2,30 +2,19 @@
 // request (API route, CRM, Google Sheet webhook…) when the backend is ready.
 // Both return a promise so the UI already handles loading, success and error.
 
-export type LoanEnquiry = {
-  need: string;
-  situation: string;
-  trade?: string;
+export type ConsultationRequest = {
   fullName: string;
   phone: string;
-  province: string;
+  need: string;
+  packageId?: string;
+  area: string;
   callTime: string;
   note?: string;
   consent: boolean;
 };
 
-export type PartnerEnquiry = {
-  organisation: string;
-  contactName: string;
-  email: string;
-  phone?: string;
-  interest: string;
-  message?: string;
-};
-
 const ENDPOINTS = {
-  loan: process.env.NEXT_PUBLIC_LOAN_ENQUIRY_ENDPOINT,
-  partner: process.env.NEXT_PUBLIC_PARTNER_ENQUIRY_ENDPOINT,
+  consultation: process.env.NEXT_PUBLIC_CONSULTATION_ENDPOINT,
 };
 
 async function post(endpoint: string | undefined, payload: unknown) {
@@ -45,12 +34,8 @@ async function post(endpoint: string | undefined, payload: unknown) {
   if (!res.ok) throw new Error(`Request failed with ${res.status}`);
 }
 
-export function submitLoanEnquiry(data: LoanEnquiry) {
-  return post(ENDPOINTS.loan, data);
-}
-
-export function submitPartnerEnquiry(data: PartnerEnquiry) {
-  return post(ENDPOINTS.partner, data);
+export function submitConsultation(data: ConsultationRequest) {
+  return post(ENDPOINTS.consultation, data);
 }
 
 // Vietnamese mobile numbers: 10 digits starting with 0, or +84 followed by 9 digits.

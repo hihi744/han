@@ -8,7 +8,7 @@ import { CaretDown, List, X } from "@phosphor-icons/react";
 import { nav, type NavLink } from "@/content/site";
 import { buttonClass } from "./ui";
 
-// Hash links (e.g. "/san-pham#tinh-thu") jump within a page, so they never mark the page as current.
+// Hash links (e.g. "/san-pham/tai-chinh#tinh-thu") jump within a page, so they never mark the page as current.
 const pathOf = (href: string) => href.split("#")[0];
 
 export function SiteHeader() {
@@ -90,7 +90,7 @@ export function SiteHeader() {
         }`}
       >
         <Link href="/" className="shrink-0 rounded-full" aria-label="Đơm Hoa, về trang chủ">
-          <Image src="/brand/dom-hoa-logo.png" alt="" width={406} height={90} priority className="h-8 w-auto sm:h-9" />
+          <Image src="/brand/dom-hoa-logo.png" alt="" width={827} height={180} priority className="h-9 w-auto sm:h-11" />
         </Link>
 
         <nav ref={desktopNav} aria-label="Điều hướng chính" className="hidden xl:block">
@@ -154,7 +154,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href="/dang-ky" className={buttonClass("primary", "max-sm:hidden min-h-11 px-5 whitespace-nowrap")}>
+          <Link href="/lien-he#dang-ky" className={buttonClass("primary", "max-sm:hidden min-h-11 px-5 whitespace-nowrap")}>
             Đăng ký tư vấn
           </Link>
           <button
@@ -212,7 +212,7 @@ export function SiteHeader() {
               ),
             )}
           </ul>
-          <Link href="/dang-ky" onClick={() => setOpen(false)} className={buttonClass("primary", "mt-2 w-full")}>
+          <Link href="/lien-he#dang-ky" onClick={() => setOpen(false)} className={buttonClass("primary", "mt-2 w-full")}>
             Đăng ký tư vấn vay
           </Link>
         </nav>

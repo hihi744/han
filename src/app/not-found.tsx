@@ -11,7 +11,7 @@ export default function NotFound() {
       </p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <LinkButton href="/">Về trang chủ</LinkButton>
-        <LinkButton href="/dang-ky" variant="ghost">Đăng ký tư vấn</LinkButton>
+        <LinkButton href="/lien-he#dang-ky" variant="ghost">Đăng ký tư vấn</LinkButton>
       </div>
     </section>
   );

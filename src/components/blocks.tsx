@@ -143,3 +143,75 @@ export function PageIntro({
     </section>
   );
 }
+
+/** Two-column "Hạng mục / Nội dung" table used by every product sheet. */
+export function InfoTable({
+  rows,
+  caption,
+}: {
+  rows: readonly { label: string; value: string }[];
+  caption?: string;
+}) {
+  return (
+    <div className="overflow-hidden rounded-[var(--radius-card)] bg-paper ring-1 ring-sprout-line">
+      <dl className="divide-y divide-sprout-line" aria-label={caption}>
+        {rows.map((r) => (
+          <div key={r.label} className="grid gap-1 px-5 py-4 sm:grid-cols-[200px_1fr] sm:gap-6 sm:px-6">
+            <dt className="text-[15px] font-semibold text-moss-ink">{r.label}</dt>
+            <dd className="text-[15px] text-ink-muted">{r.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
+/** Collapsible "Lưu ý tuân thủ pháp luật" block. */
+export function Compliance({ items, title = "Lưu ý tuân thủ pháp luật" }: { items: readonly string[]; title?: string }) {
+  return (
+    <details className="group rounded-[var(--radius-card)] bg-pollen-tint ring-1 ring-inset ring-[#ece2a8]">
+      <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-moss-ink sm:px-6 [&::-webkit-details-marker]:hidden">
+        {title}
+        <span aria-hidden="true" className="grid size-8 shrink-0 place-items-center rounded-full bg-paper text-moss transition-transform duration-300 group-open:rotate-45">
+          <Plus size={16} weight="bold" />
+        </span>
+      </summary>
+      <ul className="space-y-3 px-5 pb-6 text-[15px] text-ink-muted sm:px-6">
+        {items.map((t) => {
+          const [head, ...rest] = t.split(": ");
+          return (
+            <li key={t} className="flex gap-3">
+              <span aria-hidden="true" className="mt-2.5 size-1.5 shrink-0 rounded-full bg-moss" />
+              <span>
+                {rest.length ? (
+                  <>
+                    <strong className="font-semibold text-moss-ink">{head}:</strong> {rest.join(": ")}
+                  </>
+                ) : (
+                  t
+                )}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </details>
+  );
+}
+
+/** Bulleted list with check marks. */
+export function CheckList({ items, className = "" }: { items: readonly string[]; className?: string }) {
+  return (
+    <ul className={`space-y-3 ${className}`}>
+      {items.map((t) => (
+        <li key={t} className="flex gap-3">
+          <svg viewBox="0 0 20 20" className="mt-1 size-5 shrink-0 text-moss" aria-hidden="true">
+            <circle cx="10" cy="10" r="10" fill="currentColor" opacity="0.14" />
+            <path d="M6 10.5l2.5 2.5L14 7.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <span>{t}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}

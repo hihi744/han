@@ -3,14 +3,15 @@ import "@fontsource-variable/manrope";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: {
-    default: "Đơm Hoa | Tài chính vi mô cho phụ nữ bắt đầu lại",
+    default: "Đơm Hoa | Nảy mầm hy vọng, đơm hoa cuộc đời",
     template: "%s | Đơm Hoa",
   },
   description:
-    "Đơm Hoa cho vay vốn nhỏ, dạy nghề và đồng hành cùng phụ nữ bắt đầu lại sau thời gian chấp hành án. Thủ tục đơn giản, không phí hồ sơ, thông tin được giữ kín.",
+    "Tổ chức Tài chính Vi mô Đơm Hoa trao nguồn vốn nhỏ không cần tài sản thế chấp, kiến thức kinh doanh và sự đồng hành thấu hiểu cho phụ nữ đã từng lầm lỡ và đang khao khát làm lại cuộc đời.",
   openGraph: {
     locale: "vi_VN",
     siteName: "Đơm Hoa",
@@ -31,6 +32,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Bỏ qua, đến nội dung chính
         </a>
+        <p className="on-dark bg-moss-ink px-4 py-2 text-center text-[14px] text-on-dark-muted">
+          Dự án “Hạt mầm trong tay” đang kêu gọi tài trợ đợt 1.{" "}
+          <Link href="/du-an#tai-tro" className="font-semibold text-petal-yellow underline underline-offset-4">
+            Tìm hiểu thêm
+          </Link>
+        </p>
         <SiteHeader />
         <main id="noi-dung" tabIndex={-1} className="outline-none">
           {children}
