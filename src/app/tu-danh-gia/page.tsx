@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LockKey } from "@phosphor-icons/react/dist/ssr";
-import { SelfAssessment } from "@/components/self-assessment";
+import { Quiz } from "@/components/quiz";
+import { Orbs } from "@/components/blocks";
 import { buttonClass } from "@/components/ui";
 import { assessment } from "@/content/site";
 
@@ -20,15 +21,18 @@ const levelTone: Record<string, string> = {
 export default function AssessmentPage() {
   return (
     <>
-      <section className="container-site pt-14 md:pt-20" aria-labelledby="assessment-title">
+      <section className="relative isolate overflow-hidden pb-4 pt-14 md:pt-20" aria-labelledby="assessment-title">
+        <Orbs variant="cool" />
+        <div data-reveal className="container-site relative">
         <p className="text-[15px] font-semibold text-blossom-deep">Công cụ tự đánh giá</p>
-        <h1 id="assessment-title" className="mt-2 max-w-4xl text-[36px] text-moss-ink md:text-[52px]">
+        <h1 id="assessment-title" className="mt-2 max-w-4xl text-[38px] font-bold leading-[1.1] tracking-[-0.035em] text-moss-ink md:text-[60px]">
           {assessment.title}
         </h1>
         <p className="mt-5 max-w-3xl text-lg text-ink-muted">{assessment.intro}</p>
         <p className="mt-6 inline-flex items-center gap-2 rounded-full bg-sprout px-4 py-2 text-[15px] font-medium text-moss">
           <LockKey size={18} aria-hidden="true" /> Không hỏi thông tin cá nhân. Không lưu câu trả lời.
         </p>
+        </div>
       </section>
 
       {/* Step 1 */}
@@ -36,7 +40,7 @@ export default function AssessmentPage() {
         <h2 id="buoc-1-title" className="text-[26px] text-moss-ink md:text-[32px]">
           <span className="text-blossom-deep">Bước 1.</span> Kiểm tra điều kiện bắt buộc
         </h2>
-        <div className="mt-6 overflow-x-auto rounded-[var(--radius-card)] bg-paper ring-1 ring-sprout-line">
+        <div data-reveal className="mt-6 overflow-x-auto rounded-[var(--radius-card)] bg-paper shadow-soft ring-1 ring-sprout-line">
           <table className="w-full min-w-[640px] text-left text-[15px]">
             <thead>
               <tr className="text-sm text-ink-muted">
@@ -68,14 +72,14 @@ export default function AssessmentPage() {
         <p className="mt-3 max-w-3xl text-ink-muted">
           Mỗi lựa chọn dưới đây đã được gán sẵn số điểm. Chọn xong 5 tiêu chí, hệ thống cộng tổng điểm và hiển thị kết quả.
         </p>
-        <div className="mt-8">
-          <SelfAssessment />
+        <div className="mx-auto mt-10 max-w-3xl">
+          <Quiz />
         </div>
       </section>
 
       {/* Step 3 */}
       <section className="container-site mt-20" aria-labelledby="buoc-3-title">
-        <div className="rounded-[var(--radius-panel)] bg-sprout p-8 sm:p-12">
+        <div data-reveal className="rounded-[var(--radius-panel)] bg-sprout p-8 sm:p-12">
           <h2 id="buoc-3-title" className="text-[26px] text-moss-ink md:text-[32px]">
             <span className="text-blossom-deep">Bước 3.</span> Kết quả và bước tiếp theo
           </h2>

@@ -105,7 +105,7 @@ export function ContactForm() {
     "inline-flex min-h-11 items-center rounded-full px-5 text-[15px] font-medium ring-1 ring-inset ring-sprout-line hover:bg-sprout peer-checked:bg-moss peer-checked:text-on-dark peer-checked:ring-moss peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-blossom-deep";
 
   return (
-    <form noValidate onSubmit={onSubmit} className="space-y-6 rounded-[var(--radius-panel)] bg-paper p-6 ring-1 ring-sprout-line sm:p-10">
+    <form noValidate onSubmit={onSubmit} data-reveal className="space-y-6 rounded-[var(--radius-panel)] bg-paper p-6 shadow-soft ring-1 ring-sprout-line sm:p-10">
       <div className="grid gap-6 sm:grid-cols-2">
         <Field id="c-fullName" label="Tên của chị" required hint="Tên thường gọi là đủ." error={errors.fullName}>
           <input id="c-fullName" name="fullName" autoComplete="given-name" onChange={() => clear("fullName")} className={inputClass} aria-invalid={!!errors.fullName} aria-describedby={describedBy("c-fullName", true, errors.fullName)} />

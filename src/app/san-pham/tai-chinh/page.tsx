@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { CheckList, CtaBand, InfoTable, PageIntro } from "@/components/blocks";
+import { CheckList, CtaBand, InfoTable, Orbs, PageIntro } from "@/components/blocks";
 import { LoanCalculator } from "@/components/loan-calculator";
 import { LinkButton, SectionHeading } from "@/components/ui";
+import { Stepper, Tabs } from "@/components/tabs";
 import {
   appraisal,
   generalConditions,
@@ -47,6 +48,8 @@ export default function FinancePage() {
   return (
     <>
       <PageIntro
+        eyebrow="Sản phẩm"
+        photo={11}
         title="Sản phẩm tài chính"
         body="Khoản vay nhỏ không cần tài sản thế chấp, lãi tính trên dư nợ giảm dần, và tiết kiệm hoàn toàn tự nguyện. Mỗi khoản vay đều được giải thích rõ lịch trả nợ và tổng nghĩa vụ trước khi chị ký."
         aside={
@@ -60,7 +63,7 @@ export default function FinancePage() {
       />
 
       <nav aria-label="Trong trang này" className="sticky top-[84px] z-30 mt-8 px-3">
-        <ul className="mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-full bg-paper/90 p-1.5 ring-1 ring-sprout-line backdrop-blur-md [scrollbar-width:none]">
+        <ul className="glass mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-full p-1.5 [scrollbar-width:none]">
           {sectionNav.map((s) => (
             <li key={s.href}>
               <a href={s.href} className="flex min-h-10 items-center whitespace-nowrap rounded-full px-4 text-[14px] font-medium text-ink-muted hover:bg-sprout hover:text-moss-ink">
@@ -72,12 +75,12 @@ export default function FinancePage() {
       </nav>
 
       <section className="container-site mt-16" aria-labelledby="loans-title">
-        <h2 id="loans-title" className="shout text-[36px] text-moss-ink md:text-[52px]">
+        <h2 id="loans-title" data-reveal className="shout text-[38px] text-moss-ink md:text-[60px]">
           Cho vay
         </h2>
 
         {/* Overview strip */}
-        <ul className="mt-8 grid gap-px overflow-hidden rounded-[var(--radius-card)] bg-sprout-line ring-1 ring-sprout-line sm:grid-cols-2 lg:grid-cols-4">
+        <ul data-reveal className="mt-8 grid gap-px overflow-hidden rounded-[var(--radius-card)] bg-sprout-line shadow-soft ring-1 ring-sprout-line sm:grid-cols-2 lg:grid-cols-4">
           {loanPackages.map((p) => (
             <li key={p.id} className="bg-paper">
               <a href={`#${p.id}`} className="block h-full p-6 hover:bg-sprout/50">
@@ -95,9 +98,14 @@ export default function FinancePage() {
           ))}
         </ul>
 
-        <div className="mt-16 space-y-24">
-          {loanPackages.map((p) => (
-            <article key={p.id} id={p.id} className="scroll-mt-40" aria-labelledby={`${p.id}-title`}>
+        <div className="mt-16">
+          <Tabs
+            label="Bốn gói vay"
+            items={loanPackages.map((p) => ({
+              id: p.id,
+              tab: `Gói ${p.number}${p.name ? `: ${p.name}` : ""}`,
+              panel: (
+            <article aria-labelledby={`${p.id}-title`}>
               <div className="grid gap-10 lg:grid-cols-[0.9fr_1.4fr] lg:gap-14 [&>*]:min-w-0">
                 <div>
                   <p className="text-[15px] font-semibold text-blossom-deep">
@@ -196,20 +204,22 @@ export default function FinancePage() {
                 </div>
               )}
             </article>
-          ))}
+              ),
+            }))}
+          />
         </div>
       </section>
 
       {/* General conditions */}
       <section id="dieu-kien" className="container-site mt-28 scroll-mt-40" aria-labelledby="conditions-title">
-        <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
-          <div className="rounded-[var(--radius-panel)] bg-sprout p-8 sm:p-10">
+        <div data-reveal-group="120" className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
+          <div data-reveal className="rounded-[var(--radius-panel)] bg-sprout p-8 sm:p-10">
             <h2 id="conditions-title" className="text-[30px] text-moss-ink md:text-[38px]">
               Điều kiện chung
             </h2>
             <CheckList items={generalConditions} className="mt-6 text-[17px]" />
           </div>
-          <div className="grid gap-5">
+          <div data-reveal className="grid gap-5">
             <div className="on-dark rounded-[var(--radius-panel)] bg-moss-deep p-8 text-on-dark">
               <h3 className="shout text-[22px] text-petal-yellow">Nguyên tắc vay lũy tiến</h3>
               <p className="mt-3 text-lg text-on-dark">{progressiveLending}</p>
@@ -223,20 +233,14 @@ export default function FinancePage() {
       </section>
 
       {/* Process */}
-      <section id="quy-trinh" className="container-site mt-28 scroll-mt-40" aria-labelledby="process-title">
+      <section id="quy-trinh" className="relative isolate mt-28 scroll-mt-40 overflow-hidden py-4" aria-labelledby="process-title">
+        <Orbs variant="cool" />
+        <div className="container-site relative">
         <SectionHeading id="process-title" title="Quy trình vay vốn: 6 bước" />
-        <ol className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {loanSteps.map((s, i) => (
-            <li key={s.title} className="flex flex-col rounded-[var(--radius-card)] bg-paper p-7 ring-1 ring-sprout-line">
-              <span className="tabular grid size-11 place-items-center rounded-full bg-moss text-[16px] font-bold text-on-dark" aria-hidden="true">
-                {i + 1}
-              </span>
-              <h3 className="mt-5 text-[20px] text-moss-ink">{s.title}</h3>
-              <p className="mt-2 text-[15px] text-ink-muted">{s.body}</p>
-              {s.time && <p className="mt-auto pt-5 text-[14px] font-semibold text-blossom-deep">{s.time}</p>}
-            </li>
-          ))}
-        </ol>
+        <div className="mt-14">
+          <Stepper label="Quy trình vay vốn" steps={loanSteps} />
+        </div>
+        </div>
       </section>
 
       {/* Calculator */}
@@ -254,13 +258,13 @@ export default function FinancePage() {
       {/* Savings */}
       <section id="tiet-kiem" className="mt-28 scroll-mt-40 bg-petal-yellow/60 py-20" aria-labelledby="savings-title">
         <div className="container-site">
-          <h2 id="savings-title" className="shout text-[36px] text-moss-ink md:text-[52px]">
+          <h2 id="savings-title" data-reveal className="shout text-[38px] text-moss-ink md:text-[60px]">
             Tiết kiệm tự nguyện
           </h2>
           <p className="mt-4 max-w-3xl text-lg text-moss-ink">{savings.intro}</p>
           <div className="mt-12 grid gap-8 lg:grid-cols-2">
             {savings.products.map((sp, i) => (
-              <article key={sp.id} id={sp.id} className="scroll-mt-40">
+              <article key={sp.id} id={sp.id} data-reveal className="scroll-mt-40">
                 <p className="text-[15px] font-semibold text-blossom-deep">Sản phẩm {i + 1}</p>
                 <h3 className="mt-1 text-[26px] text-moss-ink">{sp.title}</h3>
                 <div className="mt-5">

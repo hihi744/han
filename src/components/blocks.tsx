@@ -1,82 +1,127 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Plus } from "@phosphor-icons/react/dist/ssr";
+import type { CSSProperties, ReactNode } from "react";
+import { Camera, Plus } from "@phosphor-icons/react/dist/ssr";
 import { petalPaths } from "./petals";
 import { buttonClass } from "./ui";
+import { photos } from "@/content/site";
 
-// Callers may position the slot themselves (e.g. "absolute inset-0"); otherwise it is relative.
+// Callers may position the frame themselves (e.g. "absolute inset-0"); otherwise it is relative.
 function positioned(className: string) {
   return /\b(absolute|fixed|sticky)\b/.test(className) ? className : `relative ${className}`;
 }
 
 /**
- * Image slot. Pass `src` once real photography is available; until then it renders
- * an illustrated placeholder that names the photo it is waiting for.
- * Photos of clients need their informed consent and must never imply who has a criminal record.
+ * Numbered photo frame. Shows the photo once `photos[n].file` is set in src/content/site.ts;
+ * until then it shows a gallery-style placeholder naming the photo number and size needed.
  */
-export function PhotoSlot({
-  src,
-  alt = "",
-  want,
+export function Photo({
+  n,
   className = "",
-  tone = "dark",
+  tone = "light",
   priority = false,
   sizes = "(min-width: 1024px) 50vw, 100vw",
+  parallax,
 }: {
-  src?: string;
-  alt?: string;
-  want: string;
+  n: number;
   className?: string;
-  tone?: "dark" | "light" | "blossom";
+  tone?: "light" | "dark";
   priority?: boolean;
   sizes?: string;
+  parallax?: number;
 }) {
-  if (src) {
+  const photo = photos[n];
+  const frame = `zoom-frame ${positioned(className)}`;
+  // Parallax moves an oversized inner layer so the frame edges never show.
+  const inner = parallax ? "absolute -inset-y-[12%] inset-x-0" : "absolute inset-0";
+
+  if (photo?.file) {
     return (
-      <div className={`overflow-hidden ${positioned(className)}`}>
-        <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
+      <div className={frame}>
+        <div className={inner} data-parallax={parallax}>
+          <Image src={photo.file} alt={photo.alt} fill sizes={sizes} priority={priority} className="zoom-target object-cover" />
+        </div>
       </div>
     );
   }
-  const palette = {
-    dark: { bg: "bg-[radial-gradient(120%_90%_at_80%_10%,#4d6a46_0%,#2c3f27_55%,#1f2d1b_100%)]", petal: "#b93636", leaf: "#7d9c65", seed: "#fff2a0", tag: "bg-moss-ink/60 text-on-dark" },
-    light: { bg: "bg-[radial-gradient(120%_90%_at_20%_0%,#ffffff_0%,#e6ece0_70%)]", petal: "#b93636", leaf: "#7d9c65", seed: "#fff2a0", tag: "bg-paper/80 text-ink-muted" },
-    blossom: { bg: "bg-[radial-gradient(120%_90%_at_80%_0%,#fff_0%,#fbe8e9_70%)]", petal: "#b93636", leaf: "#e8a3a8", seed: "#ff9c4c", tag: "bg-paper/80 text-ink-muted" },
-  }[tone];
+
+  const dark = tone === "dark";
   return (
-    <div className={`overflow-hidden ${palette.bg} ${positioned(className)}`} role="img" aria-label={alt || want}>
-      <svg viewBox="0 0 440 440" className="absolute -bottom-[18%] -right-[12%] h-[95%] opacity-[0.22]" aria-hidden="true">
-        <path d={petalPaths.leafLeft} fill={palette.leaf} />
-        <path d={petalPaths.leafRight} fill={palette.leaf} />
-        <path d={petalPaths.seed} fill={palette.seed} />
-        <path d={petalPaths.sprout} fill={palette.leaf} />
-        <path d={petalPaths.bloom} fill={palette.petal} />
-      </svg>
-      <span className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[12px] font-medium backdrop-blur-sm ${palette.tag}`}>
-        Ảnh chờ cập nhật: {want}
-      </span>
+    <div className={`${frame} ${dark ? "bg-moss-deep" : "bg-sprout"}`} role="img" aria-label={`Ảnh minh họa: ${photo?.alt ?? ""}`}>
+      <div className={`zoom-target ${inner}`} data-parallax={parallax}>
+        <div
+          className={`absolute inset-0 ${
+            dark
+              ? "bg-[radial-gradient(120%_90%_at_80%_10%,#4d6a46_0%,#2c3f27_55%,#1f2d1b_100%)]"
+              : "bg-[radial-gradient(120%_100%_at_15%_0%,#ffffff_0%,#eef2e8_45%,#dfe7d6_100%)]"
+          }`}
+        />
+        <svg viewBox="0 0 440 440" className="absolute -bottom-[14%] -right-[10%] h-[85%] opacity-[0.16]" aria-hidden="true">
+          <path d={petalPaths.leafLeft} fill="#7d9c65" />
+          <path d={petalPaths.leafRight} fill="#ff9c4c" />
+          <path d={petalPaths.seed} fill="#fff2a0" />
+          <path d={petalPaths.sprout} fill="#7d9c65" />
+          <path d={petalPaths.bloom} fill="#b93636" />
+        </svg>
+      </div>
+      <div
+        className={`pointer-events-none absolute inset-3 rounded-[calc(var(--radius-card)-6px)] border-[1.5px] border-dashed sm:inset-4 ${
+          dark ? "border-on-dark/30" : "border-moss/25"
+        }`}
+        aria-hidden="true"
+      />
+      <div className={`absolute inset-0 grid place-items-center p-6 text-center ${dark ? "text-on-dark" : "text-moss-ink"}`}>
+        <div className="max-w-[240px]">
+          <span className={`mx-auto grid size-12 place-items-center rounded-full ${dark ? "glass-dark" : "glass"}`}>
+            <Camera size={22} weight="duotone" aria-hidden="true" />
+          </span>
+          <p className="mt-3 text-[13px] font-bold tracking-[0.08em]">ẢNH {String(n).padStart(2, "0")}</p>
+          <p className={`mt-1 text-[14px] leading-snug ${dark ? "text-on-dark-muted" : "text-ink-muted"}`}>{photo?.want}</p>
+          <p className={`tabular mt-1 text-[12px] ${dark ? "text-on-dark-muted/80" : "text-ink-muted/80"}`}>{photo?.size}</p>
+        </div>
+      </div>
     </div>
   );
 }
 
-export function Faq({ items }: { items: readonly { q: string; a: string }[] }) {
+/** Soft ambient glow orbs, placed inside a `relative overflow-hidden` section. */
+export function Orbs({ variant = "warm" }: { variant?: "warm" | "cool" | "dark" }) {
+  const sets = {
+    warm: [
+      { c: "#fff2a0", o: 0.7, w: 520, s: { left: "-160px", top: "-120px" }, x: "60px", y: "40px", sp: "26s" },
+      { c: "#e88b92", o: 0.28, w: 460, s: { right: "-120px", top: "30%" }, x: "-50px", y: "-40px", sp: "30s" },
+    ],
+    cool: [
+      { c: "#c9d9bf", o: 0.7, w: 560, s: { right: "-180px", top: "-160px" }, x: "-60px", y: "50px", sp: "28s" },
+      { c: "#fff2a0", o: 0.5, w: 420, s: { left: "-140px", bottom: "-160px" }, x: "50px", y: "-40px", sp: "24s" },
+    ],
+    dark: [
+      { c: "#ff9c4c", o: 0.22, w: 520, s: { right: "-160px", top: "-200px" }, x: "-40px", y: "40px", sp: "26s" },
+      { c: "#7d9c65", o: 0.3, w: 480, s: { left: "-180px", bottom: "-220px" }, x: "60px", y: "-30px", sp: "30s" },
+    ],
+  }[variant];
   return (
-    <div className="divide-y divide-sprout-line border-y border-sprout-line">
-      {items.map((item) => (
-        <details key={item.q} className="group">
-          <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-[18px] font-medium text-moss-ink [&::-webkit-details-marker]:hidden">
-            {item.q}
-            <span
-              aria-hidden="true"
-              className="grid size-9 shrink-0 place-items-center rounded-full bg-sprout text-moss transition-transform duration-300 ease-[var(--ease-out-soft)] group-open:rotate-45"
-            >
-              <Plus size={18} weight="bold" />
-            </span>
-          </summary>
-          <p className="max-w-3xl pb-6 pr-12 text-ink-muted">{item.a}</p>
-        </details>
+    <>
+      {sets.map((o, i) => (
+        <div
+          key={i}
+          aria-hidden="true"
+          className="orb"
+          style={
+            {
+              ...o.s,
+              width: o.w,
+              height: o.w,
+              "--orb-color": o.c,
+              "--orb-opacity": o.o,
+              "--orb-x": o.x,
+              "--orb-y": o.y,
+              "--orb-speed": o.sp,
+            } as unknown as CSSProperties
+          }
+        />
       ))}
-    </div>
+    </>
   );
 }
 
@@ -92,26 +137,27 @@ export function CtaBand({
   secondary?: { href: string; label: string };
 }) {
   return (
-    <section className="container-site mt-24" aria-labelledby="cta-title">
-      <div className="on-dark relative overflow-hidden rounded-[var(--radius-panel)] bg-moss-deep px-6 py-14 text-on-dark sm:px-14 sm:py-20">
-        <svg viewBox="0 0 440 440" className="absolute -right-16 -top-10 h-[130%] opacity-[0.12] sm:right-6" aria-hidden="true">
+    <section className="container-site mt-28" aria-labelledby="cta-title">
+      <div data-reveal="scale" className="on-dark relative overflow-hidden rounded-[var(--radius-panel)] bg-moss-deep px-6 py-16 text-on-dark sm:px-14 sm:py-24">
+        <Orbs variant="dark" />
+        <svg viewBox="0 0 440 440" className="absolute -right-16 -top-10 h-[130%] opacity-[0.1] sm:right-6" aria-hidden="true" data-parallax="0.06">
           <path d={petalPaths.leafLeft} fill="#7d9c65" />
           <path d={petalPaths.leafRight} fill="#7d9c65" />
           <path d={petalPaths.seed} fill="#7d9c65" />
           <path d={petalPaths.sprout} fill="#7d9c65" />
           <path d={petalPaths.bloom} fill="#b93636" />
         </svg>
-        <div className="relative max-w-xl">
-          <h2 id="cta-title" className="text-[32px] text-on-dark md:text-[48px]">
+        <div className="relative max-w-2xl">
+          <h2 id="cta-title" className="text-[34px] font-light leading-[1.15] tracking-[-0.03em] text-on-dark md:text-[54px]">
             {title}
           </h2>
-          <p className="mt-4 text-lg text-on-dark-muted">{body}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href={primary.href} className={buttonClass("blossom")}>
+          <p className="mt-5 max-w-xl text-lg text-on-dark-muted">{body}</p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Link href={primary.href} data-magnetic className={buttonClass("blossom")}>
               {primary.label}
             </Link>
             {secondary && (
-              <Link href={secondary.href} className={buttonClass("outline-light")}>
+              <Link href={secondary.href} data-magnetic className={buttonClass("outline-light")}>
                 {secondary.label}
               </Link>
             )}
@@ -126,19 +172,33 @@ export function PageIntro({
   title,
   body,
   aside,
+  eyebrow,
+  photo,
 }: {
   title: string;
   body: string;
-  aside?: React.ReactNode;
+  aside?: ReactNode;
+  eyebrow?: string;
+  /** Optional banner photo number shown under the intro. */
+  photo?: number;
 }) {
   return (
-    <section className="container-site pb-6 pt-14 md:pt-20">
-      <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-end">
-        <div>
-          <h1 className="text-[40px] text-moss-ink md:text-[60px]">{title}</h1>
-          <p className="mt-5 max-w-2xl text-lg text-ink-muted md:text-xl">{body}</p>
+    <section className="relative overflow-hidden pb-6 pt-14 md:pt-20">
+      <Orbs variant="cool" />
+      <div className="container-site relative">
+        <div className="grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+          <div data-reveal>
+            {eyebrow && <p className="text-[15px] font-semibold text-blossom-deep">{eyebrow}</p>}
+            <h1 className="mt-2 text-[44px] font-bold leading-[1.08] tracking-[-0.035em] text-moss-ink md:text-[72px]">{title}</h1>
+            <p className="mt-6 max-w-2xl text-lg text-ink-muted md:text-xl">{body}</p>
+          </div>
+          {aside && <div data-reveal>{aside}</div>}
         </div>
-        {aside}
+        {photo && (
+          <div data-reveal="scale" className="mt-12">
+            <Photo n={photo} parallax={0.08} className="aspect-[12/5] min-h-[240px] w-full rounded-[var(--radius-panel)]" priority sizes="100vw" />
+          </div>
+        )}
       </div>
     </section>
   );

@@ -122,7 +122,7 @@ export function HeroBlossom({
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 1.8, ease }}
-        className="relative mx-auto -mt-4 w-full max-w-[300px] rounded-2xl bg-paper p-5 text-ink shadow-[0_24px_60px_-20px_rgba(10,20,8,0.55)] lg:mr-0"
+        className="glass relative mx-auto -mt-4 w-full max-w-[300px] rounded-2xl p-5 text-ink shadow-[0_24px_60px_-20px_rgba(10,20,8,0.55)] lg:mr-0"
       >
         <figcaption className="text-sm font-medium text-ink-muted">Ví dụ gói Nảy Mầm, chu kỳ đầu</figcaption>
         <p className="font-display tabular mt-1 text-[28px] font-semibold tracking-tight text-moss-ink">

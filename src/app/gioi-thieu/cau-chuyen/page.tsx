@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { CtaBand, PhotoSlot } from "@/components/blocks";
-import { stories } from "@/content/site";
+import { CtaBand, Orbs, Photo } from "@/components/blocks";
+import { stories, storyPhotos } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Những mùa hoa đầu tiên",
@@ -10,9 +10,10 @@ export const metadata: Metadata = {
 export default function StoriesPage() {
   return (
     <>
-      <section className="relative pb-6 pt-14 md:pt-20" aria-labelledby="stories-title">
+      <section className="relative isolate overflow-hidden pb-6 pt-14 md:pt-20" aria-labelledby="stories-title">
+        <Orbs variant="warm" />
         <div aria-hidden="true" className="absolute inset-x-0 top-0 h-full max-h-[340px] bg-petal-yellow [clip-path:polygon(0_0,70%_0,58%_100%,0_100%)]" />
-        <div className="container-site relative">
+        <div data-reveal className="container-site relative">
           <p className="text-[15px] font-semibold text-moss">Câu chuyện khách hàng</p>
           <h1 id="stories-title" className="shout mt-2 max-w-xl text-[42px] text-moss-ink md:text-[64px]">
             Những mùa hoa đầu tiên
@@ -26,18 +27,20 @@ export default function StoriesPage() {
           return (
             <article
               key={`${s.who}-${s.role}`}
-              className={`grid overflow-hidden rounded-[var(--radius-panel)] bg-paper ring-1 ring-sprout-line ${
+              data-reveal
+              className={`grid overflow-hidden rounded-[var(--radius-panel)] bg-paper shadow-soft ring-1 ring-sprout-line ${
                 long ? "lg:grid-cols-[1fr_1.4fr]" : "md:grid-cols-[1fr_1.6fr]"
               }`}
             >
-              <PhotoSlot
-                want={`câu chuyện ${s.who}, ${s.role.toLowerCase()}`}
-                tone={i % 2 ? "light" : "blossom"}
-                className={`min-h-[260px] ${i % 2 ? "md:order-2" : ""}`}
+              <Photo
+                n={storyPhotos[i]}
+                parallax={0.05}
+                className={`min-h-[320px] ${i % 2 ? "md:order-2" : ""}`}
+                sizes="(min-width: 768px) 40vw, 100vw"
               />
               <figure className="flex flex-col justify-center p-8 sm:p-12">
                 <blockquote>
-                  <p className={long ? "text-[19px] leading-relaxed text-moss-ink" : "text-[26px] font-semibold leading-snug tracking-tight text-moss-ink md:text-[30px]"}>
+                  <p className={long ? "text-[19px] font-light leading-[1.75] text-moss-ink" : "text-[28px] font-light leading-[1.3] tracking-[-0.03em] text-moss-ink md:text-[36px]"}>
                     “{s.quote}”
                   </p>
                 </blockquote>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ArrowRight, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
-import { CheckList, PhotoSlot } from "@/components/blocks";
+import { CheckList, Orbs, Photo } from "@/components/blocks";
 import { SectionHeading } from "@/components/ui";
 import { org, project, projectEmailHref } from "@/content/site";
 
@@ -63,16 +63,17 @@ export default function ProjectPage() {
       {/* Hero: photo slot with a bold title block, after the reference layout */}
       <section className="px-3 pt-3" aria-labelledby="project-title">
         <div className="on-dark relative mx-auto max-w-[1400px] overflow-hidden rounded-[var(--radius-panel)] bg-moss-deep text-on-dark">
-          <PhotoSlot want="lớp may gia công, chụp tay và máy may" tone="dark" className="absolute inset-0" />
-          <div className="absolute inset-0 bg-gradient-to-r from-moss-ink/85 via-moss-ink/50 to-transparent" aria-hidden="true" />
-          <div className="container-site relative py-20 md:py-28">
+          <Photo n={13} tone="dark" parallax={0.08} priority sizes="100vw" className="absolute inset-0" />
+          <div className="absolute inset-0 bg-gradient-to-r from-moss-ink/90 via-moss-ink/65 to-moss-ink/20" aria-hidden="true" />
+          <Orbs variant="dark" />
+          <div data-reveal className="container-site relative py-24 md:py-32">
             <p className="text-[15px] font-semibold text-petal-yellow">Dự án</p>
             <h1 id="project-title" className="shout mt-3 max-w-3xl text-[44px] text-on-dark md:text-[72px]">
               Hạt mầm trong tay
             </h1>
             <p className="mt-4 max-w-xl text-xl text-on-dark-muted">{project.subtitle}</p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <a href="#tai-tro" className="inline-flex min-h-12 items-center rounded-full bg-petal-yellow px-6 text-[15px] font-semibold text-moss-ink hover:bg-[#fff7c4]">
+              <a href="#tai-tro" data-magnetic className="btn-sweep inline-flex min-h-12 items-center rounded-full bg-petal-yellow px-6 text-[15px] font-semibold text-moss-ink hover:bg-[#fff7c4]">
                 Kêu gọi tài trợ
               </a>
               <a href={projectEmailHref} className="inline-flex min-h-12 items-center gap-2 rounded-full px-6 text-[15px] font-semibold text-on-dark ring-1 ring-inset ring-on-dark/35 hover:bg-on-dark/10">
@@ -87,12 +88,12 @@ export default function ProjectPage() {
       <section className="container-site mt-20" aria-labelledby="nature-title">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
           <div>
-            <h2 id="nature-title" className="text-[30px] text-moss-ink md:text-[40px]">
+            <h2 id="nature-title" data-reveal className="text-[32px] font-bold tracking-[-0.035em] text-moss-ink md:text-[46px]">
               Đào tạo có việc làm chờ sẵn
             </h2>
             <CheckList items={project.nature} className="mt-6 text-[17px]" />
           </div>
-          <dl className="grid gap-px overflow-hidden rounded-[var(--radius-card)] bg-sprout-line ring-1 ring-sprout-line">
+          <dl data-reveal className="grid gap-px overflow-hidden rounded-[var(--radius-card)] bg-sprout-line shadow-soft ring-1 ring-sprout-line">
             {[
               { label: "Mô hình chung", value: project.model },
               { label: "Quy mô", value: project.scale },
@@ -113,9 +114,9 @@ export default function ProjectPage() {
         <h2 id="structure-title" className="text-[24px] text-moss-ink">
           Cấu trúc
         </h2>
-        <ol className="mt-6 flex flex-col gap-3 lg:flex-row lg:items-stretch">
+        <ol data-reveal-group="140" className="mt-6 flex flex-col gap-3 lg:flex-row lg:items-stretch">
           {project.structure.map((s, i) => (
-            <li key={s} className="flex flex-1 items-center gap-3">
+            <li key={s} data-reveal className="flex flex-1 items-center gap-3">
               <span className="flex h-full flex-1 items-center gap-4 rounded-[var(--radius-card)] bg-sprout p-5">
                 <span className="tabular grid size-9 shrink-0 place-items-center rounded-full bg-moss text-[15px] font-bold text-on-dark" aria-hidden="true">
                   {i + 1}
@@ -132,14 +133,15 @@ export default function ProjectPage() {
 
       {/* Timeline */}
       <section className="container-site mt-24" aria-labelledby="timeline-title">
-        <div className="on-dark rounded-[var(--radius-panel)] bg-moss-deep p-8 text-on-dark sm:p-12">
+        <div data-reveal="scale" className="on-dark relative overflow-hidden rounded-[var(--radius-panel)] bg-moss-deep p-8 text-on-dark sm:p-12">
+          <Orbs variant="dark" />
           <h2 id="timeline-title" className="shout text-[32px] text-on-dark md:text-[44px]">
             Quy trình triển khai
           </h2>
-          <ol className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          <ol data-reveal-group="140" className="relative mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             {project.phases.map((p) => (
-              <li key={p.phase} className="relative border-t border-on-dark/25 pt-6">
-                <span className="absolute -top-[7px] left-0 size-3 rounded-full bg-petal-yellow" aria-hidden="true" />
+              <li key={p.phase} data-reveal className="relative border-t border-on-dark/25 pt-6">
+                <span className="absolute -top-[7px] left-0 size-3 rounded-full bg-petal-yellow shadow-[0_0_0_6px_rgba(255,242,160,0.15),0_0_24px_4px_rgba(255,242,160,0.4)]" aria-hidden="true" />
                 <p className="tabular text-sm text-on-dark-muted">{p.time}</p>
                 <h3 className="mt-1 text-[20px] text-on-dark">{p.phase}</h3>
                 <ul className="mt-3 space-y-2 text-[15px] text-on-dark-muted">
@@ -187,9 +189,9 @@ export default function ProjectPage() {
       {/* KPIs */}
       <section className="container-site mt-24" aria-labelledby="kpi-title">
         <SectionHeading id="kpi-title" title="Các chỉ số đánh giá" />
-        <dl className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <dl data-reveal-group="80" className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {project.kpis.map((k) => (
-            <div key={k.name} className="flex flex-col rounded-[var(--radius-card)] bg-paper p-6 ring-1 ring-sprout-line">
+            <div key={k.name} data-reveal className="card-lift flex flex-col rounded-[var(--radius-card)] bg-paper p-6 shadow-soft ring-1 ring-sprout-line">
               <dt className="order-2 mt-3 font-medium text-moss-ink">{k.name}</dt>
               <dd className={`order-1 tabular font-extrabold leading-none tracking-tight ${k.target === "Theo dõi" ? "text-[26px] text-ink-muted" : "text-[44px] text-petal-red"}`}>
                 {k.target}
@@ -222,17 +224,18 @@ export default function ProjectPage() {
       </section>
 
       {/* Sponsorship */}
-      <section id="tai-tro" className="mt-24 scroll-mt-32 bg-petal-yellow py-20" aria-labelledby="appeal-title">
-        <div className="container-site">
+      <section id="tai-tro" className="relative isolate mt-24 scroll-mt-32 overflow-hidden bg-petal-yellow py-24" aria-labelledby="appeal-title">
+        <Orbs variant="warm" />
+        <div className="container-site relative">
           <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-end">
             <h2 id="appeal-title" className="shout text-[36px] text-moss-ink md:text-[52px]">
               Kêu gọi tài trợ dự án
             </h2>
             <p className="text-lg text-moss-ink">{project.appeal}</p>
           </div>
-          <ul className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <ul data-reveal-group="110" className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {project.packages.map((p, i) => (
-              <li key={p.name} className={`flex flex-col rounded-[var(--radius-card)] p-7 ${i === 0 ? "on-dark bg-moss-deep text-on-dark" : "bg-paper"}`}>
+              <li key={p.name} data-reveal className={`card-lift flex flex-col rounded-[var(--radius-card)] p-7 shadow-soft ${i === 0 ? "on-dark bg-moss-deep text-on-dark" : "bg-paper"}`}>
                 <h3 className={`text-[19px] ${i === 0 ? "text-on-dark" : "text-moss-ink"}`}>{p.name}</h3>
                 <p className={`tabular mt-4 text-[26px] font-extrabold tracking-tight ${i === 0 ? "text-petal-yellow" : "text-petal-red"}`}>{p.value}</p>
                 <p className={`mt-3 text-[15px] ${i === 0 ? "text-on-dark-muted" : "text-ink-muted"}`}>{p.meaning}</p>

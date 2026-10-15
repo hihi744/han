@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Brain, Storefront, Student } from "@phosphor-icons/react/dist/ssr";
-import { Compliance, CtaBand, InfoTable, PageIntro } from "@/components/blocks";
+import { Compliance, CtaBand, InfoTable, PageIntro, Photo } from "@/components/blocks";
 import { counselling, financeEducation, socialShop } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -19,16 +19,19 @@ export default function CommunityPage() {
   return (
     <>
       <PageIntro
+        eyebrow="Sản phẩm"
         title="Sản phẩm cộng đồng"
         body="Vốn, kiến thức và sự hỗ trợ tinh thần luôn đi cùng nhau, như người làm vườn kiên nhẫn chăm từng chồi non. Các dịch vụ dưới đây là tự nguyện và không ảnh hưởng đến việc xét vay."
       />
 
       <nav aria-label="Ba sản phẩm cộng đồng" className="container-site mt-10">
-        <ul className="grid gap-4 md:grid-cols-3">
+        <ul data-reveal-group="100" className="grid gap-4 md:grid-cols-3">
           {products.map(({ id, icon: Icon, label, title }) => (
-            <li key={id}>
-              <a href={`#${id}`} className="flex h-full items-start gap-4 rounded-[var(--radius-card)] bg-sprout p-6 transition-colors duration-200 hover:bg-[#dde6d5]">
-                <Icon size={30} className="shrink-0 text-moss" aria-hidden="true" />
+            <li key={id} data-reveal>
+              <a href={`#${id}`} className="card-lift flex h-full items-start gap-4 rounded-[var(--radius-card)] bg-sprout p-6">
+                <span className="glass grid size-12 shrink-0 place-items-center rounded-2xl text-moss">
+                  <Icon size={26} weight="duotone" aria-hidden="true" />
+                </span>
                 <span>
                   <span className="block text-sm font-semibold text-blossom-deep">{label}</span>
                   <span className="mt-1 block font-bold text-moss-ink">{title}</span>
@@ -42,7 +45,7 @@ export default function CommunityPage() {
       {/* 1. Counselling */}
       <section id={counselling.id} className="container-site mt-24 scroll-mt-32" aria-labelledby="counselling-title">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.4fr] lg:gap-14 [&>*]:min-w-0">
-          <div>
+          <div data-reveal className="lg:sticky lg:top-32 lg:self-start">
             <p className="text-[15px] font-semibold text-blossom-deep">Sản phẩm 1</p>
             <h2 id="counselling-title" className="mt-2 text-[32px] text-moss-ink md:text-[42px]">
               {counselling.title}
@@ -55,9 +58,9 @@ export default function CommunityPage() {
         </div>
 
         <h3 className="mt-14 text-[24px] text-moss-ink">Quy trình</h3>
-        <ol className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ol data-reveal-group="80" className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {counselling.steps.map((s, i) => (
-            <li key={s.title} className="rounded-[var(--radius-card)] bg-paper p-6 ring-1 ring-sprout-line">
+            <li key={s.title} data-reveal className="card-lift rounded-[var(--radius-card)] bg-paper p-6 shadow-soft ring-1 ring-sprout-line">
               <span className="tabular grid size-9 place-items-center rounded-full bg-moss text-[15px] font-bold text-on-dark" aria-hidden="true">
                 {i + 1}
               </span>
@@ -84,7 +87,12 @@ export default function CommunityPage() {
                 Học hỏi đồng đẳng trong nhóm nhỏ, với tình huống thực tế và bài tập lập sổ thu chi. Không bắt buộc học thêm để được vay ngoài buổi tập huấn đầu vào.
               </p>
             </div>
-            <InfoTable rows={financeEducation.rows} caption={financeEducation.title} />
+            <div className="space-y-5">
+              <div data-reveal="scale">
+                <Photo n={12} parallax={0.05} className="aspect-[4/3] rounded-[var(--radius-panel)]" />
+              </div>
+              <InfoTable rows={financeEducation.rows} caption={financeEducation.title} />
+            </div>
           </div>
 
           <h3 className="mt-14 text-[24px] text-moss-ink">Các học phần đề xuất</h3>
@@ -119,7 +127,7 @@ export default function CommunityPage() {
       {/* 3. Social shop */}
       <section id={socialShop.id} className="container-site mt-24 scroll-mt-32" aria-labelledby="shop-title">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.4fr] lg:gap-14 [&>*]:min-w-0">
-          <div>
+          <div data-reveal className="lg:sticky lg:top-32 lg:self-start">
             <p className="text-[15px] font-semibold text-blossom-deep">Sản phẩm 3</p>
             <h2 id="shop-title" className="mt-2 text-[32px] text-moss-ink md:text-[42px]">
               {socialShop.title}

@@ -785,3 +785,30 @@ export const contact = {
 export const projectEmailHref = `mailto:${"domhoa@gmail.com"}?subject=${encodeURIComponent(
   "Đề nghị nhận hồ sơ dự án Hạt mầm trong tay",
 )}`;
+
+/* ---------------- Ảnh (14 vị trí) ----------------
+ * Khi có ảnh: đặt file vào public/photos/ rồi điền `file`, ví dụ file: "/photos/01-hero.jpg".
+ * Ô nào chưa có file sẽ hiện khung chờ ghi rõ số ảnh và kích thước cần.
+ * Không dùng ảnh lộ mặt học viên nếu chưa có đồng ý bằng văn bản.
+ */
+export type Photo = { file?: string; alt: string; want: string; size: string };
+
+export const photos: Record<number, Photo> = {
+  1: { alt: "Đôi tay chăm một mầm cây", want: "Ảnh nền hero: đôi tay chăm mầm cây, nắng sớm (sẽ phủ lớp màu xanh)", size: "2400×1350 (16:9)" },
+  2: { alt: "Một buổi tư vấn riêng", want: "Buổi tư vấn, chụp từ sau lưng", size: "1200×1500 (4:5)" },
+  3: { alt: "Không gian lớp học của Đơm Hoa", want: "Lớp học hoặc xưởng, toàn cảnh", size: "2400×1200 (2:1)" },
+  4: { alt: "Quán nước của chị P", want: "Câu chuyện chị P: quán nước", size: "1200×1500 (4:5)" },
+  5: { alt: "Hàng online của chị H", want: "Câu chuyện chị H: bán hàng online", size: "1200×1500 (4:5)" },
+  6: { alt: "Đường may của chị H", want: "Câu chuyện chị H: may gia công", size: "1200×1500 (4:5)" },
+  7: { alt: "Tiệm bánh của chị X", want: "Câu chuyện chị X: tiệm bánh", size: "1200×1500 (4:5)" },
+  8: { alt: "Đồ thủ công của chị N", want: "Câu chuyện chị N: đồ thủ công", size: "1200×1500 (4:5)" },
+  9: { alt: "Buổi sinh hoạt nhóm tại Đơm Hoa", want: "Văn phòng hoặc sinh hoạt nhóm", size: "2400×1000 (12:5)" },
+  10: { alt: "Đội ngũ Đơm Hoa", want: "Ảnh tập thể đội ngũ", size: "1600×1000 (16:10)" },
+  11: { alt: "Sổ ghi chép thu chi", want: "Sổ thu chi, tiết kiệm", size: "2400×1000 (12:5)" },
+  12: { alt: "Lớp giáo dục tài chính Chồi Xanh", want: "Lớp Chồi Xanh", size: "1600×1200 (4:3)" },
+  13: { alt: "Lớp may gia công của dự án", want: "Lớp may gia công", size: "2400×1200 (2:1)" },
+  14: { alt: "Văn phòng Đơm Hoa tại 207 Giải Phóng", want: "Văn phòng 207 Giải Phóng", size: "1600×1200 (4:3)" },
+};
+
+/** Photo number used by each customer story, in the order of `stories`. */
+export const storyPhotos = [4, 5, 6, 7, 8];

@@ -26,7 +26,7 @@ export function LoanCalculator({ initial = "goi-1" }: { initial?: PackageId }) {
   const pct = ((amount - pkg.min) / (pkg.max - pkg.min)) * 100;
 
   return (
-    <div className="overflow-hidden rounded-[var(--radius-panel)] bg-paper ring-1 ring-sprout-line">
+    <div data-reveal className="overflow-hidden rounded-[var(--radius-panel)] bg-paper shadow-soft ring-1 ring-sprout-line">
       {/* Package switcher */}
       <fieldset className="border-b border-sprout-line p-4 sm:px-10 sm:py-5">
         <legend className="sr-only">Chọn gói vay</legend>

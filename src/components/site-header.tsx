@@ -84,9 +84,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 px-3 pt-3">
       <div
         className={`mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 rounded-full pl-5 pr-2 transition-[background-color,box-shadow] duration-300 ${
-          scrolled || open
-            ? "bg-paper/90 shadow-[0_8px_30px_-12px_rgba(27,38,23,0.25)] ring-1 ring-sprout-line backdrop-blur-md"
-            : "bg-paper ring-1 ring-sprout-line"
+          scrolled || open ? "glass" : "bg-paper/85 ring-1 ring-sprout-line backdrop-blur-md"
         }`}
       >
         <Link href="/" className="shrink-0 rounded-full" aria-label="Đơm Hoa, về trang chủ">
@@ -125,7 +123,7 @@ export function SiteHeader() {
                   </button>
                   {/* pt-2 bridges the gap so the menu stays open while the pointer moves into it */}
                   <div id={`menu-${item.label}`} hidden={openMenu !== item.label} className="absolute left-0 top-full z-10 pt-2">
-                    <ul className="w-[300px] rounded-2xl bg-paper p-2 shadow-[0_24px_60px_-20px_rgba(27,38,23,0.35)] ring-1 ring-sprout-line">
+                    <ul className="glass w-[300px] rounded-2xl p-2">
                       {item.children.map((c) => (
                         <li key={c.href}>
                           <Link

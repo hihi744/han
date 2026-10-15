@@ -5,8 +5,8 @@ import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 type Variant = "primary" | "blossom" | "ghost" | "light" | "outline-light";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-moss text-on-dark hover:bg-moss-deep",
-  blossom: "bg-blossom text-moss-ink hover:bg-[#ef9da3]",
+  primary: "btn-sweep bg-moss text-on-dark shadow-[0_10px_24px_-12px_rgba(36,51,32,0.6)] hover:bg-moss-deep",
+  blossom: "btn-sweep bg-blossom text-moss-ink shadow-[0_10px_28px_-12px_rgba(232,139,146,0.9)] hover:bg-[#ef9da3]",
   ghost: "text-moss hover:bg-sprout",
   light: "bg-mist text-moss-ink hover:bg-white",
   "outline-light": "text-on-dark ring-1 ring-inset ring-on-dark/35 hover:bg-on-dark/10",
@@ -15,7 +15,7 @@ const variants: Record<Variant, string> = {
 export function buttonClass(variant: Variant = "primary", extra = "") {
   return [
     "inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-[15px] font-semibold",
-    "transition-[background-color,transform] duration-200 ease-out active:scale-[0.98] cursor-pointer",
+    "transition-[background-color,box-shadow] duration-300 active:scale-[0.98] cursor-pointer",
     "disabled:cursor-not-allowed disabled:opacity-50",
     variants[variant],
     extra,
@@ -26,11 +26,12 @@ export function LinkButton({
   variant = "primary",
   className = "",
   withIcon = false,
+  magnetic = true,
   children,
   ...props
-}: ComponentProps<typeof Link> & { variant?: Variant; withIcon?: boolean }) {
+}: ComponentProps<typeof Link> & { variant?: Variant; withIcon?: boolean; magnetic?: boolean }) {
   return (
-    <Link className={buttonClass(variant, className)} {...props}>
+    <Link className={buttonClass(variant, className)} data-magnetic={magnetic ? "" : undefined} {...props}>
       {children}
       {withIcon && (
         <span
@@ -59,10 +60,10 @@ export function SectionHeading({
 }) {
   const centered = align === "center";
   return (
-    <div className={centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
+    <div data-reveal className={centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
       <h2
         id={id}
-        className={`text-[32px] md:text-[44px] ${tone === "dark" ? "text-on-dark" : "text-moss-ink"}`}
+        className={`text-[34px] font-bold tracking-[-0.035em] md:text-[50px] ${tone === "dark" ? "text-on-dark" : "text-moss-ink"}`}
       >
         {title}
       </h2>

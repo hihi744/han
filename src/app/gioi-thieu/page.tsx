@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, MapPin } from "@phosphor-icons/react/dist/ssr";
-import { CheckList, CtaBand, PageIntro } from "@/components/blocks";
-import { StageGlyph } from "@/components/petals";
+import { CheckList, CtaBand, PageIntro, Photo } from "@/components/blocks";
+import { Journey } from "@/components/journey";
 import { SectionHeading } from "@/components/ui";
 import { about, expansion, funding, goals2031, legal, locations, org, partners, values } from "@/content/site";
 
@@ -26,11 +26,11 @@ const sectionNav = [
 export default function AboutPage() {
   return (
     <>
-      <PageIntro title="Về chúng tôi" body={about.direction} />
+      <PageIntro eyebrow="Giới thiệu" title="Về chúng tôi" body={about.direction} photo={9} />
 
       {/* Names */}
       <section className="container-site mt-10" aria-label="Tên tổ chức">
-        <dl className="grid gap-px overflow-hidden rounded-[var(--radius-card)] bg-sprout-line ring-1 ring-sprout-line sm:grid-cols-2 lg:grid-cols-4">
+        <dl data-reveal className="grid gap-px overflow-hidden rounded-[var(--radius-card)] bg-sprout-line shadow-soft ring-1 ring-sprout-line sm:grid-cols-2 lg:grid-cols-4">
           {[
             { label: "Tên tiếng Việt", value: org.fullName },
             { label: "Tên tiếng Anh", value: org.englishName },
@@ -46,7 +46,7 @@ export default function AboutPage() {
       </section>
 
       <nav aria-label="Trong trang này" className="sticky top-[84px] z-30 mt-10 px-3">
-        <ul className="mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-full bg-paper/90 p-1.5 ring-1 ring-sprout-line backdrop-blur-md [scrollbar-width:none]">
+        <ul className="glass mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-full p-1.5 [scrollbar-width:none]">
           {sectionNav.map((s) => (
             <li key={s.href}>
               <a href={s.href} className="flex min-h-10 items-center whitespace-nowrap rounded-full px-4 text-[14px] font-medium text-ink-muted hover:bg-sprout hover:text-moss-ink">
@@ -59,7 +59,7 @@ export default function AboutPage() {
 
       {/* Vision & mission */}
       <section id="tam-nhin" className="container-site mt-12 scroll-mt-40" aria-label="Tầm nhìn và sứ mệnh">
-        <div className="on-dark grid gap-10 rounded-[var(--radius-panel)] bg-moss-deep p-8 text-on-dark sm:p-12 lg:grid-cols-2 lg:gap-16">
+        <div data-reveal="scale" className="on-dark relative grid gap-10 overflow-hidden rounded-[var(--radius-panel)] bg-moss-deep p-8 text-on-dark sm:p-14 lg:grid-cols-2 lg:gap-16">
           <div>
             <h2 className="shout text-[26px] text-petal-yellow">Tầm nhìn</h2>
             <p className="mt-4 text-[22px] leading-snug text-on-dark sm:text-[26px]">{about.vision}</p>
@@ -73,24 +73,17 @@ export default function AboutPage() {
 
       {/* Core values */}
       <section id="gia-tri" className="container-site mt-24 scroll-mt-40" aria-labelledby="values-title">
-        <SectionHeading id="values-title" title="Giá trị cốt lõi" intro={about.valuesIntro} />
-        <ol className="mt-14 grid gap-5 sm:grid-cols-2">
-          {values.map((v, i) => (
-            <li key={v.key} className="flex flex-col rounded-[var(--radius-card)] bg-paper p-8 ring-1 ring-sprout-line">
-              <div className="flex items-center justify-between">
-                <StageGlyph stage={v.key} className="size-14" />
-                <span className="tabular text-sm font-medium text-ink-muted">Chặng {i + 1}</span>
-              </div>
-              <h3 className="mt-6 text-[28px] text-moss-ink">
-                {v.stage} – {v.value}
-              </h3>
-              <p className="font-semibold text-blossom-deep">{v.promise}</p>
-              <p className="mt-3 text-ink-muted">{v.body}</p>
-            </li>
-          ))}
-        </ol>
-        <figure className="mx-auto mt-16 max-w-3xl text-center">
-          <blockquote className="text-[26px] font-bold leading-snug tracking-tight text-moss-ink md:text-[36px]">
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.3fr] lg:gap-20">
+          <div className="lg:sticky lg:top-40 lg:self-start" data-reveal>
+            <h2 id="values-title" className="shout text-[36px] text-moss-ink md:text-[52px]">
+              Giá trị cốt lõi
+            </h2>
+            <p className="mt-5 max-w-md text-lg text-ink-muted">{about.valuesIntro}</p>
+          </div>
+          <Journey />
+        </div>
+        <figure data-reveal className="mx-auto mt-24 max-w-3xl text-center">
+          <blockquote className="text-[28px] font-light leading-[1.3] tracking-[-0.03em] text-moss-ink md:text-[44px]">
             “{org.philosophy}”
           </blockquote>
           <figcaption className="mt-4 text-ink-muted">Triết lý cốt lõi</figcaption>
@@ -100,17 +93,20 @@ export default function AboutPage() {
       {/* Who we serve + how we reach */}
       <section id="doi-tuong" className="container-site mt-24 scroll-mt-40" aria-label="Đối tượng và cách tiếp cận">
         <div className="grid gap-5 lg:grid-cols-2">
-          <div className="rounded-[var(--radius-panel)] bg-sprout p-8 sm:p-10">
+          <div data-reveal className="rounded-[var(--radius-panel)] bg-sprout p-8 sm:p-10 lg:self-start">
             <h2 className="text-[28px] text-moss-ink md:text-[34px]">Chúng tôi đồng hành cùng ai?</h2>
             <CheckList items={about.whoWeServe} className="mt-6 text-[17px]" />
           </div>
-          <div className="rounded-[var(--radius-panel)] bg-paper p-8 ring-1 ring-sprout-line sm:p-10">
+          <div data-reveal className="overflow-hidden rounded-[var(--radius-panel)] bg-paper shadow-soft ring-1 ring-sprout-line">
+            <Photo n={10} className="aspect-[16/10]" sizes="(min-width: 1024px) 50vw, 100vw" />
+            <div className="p-8 sm:p-10">
             <h2 className="text-[28px] text-moss-ink md:text-[34px]">Cách chúng tôi đến với chị</h2>
             {about.howWeReach.map((p) => (
               <p key={p} className="mt-5 text-ink-muted">
                 {p}
               </p>
             ))}
+            </div>
           </div>
         </div>
       </section>
@@ -118,9 +114,9 @@ export default function AboutPage() {
       {/* Locations & expansion */}
       <section id="pham-vi" className="container-site mt-24 scroll-mt-40" aria-labelledby="scope-title">
         <SectionHeading id="scope-title" title="Phạm vi hoạt động" intro="Thí điểm tại 2 địa phương, mở rộng theo mô hình “điểm – cụm – vùng”." />
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
+        <div data-reveal-group="120" className="mt-12 grid gap-5 md:grid-cols-2">
           {locations.map((l) => (
-            <article key={l.place} className="rounded-[var(--radius-card)] bg-paper p-8 ring-1 ring-sprout-line">
+            <article key={l.place} data-reveal className="card-lift rounded-[var(--radius-card)] bg-paper p-8 shadow-soft ring-1 ring-sprout-line">
               <p className="flex items-center gap-2 text-[15px] font-semibold text-blossom-deep">
                 <MapPin size={20} weight="fill" aria-hidden="true" /> {l.role}
               </p>
@@ -129,9 +125,9 @@ export default function AboutPage() {
             </article>
           ))}
         </div>
-        <ol className="mt-12 grid gap-8 md:grid-cols-3 md:gap-6">
+        <ol data-reveal-group="120" className="mt-12 grid gap-8 md:grid-cols-3 md:gap-6">
           {expansion.map((e) => (
-            <li key={e.phase} className="relative border-t-2 border-moss pt-6">
+            <li key={e.phase} data-reveal className="relative border-t-2 border-moss pt-6">
               <span className="absolute -top-[9px] left-0 size-4 rounded-full bg-petal-orange ring-4 ring-mist" aria-hidden="true" />
               <p className="tabular text-sm font-semibold text-ink-muted">{e.time}</p>
               <h3 className="shout mt-1 text-[26px] text-moss-ink">{e.phase}</h3>
@@ -142,8 +138,8 @@ export default function AboutPage() {
       </section>
 
       {/* Goals */}
-      <section id="muc-tieu" className="mt-24 scroll-mt-40 bg-petal-yellow py-16" aria-labelledby="goals-title">
-        <div className="container-site grid gap-10 lg:grid-cols-[0.8fr_1.6fr] lg:gap-16">
+      <section id="muc-tieu" className="mt-24 scroll-mt-40 bg-petal-yellow py-20" aria-labelledby="goals-title">
+        <div data-reveal className="container-site grid gap-10 lg:grid-cols-[0.8fr_1.6fr] lg:gap-16">
           <h2 id="goals-title" className="shout text-[32px] text-moss-ink md:text-[44px]">
             Mục tiêu hoạt động giai đoạn 2027–2031
           </h2>
@@ -189,7 +185,7 @@ export default function AboutPage() {
 
       {/* Funding */}
       <section id="nguon-luc" className="container-site mt-24 scroll-mt-40" aria-labelledby="funding-title">
-        <div className="grid gap-10 rounded-[var(--radius-panel)] bg-paper p-8 ring-1 ring-sprout-line sm:p-12 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
+        <div data-reveal className="grid gap-10 rounded-[var(--radius-panel)] bg-paper p-8 shadow-soft ring-1 ring-sprout-line sm:p-12 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
           <div>
             <h2 id="funding-title" className="text-[30px] text-moss-ink md:text-[38px]">
               Nguồn lực và nhà tài trợ
