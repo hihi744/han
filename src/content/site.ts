@@ -311,7 +311,6 @@ export const loanPackages = [
           { label: "Ân hạn gốc", value: "Có thể 2–4 tuần đầu. Lãi trong thời gian ân hạn và tổng nghĩa vụ phải trả được nêu rõ từ đầu" },
           { label: "Lãi suất", value: "0,8%/tháng (chu kỳ đầu, 5–15 triệu); 0,75%/tháng (chu kỳ tiếp theo, 15–30 triệu); tính trên dư nợ giảm dần" },
         ],
-        note: "Mức lãi suất tiệm cận lãi suất cho vay hộ nghèo, hộ mới thoát nghèo của Ngân hàng Chính sách Xã hội, vừa sức với người có thu nhập chưa ổn định. Lãi ưu đãi nhẹ giúp hình thành thói quen tính toán chi phí vốn mà không tạo áp lực quá hạn.",
       },
       {
         kind: "list",
