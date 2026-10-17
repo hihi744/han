@@ -46,10 +46,10 @@ export function ContactForm() {
     const next: Errors = {};
     if (!get("fullName")) next.fullName = "Vui lòng cho biết tên để cán bộ xưng hô.";
     if (!isVietnamesePhone(get("phone"))) next.phone = "Số điện thoại chưa đúng. Ví dụ: 0912 345 678";
-    if (!get("need")) next.need = "Vui lòng chọn nhu cầu của chị.";
-    if (!get("area")) next.area = "Vui lòng chọn khu vực chị đang sống.";
+    if (!get("need")) next.need = "Vui lòng chọn nhu cầu của bạn.";
+    if (!get("area")) next.area = "Vui lòng chọn khu vực bạn đang sống.";
     if (!get("callTime")) next.callTime = "Vui lòng chọn giờ thuận tiện để nghe máy.";
-    if (!form.get("consent")) next.consent = "Vui lòng đồng ý để Đơm Hoa liên hệ với chị.";
+    if (!form.get("consent")) next.consent = "Vui lòng đồng ý để Đơm Hoa liên hệ với bạn.";
     setErrors(next);
     const first = Object.keys(next)[0];
     if (first) {
@@ -87,7 +87,7 @@ export function ContactForm() {
           Đã nhận. Cảm ơn {name}.
         </h3>
         <p className="mt-3 text-lg text-ink-muted">
-          Cán bộ tín dụng nữ của Đơm Hoa sẽ gọi cho chị vào {callTime.toLowerCase()} trong giờ làm việc. Nếu cần gấp, chị có thể gọi hotline {org.phone}.
+          Cán bộ tín dụng nữ của Đơm Hoa sẽ gọi cho bạn vào {callTime.toLowerCase()} trong giờ làm việc. Nếu cần gấp, bạn có thể gọi hotline {org.phone}.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link href="/tu-danh-gia" className={buttonClass("primary")}>
@@ -107,7 +107,7 @@ export function ContactForm() {
   return (
     <form noValidate onSubmit={onSubmit} data-reveal className="space-y-6 rounded-[var(--radius-panel)] bg-paper p-6 shadow-soft ring-1 ring-sprout-line sm:p-10">
       <div className="grid gap-6 sm:grid-cols-2">
-        <Field id="c-fullName" label="Tên của chị" required hint="Tên thường gọi là đủ." error={errors.fullName}>
+        <Field id="c-fullName" label="Tên của bạn" required hint="Tên thường gọi là đủ." error={errors.fullName}>
           <input id="c-fullName" name="fullName" autoComplete="given-name" onChange={() => clear("fullName")} className={inputClass} aria-invalid={!!errors.fullName} aria-describedby={describedBy("c-fullName", true, errors.fullName)} />
         </Field>
         <Field id="c-phone" label="Số điện thoại" required hint="Chỉ cán bộ phụ trách được xem." error={errors.phone}>
@@ -116,7 +116,7 @@ export function ContactForm() {
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2">
-        <Field id="c-need" label="Chị cần hỗ trợ gì?" required error={errors.need}>
+        <Field id="c-need" label="Bạn cần hỗ trợ gì?" required error={errors.need}>
           <select
             id="c-need"
             name="need"
@@ -135,13 +135,12 @@ export function ContactForm() {
             ))}
           </select>
         </Field>
-        <Field id="c-packageId" label="Gói chị quan tâm">
+        <Field id="c-packageId" label="Gói bạn quan tâm">
           <select id="c-packageId" name="packageId" key={prefill.pkg ?? "none"} defaultValue={prefill.pkg ?? ""} className={`${inputClass} cursor-pointer`}>
             <option value="">Chưa biết, nhờ cán bộ tư vấn</option>
             {loanPackages.map((p) => (
               <option key={p.id} value={p.id}>
-                Gói {p.number}
-                {p.name ? `: ${p.name}` : `: ${p.title}`}
+                Gói {p.number}: {p.title}
               </option>
             ))}
           </select>
@@ -150,7 +149,7 @@ export function ContactForm() {
 
       <fieldset aria-describedby={describedBy("c-area", false, errors.area)}>
         <legend className="text-[15px] font-medium text-moss-ink">
-          Khu vực chị đang sống<span className="text-blossom-deep" aria-hidden="true"> *</span>
+          Khu vực bạn đang sống<span className="text-blossom-deep" aria-hidden="true"> *</span>
         </legend>
         <div id="c-area" tabIndex={-1} className="mt-2 flex flex-wrap gap-2 outline-none">
           {areas.map((a) => (
@@ -178,7 +177,7 @@ export function ContactForm() {
         {errors.callTime && <p id="c-callTime-error" className="mt-2 text-sm font-medium text-blossom-deep">{errors.callTime}</p>}
       </fieldset>
 
-      <Field id="c-note" label="Chị muốn nhắn gì thêm?">
+      <Field id="c-note" label="Bạn muốn nhắn gì thêm?">
         <textarea id="c-note" name="note" rows={3} key={prefill.note ?? "none"} defaultValue={prefill.note ?? ""} className={`${inputClass} resize-y`} />
       </Field>
 
@@ -197,7 +196,7 @@ export function ContactForm() {
 
       {status === "error" && (
         <p role="alert" className="rounded-xl bg-blossom-tint px-4 py-3 text-[15px] text-moss-ink">
-          Chưa gửi được do lỗi kết nối. Thông tin của chị vẫn còn đây, vui lòng bấm gửi lại hoặc gọi hotline {org.phone}.
+          Chưa gửi được do lỗi kết nối. Thông tin của bạn vẫn còn đây, vui lòng bấm gửi lại hoặc gọi hotline {org.phone}.
         </p>
       )}
 

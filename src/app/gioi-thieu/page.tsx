@@ -4,12 +4,13 @@ import { ArrowUpRight, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { CheckList, CtaBand, PageIntro, Photo } from "@/components/blocks";
 import { Journey } from "@/components/journey";
 import { SectionHeading } from "@/components/ui";
-import { about, expansion, funding, goals2031, legal, locations, org, partners, values } from "@/content/site";
+import { about, expansion, funding, goals2031, goalsNote, legal, locations, org, partners } from "@/content/site";
+import { FundingDonut } from "@/components/funding-donut";
 
 export const metadata: Metadata = {
   title: "Về chúng tôi",
   description:
-    "Tổ chức Tài chính Vi mô ĐƠM HOA (BLOSSOM Microfinance Institution): tầm nhìn, sứ mệnh, giá trị cốt lõi, phạm vi hoạt động, đối tác và cơ sở pháp lý.",
+    "Tổ chức Tài chính Vi mô ĐƠM HOA: tầm nhìn, sứ mệnh, giá trị cốt lõi, phạm vi hoạt động, đối tác và cơ sở pháp lý.",
 };
 
 const sectionNav = [
@@ -30,11 +31,9 @@ export default function AboutPage() {
 
       {/* Names */}
       <section className="container-site mt-10" aria-label="Tên tổ chức">
-        <dl data-reveal className="grid gap-px overflow-hidden rounded-[var(--radius-card)] bg-sprout-line shadow-soft ring-1 ring-sprout-line sm:grid-cols-2 lg:grid-cols-4">
+        <dl data-reveal className="grid gap-px overflow-hidden rounded-[var(--radius-card)] bg-sprout-line shadow-soft ring-1 ring-sprout-line sm:grid-cols-2">
           {[
-            { label: "Tên tiếng Việt", value: org.fullName },
-            { label: "Tên tiếng Anh", value: org.englishName },
-            { label: "Tên viết tắt", value: org.shortName },
+            { label: "Tên tổ chức", value: org.fullName },
             { label: "Tagline", value: org.tagline },
           ].map((n) => (
             <div key={n.label} className="bg-paper p-6">
@@ -86,7 +85,6 @@ export default function AboutPage() {
           <blockquote className="text-[28px] font-light leading-[1.3] tracking-[-0.03em] text-moss-ink md:text-[44px]">
             “{org.philosophy}”
           </blockquote>
-          <figcaption className="mt-4 text-ink-muted">Triết lý cốt lõi</figcaption>
         </figure>
       </section>
 
@@ -94,13 +92,13 @@ export default function AboutPage() {
       <section id="doi-tuong" className="container-site mt-24 scroll-mt-40" aria-label="Đối tượng và cách tiếp cận">
         <div className="grid gap-5 lg:grid-cols-2">
           <div data-reveal className="rounded-[var(--radius-panel)] bg-sprout p-8 sm:p-10 lg:self-start">
-            <h2 className="text-[28px] text-moss-ink md:text-[34px]">Chúng tôi đồng hành cùng ai?</h2>
+            <h2 className="text-[28px] text-moss-ink md:text-[34px]">Đơm Hoa đồng hành cùng ai?</h2>
             <CheckList items={about.whoWeServe} className="mt-6 text-[17px]" />
           </div>
           <div data-reveal className="overflow-hidden rounded-[var(--radius-panel)] bg-paper shadow-soft ring-1 ring-sprout-line">
             <Photo n={10} className="aspect-[16/10]" sizes="(min-width: 1024px) 50vw, 100vw" />
             <div className="p-8 sm:p-10">
-            <h2 className="text-[28px] text-moss-ink md:text-[34px]">Cách chúng tôi đến với chị</h2>
+            <h2 className="text-[28px] text-moss-ink md:text-[34px]">Cách thức tiếp cận</h2>
             {about.howWeReach.map((p) => (
               <p key={p} className="mt-5 text-ink-muted">
                 {p}
@@ -150,13 +148,14 @@ export default function AboutPage() {
                 <span className="text-moss-ink">{g}</span>
               </li>
             ))}
+            <li className="pt-2 text-moss-ink sm:col-span-2">{goalsNote}</li>
           </ul>
         </div>
       </section>
 
       {/* Partners */}
       <section id="doi-tac" className="container-site mt-24 scroll-mt-40" aria-labelledby="partners-title">
-        <SectionHeading id="partners-title" title="Đối tác" />
+        <SectionHeading id="partners-title" title="Đối tác đồng hành" />
         <div className="mt-12 grid gap-10 lg:grid-cols-2">
           <div>
             <h3 className="text-[15px] font-semibold tracking-normal text-ink-muted">Đối tác chuyên môn</h3>
@@ -190,16 +189,15 @@ export default function AboutPage() {
             <h2 id="funding-title" className="text-[30px] text-moss-ink md:text-[38px]">
               Nguồn lực và nhà tài trợ
             </h2>
-            <p className="mt-4 text-ink-muted">{funding.intro}</p>
+            {funding.intro.map((t) => (
+              <p key={t} className="mt-4 text-ink-muted">
+                {t}
+              </p>
+            ))}
             <h3 className="mt-10 text-[15px] font-semibold tracking-normal text-ink-muted">Cơ cấu nguồn thu dự kiến</h3>
-            <dl className="mt-4 grid grid-cols-2 gap-4">
-              {funding.mix.map((m) => (
-                <div key={m.label} className="flex flex-col rounded-2xl bg-sprout p-4">
-                  <dt className="order-2 mt-2 text-[14px] text-ink-muted">{m.label}</dt>
-                  <dd className="order-1 tabular text-[30px] font-extrabold leading-none text-moss-ink">{m.share}%</dd>
-                </div>
-              ))}
-            </dl>
+            <div className="mt-6">
+              <FundingDonut mix={funding.mix} />
+            </div>
             <p className="mt-6 text-[15px] text-ink-muted">{funding.outlook}</p>
           </div>
           <ul className="space-y-6">
@@ -237,7 +235,7 @@ export default function AboutPage() {
 
       <CtaBand
         title="Cùng gieo một mùa hoa."
-        body="Dù chị đang cần một khởi đầu mới hay bạn muốn trao cơ hội cho người khác, Đơm Hoa luôn sẵn lòng lắng nghe."
+        body="Dù bạn đang cần một khởi đầu mới hay muốn trao cơ hội cho người khác, Đơm Hoa luôn sẵn lòng lắng nghe."
         primary={{ href: "/lien-he#dang-ky", label: "Đăng ký tư vấn" }}
         secondary={{ href: "/du-an", label: "Đồng hành cùng dự án" }}
       />

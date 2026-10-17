@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { LockKey } from "@phosphor-icons/react/dist/ssr";
 import { Quiz } from "@/components/quiz";
-import { Orbs } from "@/components/blocks";
-import { buttonClass } from "@/components/ui";
+import { CheckList, Orbs } from "@/components/blocks";
 import { assessment } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -12,66 +10,50 @@ export const metadata: Metadata = {
     "Kiểm tra nhanh mức độ phù hợp với các gói hỗ trợ của Đơm Hoa trong khoảng 2 phút. Không hỏi thông tin cá nhân, không lưu câu trả lời.",
 };
 
-const levelTone: Record<string, string> = {
-  "Bắt buộc": "bg-moss text-on-dark",
-  "Ưu tiên cao": "bg-petal-orange text-moss-ink",
-  "Ưu tiên": "bg-sprout text-moss",
-};
+const levelTone = ["bg-petal-yellow", "bg-sprout", "bg-mist"];
 
 export default function AssessmentPage() {
+  const { basics } = assessment;
   return (
     <>
       <section className="relative isolate overflow-hidden pb-4 pt-14 md:pt-20" aria-labelledby="assessment-title">
         <Orbs variant="cool" />
         <div data-reveal className="container-site relative">
-        <p className="text-[15px] font-semibold text-blossom-deep">Công cụ tự đánh giá</p>
-        <h1 id="assessment-title" className="mt-2 max-w-4xl text-[38px] font-bold leading-[1.1] tracking-[-0.035em] text-moss-ink md:text-[60px]">
-          {assessment.title}
-        </h1>
-        <p className="mt-5 max-w-3xl text-lg text-ink-muted">{assessment.intro}</p>
-        <p className="mt-6 inline-flex items-center gap-2 rounded-full bg-sprout px-4 py-2 text-[15px] font-medium text-moss">
-          <LockKey size={18} aria-hidden="true" /> Không hỏi thông tin cá nhân. Không lưu câu trả lời.
-        </p>
+          <p className="text-[15px] font-semibold text-blossom-deep">Công cụ tự đánh giá</p>
+          <h1 id="assessment-title" className="mt-2 max-w-4xl text-[38px] font-bold leading-[1.1] tracking-[-0.035em] text-moss-ink md:text-[60px]">
+            {assessment.title}
+          </h1>
+          <p className="mt-5 max-w-3xl text-lg text-ink-muted">{assessment.intro}</p>
+          <p className="mt-6 inline-flex items-center gap-2 rounded-full bg-sprout px-4 py-2 text-[15px] font-medium text-moss">
+            <LockKey size={18} aria-hidden="true" /> Không hỏi thông tin cá nhân. Không lưu câu trả lời.
+          </p>
         </div>
       </section>
 
       {/* Step 1 */}
       <section className="container-site mt-16" aria-labelledby="buoc-1-title">
         <h2 id="buoc-1-title" className="text-[26px] text-moss-ink md:text-[32px]">
-          <span className="text-blossom-deep">Bước 1.</span> Kiểm tra điều kiện bắt buộc
+          <span className="text-blossom-deep">Bước 1.</span> Những điều kiện cơ bản
         </h2>
-        <div data-reveal className="mt-6 overflow-x-auto rounded-[var(--radius-card)] bg-paper shadow-soft ring-1 ring-sprout-line">
-          <table className="w-full min-w-[640px] text-left text-[15px]">
-            <thead>
-              <tr className="text-sm text-ink-muted">
-                <th scope="col" className="px-5 py-3 font-medium">Tiêu chí</th>
-                <th scope="col" className="px-5 py-3 font-medium">Nội dung đánh giá</th>
-                <th scope="col" className="px-5 py-3 font-medium">Mức độ</th>
-              </tr>
-            </thead>
-            <tbody>
-              {assessment.criteria.map((c) => (
-                <tr key={c.name} className="border-t border-sprout-line align-top">
-                  <th scope="row" className="px-5 py-4 font-semibold text-moss-ink">{c.name}</th>
-                  <td className="px-5 py-4 text-ink-muted">{c.body}</td>
-                  <td className="px-5 py-4">
-                    <span className={`inline-block whitespace-nowrap rounded-full px-3 py-1 text-[13px] font-semibold ${levelTone[c.level]}`}>{c.level}</span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <p className="mt-3 max-w-3xl text-ink-muted">{basics.intro}</p>
+        <div data-reveal-group="120" className="mt-8 grid gap-5 lg:grid-cols-2">
+          <div data-reveal className="rounded-[var(--radius-panel)] bg-paper p-7 shadow-soft ring-1 ring-sprout-line sm:p-9">
+            <h3 className="text-[20px] font-bold text-moss-ink">Cần có</h3>
+            <CheckList items={basics.required} className="mt-5 text-[16px]" />
+          </div>
+          <div data-reveal className="rounded-[var(--radius-panel)] bg-sprout p-7 sm:p-9">
+            <h3 className="text-[20px] font-bold text-moss-ink">Được ưu tiên hơn nếu</h3>
+            <CheckList items={basics.priority} className="mt-5 text-[16px]" />
+          </div>
         </div>
       </section>
 
       {/* Step 2 */}
       <section id="buoc-2" className="container-site mt-16 scroll-mt-32" aria-labelledby="buoc-2-title">
         <h2 id="buoc-2-title" className="text-[26px] text-moss-ink md:text-[32px]">
-          <span className="text-blossom-deep">Bước 2.</span> Phiếu đánh giá thử nghiệm (thang 100 điểm)
+          <span className="text-blossom-deep">Bước 2.</span> Phiếu đánh giá thử nghiệm
         </h2>
-        <p className="mt-3 max-w-3xl text-ink-muted">
-          Mỗi lựa chọn dưới đây đã được gán sẵn số điểm. Chọn xong 5 tiêu chí, hệ thống cộng tổng điểm và hiển thị kết quả.
-        </p>
+        <p className="mt-3 max-w-3xl text-ink-muted">{assessment.quizIntro}</p>
         <div className="mx-auto mt-10 max-w-3xl">
           <Quiz />
         </div>
@@ -79,31 +61,21 @@ export default function AssessmentPage() {
 
       {/* Step 3 */}
       <section className="container-site mt-20" aria-labelledby="buoc-3-title">
-        <div data-reveal className="rounded-[var(--radius-panel)] bg-sprout p-8 sm:p-12">
-          <h2 id="buoc-3-title" className="text-[26px] text-moss-ink md:text-[32px]">
-            <span className="text-blossom-deep">Bước 3.</span> Kết quả và bước tiếp theo
-          </h2>
-          <p className="mt-4 font-semibold text-moss-ink">Quy trình ra quyết định:</p>
-          <ol className="mt-3 space-y-2 text-ink-muted">
-            {assessment.decision.map((d, i) => (
-              <li key={d} className="flex gap-3">
-                <span className="tabular font-bold text-moss">{i + 1}.</span>
-                {d}
-              </li>
-            ))}
-          </ol>
-          <div className="mt-8 grid gap-5 md:grid-cols-2">
-            {assessment.outcomes.map((o) => (
-              <div key={o.title} className="flex flex-col rounded-[var(--radius-card)] bg-paper p-6">
-                <h3 className="text-[20px] text-moss-ink">{o.title}</h3>
-                <p className="mt-2 text-ink-muted">{o.body}</p>
-                <Link href={o.action.href} className={buttonClass("primary", "mt-6 self-start")}>
-                  {o.action.label}
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
+        <h2 id="buoc-3-title" className="text-[26px] text-moss-ink md:text-[32px]">
+          <span className="text-blossom-deep">Bước 3.</span> Kết quả
+        </h2>
+        <p className="mt-3 max-w-3xl text-ink-muted">Kết quả theo tổng điểm của 5 câu trả lời:</p>
+        <ol data-reveal-group="100" className="mt-8 grid gap-4 md:grid-cols-3">
+          {assessment.results.map((r, i) => (
+            <li key={r.title} data-reveal className={`rounded-[var(--radius-card)] p-6 ${levelTone[i]}`}>
+              <p className="tabular text-[14px] font-bold text-moss">
+                Mức {i + 1}: {r.range}
+              </p>
+              <h3 className="mt-2 text-[19px] font-bold text-moss-ink">{r.title}</h3>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-6 max-w-3xl text-[15px] text-ink-muted">{assessment.resultNote}</p>
       </section>
     </>
   );

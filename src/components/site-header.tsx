@@ -8,7 +8,7 @@ import { CaretDown, List, X } from "@phosphor-icons/react";
 import { nav, type NavLink } from "@/content/site";
 import { buttonClass } from "./ui";
 
-// Hash links (e.g. "/san-pham/tai-chinh#tinh-thu") jump within a page, so they never mark the page as current.
+// Hash links (e.g. "/san-pham#tinh-thu") jump within a page, so they never mark the page as current.
 const pathOf = (href: string) => href.split("#")[0];
 
 export function SiteHeader() {

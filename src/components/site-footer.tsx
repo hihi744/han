@@ -1,38 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { org } from "@/content/site";
+import { footer, org } from "@/content/site";
 import { buttonClass } from "./ui";
-
-// Footer columns as listed in the official content document.
-const columns = [
-  {
-    title: "Về Đơm Hoa",
-    links: [
-      { href: "/gioi-thieu", label: "Giới thiệu" },
-      { href: "/gioi-thieu#tam-nhin", label: "Tầm nhìn – Sứ mệnh" },
-      { href: "/gioi-thieu#gia-tri", label: "Giá trị cốt lõi" },
-      { href: "/gioi-thieu/cau-chuyen", label: "Câu chuyện khách hàng" },
-    ],
-  },
-  {
-    title: "Dịch vụ",
-    links: [
-      { href: "/san-pham/tai-chinh", label: "Sản phẩm vay vốn" },
-      { href: "/san-pham/tai-chinh#tiet-kiem", label: "Tiết kiệm tự nguyện" },
-      { href: "/tu-danh-gia", label: "Công cụ tự đánh giá" },
-      { href: "/lien-he#dang-ky", label: "Đăng ký tư vấn" },
-    ],
-  },
-  {
-    title: "Dành cho đối tác",
-    links: [
-      { href: "/du-an", label: "Dự án “Hạt mầm trong tay”" },
-      { href: "/du-an#tai-tro", label: "Kêu gọi tài trợ" },
-      { href: "/du-an#ho-so", label: "Hồ sơ dự án" },
-      { href: "/lien-he#doi-tac", label: "Liên hệ hợp tác" },
-    ],
-  },
-];
 
 export function SiteFooter() {
   return (
@@ -42,7 +11,7 @@ export function SiteFooter() {
         <div className="grid gap-8 border-t border-sprout-line py-14 lg:grid-cols-[1fr_1.2fr] lg:items-center">
           <div>
             <Image src="/brand/dom-hoa-logo.png" alt="Đơm Hoa" width={827} height={180} className="h-12 w-auto sm:h-14" />
-            <p className="mt-5 max-w-md text-ink-muted">{org.philosophy}</p>
+            <p className="mt-5 max-w-md text-lg font-semibold tracking-tight text-moss-ink">{org.tagline}</p>
           </div>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center lg:justify-end">
             <p className="text-[22px] font-bold tracking-tight text-moss-ink sm:mr-4">Bắt đầu cùng Đơm Hoa</p>
@@ -50,7 +19,7 @@ export function SiteFooter() {
               <Link href="/lien-he#dang-ky" className={buttonClass("primary")}>
                 Đăng ký tư vấn
               </Link>
-              <Link href="/du-an#tai-tro" className={buttonClass("blossom")}>
+              <Link href="/du-an#dong-hanh" className={buttonClass("blossom")}>
                 Đồng hành tài trợ
               </Link>
             </div>
@@ -80,7 +49,7 @@ export function SiteFooter() {
               </span>
             ))}
           </address>
-          {columns.map((col) => (
+          {footer.columns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
               <h2 className="text-[15px] font-semibold tracking-normal text-moss-ink">{col.title}</h2>
               <ul className="mt-4 space-y-1">
@@ -96,12 +65,20 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="flex flex-col gap-2 border-t border-sprout-line py-6 text-sm text-ink-muted md:flex-row md:justify-between">
-          <p>
-            © {new Date().getFullYear()} {org.fullName} ({org.shortName})
-          </p>
-          <p>Hoạt động theo Luật Các tổ chức tín dụng 2024, liên kết với Hội Liên hiệp Phụ nữ Việt Nam.</p>
-        </div>
+        <ul aria-label="Cam kết ngắn" className="grid gap-4 border-t border-sprout-line py-8 text-[15px] text-ink-muted md:grid-cols-2">
+          {footer.commitments.map((c) => (
+            <li key={c.title} className="flex gap-3">
+              <span aria-hidden="true" className="mt-2 size-2 shrink-0 rotate-45 bg-petal-red" />
+              <span>
+                <strong className="font-semibold text-moss-ink">{c.title}</strong> {c.body}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <p className="border-t border-sprout-line py-6 text-sm text-ink-muted">
+          © {new Date().getFullYear()} {org.fullName}
+        </p>
       </div>
     </footer>
   );

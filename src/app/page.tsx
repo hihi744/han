@@ -4,23 +4,23 @@ import { HeroBlossom } from "@/components/hero-blossom";
 import { CtaBand, Orbs, Photo } from "@/components/blocks";
 import { Journey } from "@/components/journey";
 import { LinkButton } from "@/components/ui";
-import { about, fiveYearGoals, home, loanPackages, org, stories, storyPhotos } from "@/content/site";
+import { about, fiveYearGoals, home, loanPackages, stories, storyPhotos } from "@/content/site";
 
 const community = [
   {
-    href: "/san-pham/cong-dong#tham-van",
+    href: "/san-pham#tham-van",
     icon: Brain,
     title: "Tham vấn và hỗ trợ tâm lý",
     body: "Giảm mặc cảm, lo âu khi trở về cộng đồng. Tự nguyện, miễn phí, không ảnh hưởng đến việc xét vay.",
   },
   {
-    href: "/san-pham/cong-dong#giao-duc-tai-chinh",
+    href: "/san-pham#giao-duc-tai-chinh",
     icon: Student,
-    title: "Chồi Xanh: Giáo dục tài chính và khởi nghiệp",
-    body: "Quản lý chi tiêu, hiểu vay trả, lập kế hoạch kinh doanh nhỏ. Dành cho cả người vay và không vay.",
+    title: "Giáo dục tài chính và khởi nghiệp",
+    body: "Quản lý chi tiêu, hiểu vay trả, lập kế hoạch kinh doanh nhỏ. Miễn phí, dành cho cả người đã vay và chưa vay.",
   },
   {
-    href: "/san-pham/cong-dong#cua-hang-xa-hoi",
+    href: "/san-pham#cua-hang-xa-hoi",
     icon: Storefront,
     title: "Cửa hàng xã hội thực hành",
     body: "1–3 tháng thực hành bán hàng, thu ngân, quản lý kho và bán online để có kinh nghiệm làm việc thật.",
@@ -54,7 +54,7 @@ export default function HomePage() {
                 <LinkButton href="/lien-he#dang-ky" variant="blossom">
                   Đăng ký tư vấn
                 </LinkButton>
-                <LinkButton href="/san-pham/tai-chinh" variant="outline-light">
+                <LinkButton href="/san-pham" variant="outline-light">
                   Tìm hiểu sản phẩm
                 </LinkButton>
               </div>
@@ -83,7 +83,7 @@ export default function HomePage() {
             <Photo n={2} parallax={0.06} className="aspect-[4/5] rounded-[var(--radius-panel)]" />
             <p className="glass absolute -bottom-6 right-4 max-w-[260px] rounded-2xl p-4 text-[15px] font-semibold text-moss-ink sm:-right-8">
               <LockKey size={20} className="mb-1 text-moss" aria-hidden="true" />
-              Mọi thông tin riêng tư của chị đều được giữ kín.
+              Mọi thông tin riêng tư đều được giữ kín.
             </p>
           </div>
           <div data-reveal>
@@ -142,26 +142,25 @@ export default function HomePage() {
         <div className="grid gap-12 lg:grid-cols-[0.8fr_2fr] lg:gap-16">
           <div className="lg:sticky lg:top-32 lg:self-start" data-reveal>
             <h2 id="finance-title" className="shout text-[36px] text-moss-ink md:text-[48px]">
-              Sản phẩm tài chính
+              Vay vốn và tiết kiệm
             </h2>
             <p className="mt-5 text-lg text-ink-muted">
-              Bốn gói vay và hai sản phẩm tiết kiệm tự nguyện. Lãi tính trên dư nợ giảm dần, lịch trả nợ được giải thích rõ trước khi ký.
+              Bốn gói vay và hai hình thức tiết kiệm tự nguyện. Lãi tính trên dư nợ giảm dần, lịch trả nợ được giải thích rõ trước khi ký.
             </p>
-            <LinkButton href="/san-pham/tai-chinh" variant="primary" className="mt-8">
-              Xem sản phẩm tài chính
+            <LinkButton href="/san-pham#vay-von" variant="primary" className="mt-8">
+              Xem các gói vay
             </LinkButton>
           </div>
           <ul data-reveal-group="100" className="grid gap-6 sm:grid-cols-2">
             {loanPackages.map((p, i) => (
               <li key={p.id} data-reveal>
-                <Link href={`/san-pham/tai-chinh#${p.id}`} className="card-lift group flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] bg-paper shadow-soft ring-1 ring-sprout-line">
+                <Link href={`/san-pham#${p.id}`} className="card-lift group flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] bg-paper shadow-soft ring-1 ring-sprout-line">
                   <div className={`relative h-28 bg-gradient-to-br ${packageWash[i]}`}>
                     <span aria-hidden="true" className="step-ghost tabular absolute -bottom-6 right-3 text-[96px] font-extrabold leading-none tracking-tighter">
                       {String(p.number).padStart(2, "0")}
                     </span>
                     <p className="absolute left-7 top-6 text-[15px] font-bold text-moss-ink">
                       Gói {p.number}
-                      {p.name ? `: ${p.name}` : ""}
                     </p>
                   </div>
                   <div className="flex flex-1 flex-col p-7 pt-5">
@@ -193,11 +192,11 @@ export default function HomePage() {
         <div className="grid gap-12 lg:grid-cols-[0.8fr_2fr] lg:gap-16">
           <div data-reveal>
             <h2 id="community-title" className="shout text-[36px] text-moss-ink md:text-[48px]">
-              Sản phẩm cộng đồng
+              Đồng hành cộng đồng
             </h2>
-            <p className="mt-5 text-lg text-ink-muted">Vốn, kiến thức và sự hỗ trợ tinh thần luôn đi cùng nhau. Không ai đơn độc.</p>
-            <LinkButton href="/san-pham/cong-dong" variant="primary" className="mt-8">
-              Xem sản phẩm cộng đồng
+            <p className="mt-5 text-lg text-ink-muted">Không chỉ trao cơ hội, mà còn đồng hành trên hành trình làm lại cuộc đời. Ba chương trình miễn phí, hoàn toàn tự nguyện.</p>
+            <LinkButton href="/san-pham#dong-hanh" variant="primary" className="mt-8">
+              Xem chương trình đồng hành
             </LinkButton>
           </div>
           <ul data-reveal-group="100" className="grid gap-6 md:grid-cols-3">
@@ -231,7 +230,7 @@ export default function HomePage() {
             </h2>
             <div data-reveal-group="140" className="grid gap-6 sm:grid-cols-2">
               <div data-reveal className="glass-dark flex flex-col rounded-[var(--radius-card)] p-7">
-                <h3 className="shout text-[24px] text-on-dark">Chị cần hỗ trợ</h3>
+                <h3 className="shout text-[24px] text-on-dark">Bạn cần hỗ trợ</h3>
                 <ul className="mt-4 space-y-2 text-on-dark-muted">
                   <li>Tư vấn riêng với cán bộ tín dụng nữ</li>
                   <li>Tự đánh giá mức độ phù hợp trong 2 phút</li>
@@ -248,7 +247,7 @@ export default function HomePage() {
                 <ul className="mt-4 space-y-2 text-on-dark-muted">
                   <li>Tài trợ dự án “Hạt mầm trong tay”</li>
                   <li>Nhận học viên vào làm sau đào tạo</li>
-                  <li>Doanh nghiệp xã hội: gói Chung Vườn</li>
+                  <li>Doanh nghiệp: Gói 2, Đồng hành tạo việc làm</li>
                 </ul>
                 <div className="mt-auto pt-8">
                   <Link href="/du-an" data-magnetic className="btn-sweep inline-flex min-h-12 items-center justify-center rounded-full bg-petal-yellow px-6 text-[15px] font-semibold text-moss-ink hover:bg-[#fff7c4]">
@@ -295,10 +294,9 @@ export default function HomePage() {
       </section>
 
       <CtaBand
-        title={`“${org.philosophy}”`}
-        body="Dù chị đang cần một khởi đầu mới hay bạn muốn trao cơ hội cho người khác, Đơm Hoa luôn sẵn lòng lắng nghe."
-        primary={{ href: "/lien-he", label: "Liên hệ ngay" }}
-        secondary={{ href: "/tu-danh-gia", label: "Làm bài tự đánh giá" }}
+        title={`“${home.closing.quote}”`}
+        body="Dù bạn đang cần một khởi đầu mới hay muốn trao cơ hội cho người khác, Đơm Hoa luôn sẵn lòng lắng nghe."
+        primary={{ href: "/lien-he", label: home.closing.cta }}
       />
     </>
   );

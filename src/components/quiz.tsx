@@ -34,17 +34,15 @@ export function Quiz() {
         {assessment.questions.map((q, qi) => (
           <fieldset key={q.id} data-quiz-slide hidden={qi !== 0} className="mt-8">
             <legend tabIndex={-1} className="outline-none">
-              <span className="tabular block text-[13px] font-bold tracking-[0.08em] text-blossom-deep">TIÊU CHÍ {qi + 1}</span>
+              <span className="tabular block text-[13px] font-bold tracking-[0.08em] text-blossom-deep">CÂU {qi + 1}</span>
               <span className="mt-2 block text-[26px] font-bold leading-tight tracking-[-0.02em] text-moss-ink md:text-[32px]">{q.title}</span>
-              <span className="tabular mt-1 block text-[15px] text-ink-muted">Tối đa {q.max} điểm</span>
             </legend>
             <div className="mt-6 grid gap-3">
               {q.options.map((o) => (
                 <label key={o.label} className="block cursor-pointer">
                   <input type="radio" name={q.id} value={o.points} className="peer sr-only" />
-                  <span className="flex min-h-16 items-center justify-between gap-4 rounded-2xl bg-paper/80 px-5 py-4 ring-1 ring-inset ring-sprout-line transition-[box-shadow,background-color,transform] duration-300 hover:bg-paper hover:ring-moss-soft peer-checked:bg-sprout peer-checked:ring-2 peer-checked:ring-moss peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-blossom-deep">
+                  <span className="flex min-h-16 items-center gap-4 rounded-2xl bg-paper/80 px-5 py-4 ring-1 ring-inset ring-sprout-line transition-[box-shadow,background-color,transform] duration-300 hover:bg-paper hover:ring-moss-soft peer-checked:bg-sprout peer-checked:ring-2 peer-checked:ring-moss peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-blossom-deep">
                     <span className="text-[17px] font-semibold text-moss-ink">{o.label}</span>
-                    <span className="tabular shrink-0 rounded-full bg-mist px-3 py-1 text-[13px] font-bold text-ink-muted">{o.points} điểm</span>
                   </span>
                 </label>
               ))}

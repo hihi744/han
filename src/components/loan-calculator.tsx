@@ -106,7 +106,7 @@ export function LoanCalculator({ initial = "goi-1" }: { initial?: PackageId }) {
 
         {/* Results */}
         <div className="on-dark flex flex-col bg-moss-deep p-6 text-on-dark sm:p-10" aria-live="polite">
-          <p className="text-[15px] text-on-dark-muted">Tháng đầu tiên chị trả</p>
+          <p className="text-[15px] text-on-dark-muted">Tháng đầu tiên phải trả</p>
           <p className="tabular mt-1 text-[40px] font-bold tracking-tight sm:text-[52px]">{formatVnd(result.firstPayment)}</p>
           <p className="tabular text-[15px] text-on-dark-muted">giảm dần đến {formatVnd(result.lastPayment)} ở tháng cuối</p>
 
@@ -171,7 +171,7 @@ export function LoanCalculator({ initial = "goi-1" }: { initial?: PackageId }) {
               Đăng ký tư vấn khoản vay này
             </Link>
             <p className="mt-4 text-[13px] leading-snug text-on-dark-muted">
-              Kết quả để tham khảo. Hạn mức và lịch trả nợ thực tế được xác định sau buổi tư vấn và thẩm định, và được giải thích rõ trước khi chị ký hợp đồng. Gói 2 (Chung Vườn) dành cho doanh nghiệp, lãi suất theo tỷ lệ lao động nữ sau cải tạo, vui lòng liên hệ để được báo giá.
+              Kết quả để tham khảo. Hạn mức và lịch trả nợ thực tế được xác định sau buổi tư vấn và thẩm định, và được giải thích rõ trước khi ký hợp đồng. Gói 2 (Đồng hành tạo việc làm) dành cho doanh nghiệp và hộ kinh doanh, lãi suất theo tỷ lệ lao động thuộc diện Đơm Hoa đồng hành, vui lòng liên hệ để được tư vấn.
             </p>
           </div>
         </div>

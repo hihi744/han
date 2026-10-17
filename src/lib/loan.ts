@@ -45,26 +45,26 @@ export function formatRate(monthlyRate: number) {
 
 /**
  * Calculator settings per individual loan package, from the official product sheet.
- * Gói 2 (Chung Vườn) is a business loan priced per hiring tier, so it is quoted, not calculated.
+ * Gói 2 (Đồng hành tạo việc làm) is a business loan priced per hiring tier, so it is quoted, not calculated.
  */
 export const calculatorPackages = [
   {
     id: "goi-1",
-    label: "Gói 1: Nảy Mầm",
+    label: "Gói 1: Vốn khởi sự theo nhóm",
     min: 5_000_000,
     max: 30_000_000,
     step: 500_000,
     terms: [6, 9, 12],
     defaultAmount: 10_000_000,
     defaultTerm: 12,
-    // 0,8%/tháng for the first cycle (5–15 triệu), 1,0%/tháng for later cycles (15–30 triệu)
-    rate: (amount: number) => (amount <= 15_000_000 ? 0.008 : 0.01),
+    // 0,8%/tháng for the first cycle (5–15 triệu), 0,75%/tháng for later cycles (15–30 triệu)
+    rate: (amount: number) => (amount <= 15_000_000 ? 0.008 : 0.0075),
     rateNote: (amount: number) =>
-      amount <= 15_000_000 ? "Chu kỳ đầu (5–15 triệu): 0,8%/tháng" : "Chu kỳ tiếp theo (15–30 triệu): 1,0%/tháng",
+      amount <= 15_000_000 ? "Chu kỳ đầu (5–15 triệu): 0,8%/tháng" : "Chu kỳ tiếp theo (15–30 triệu): 0,75%/tháng",
   },
   {
     id: "goi-3",
-    label: "Gói 3: Gieo Nghề",
+    label: "Gói 3: Học nghề",
     min: 3_000_000,
     max: 15_000_000,
     step: 500_000,
@@ -72,7 +72,7 @@ export const calculatorPackages = [
     defaultAmount: 8_000_000,
     defaultTerm: 12,
     rate: () => 0.005,
-    rateNote: () => "0,5%/tháng trong thời gian học. Miễn toàn bộ lãi nếu hoàn thành khóa học và đạt chứng nhận nghề.",
+    rateNote: () => "0,5%/tháng trong thời gian vay. Miễn toàn bộ tiền lãi nếu hoàn thành khóa học và đạt chứng nhận nghề.",
   },
   {
     id: "goi-4",
@@ -83,8 +83,7 @@ export const calculatorPackages = [
     terms: [12, 18, 24],
     defaultAmount: 30_000_000,
     defaultTerm: 18,
-    // The sheet gives a 1,0%–1,16% band; show the top of the band so the estimate never understates the cost.
-    rate: () => 0.0116,
-    rateNote: () => "Khung 1,0%–1,16%/tháng. Kết quả tính theo mức cao nhất của khung.",
+    rate: () => 0.01,
+    rateNote: () => "1,0%/tháng, tính trên dư nợ gốc thực tế còn lại.",
   },
 ] as const;

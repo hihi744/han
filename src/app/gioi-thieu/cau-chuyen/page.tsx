@@ -56,8 +56,8 @@ export default function StoriesPage() {
       </div>
 
       <CtaBand
-        title="Câu chuyện tiếp theo có thể là của chị."
-        body="Cuộc trò chuyện đầu tiên là buổi tư vấn riêng với cán bộ tín dụng nữ, trong không gian kín đáo. Chị không cần mang theo gì cả."
+        title="Câu chuyện tiếp theo có thể là của bạn."
+        body="Cuộc trò chuyện đầu tiên là buổi tư vấn riêng với cán bộ tín dụng nữ, trong không gian kín đáo. Không cần mang theo gì cả."
         primary={{ href: "/lien-he#dang-ky", label: "Đăng ký tư vấn" }}
         secondary={{ href: "/tu-danh-gia", label: "Làm bài tự đánh giá" }}
       />

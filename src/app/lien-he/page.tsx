@@ -37,7 +37,7 @@ export default function ContactPage() {
           </span>
           <h2 className="mt-8 text-[26px] text-on-dark md:text-[30px]">{contact.borrowers.title}</h2>
           <p className="mt-3 text-on-dark-muted">{contact.borrowers.body}</p>
-          <span className="mt-auto pt-8 font-semibold text-blossom">Đăng ký tư vấn riêng ↓</span>
+          <span className="mt-auto pt-8 font-semibold text-blossom">{contact.borrowers.cta} ↓</span>
         </a>
         <div id="doi-tac" data-reveal className="relative flex scroll-mt-32 flex-col overflow-hidden rounded-[var(--radius-panel)] bg-petal-yellow p-8 sm:p-10">
           <span className="grid size-12 place-items-center rounded-full bg-paper text-moss">
@@ -47,7 +47,7 @@ export default function ContactPage() {
           <p className="mt-3 text-moss-ink">{contact.partners.body}</p>
           <div className="mt-auto pt-8">
             <a href={projectEmailHref} className="inline-flex min-h-12 items-center gap-2 rounded-full bg-moss px-6 text-[15px] font-semibold text-on-dark hover:bg-moss-deep">
-              <EnvelopeSimple size={18} aria-hidden="true" /> Gửi email cho Đơm Hoa
+              <EnvelopeSimple size={18} aria-hidden="true" /> {contact.partners.cta}
             </a>
             <p className="mt-2 text-[14px] text-moss-ink">
               Địa chỉ email: <span className="select-all font-semibold">{org.email}</span>

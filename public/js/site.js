@@ -170,10 +170,15 @@
   }
 
   /* ---------------- Tabs (also used for the 6-step stepper) ---------------- */
+  // Tab boxes can nest, so each box only owns the tabs whose nearest [data-tabs] is itself.
+  var tabBoxes = [];
+
   function initTabs(root) {
     root.querySelectorAll("[data-tabs]").forEach(function (box) {
       if (!once(box)) return;
-      var tabs = Array.prototype.slice.call(box.querySelectorAll('[role="tab"]'));
+      var tabs = Array.prototype.slice.call(box.querySelectorAll('[role="tab"]')).filter(function (t) {
+        return t.closest("[data-tabs]") === box;
+      });
       var panels = tabs.map(function (t) {
         return document.getElementById(t.getAttribute("aria-controls"));
       });
@@ -211,21 +216,44 @@
           }
         });
       });
-      function fromHash() {
-        var id = decodeURIComponent(location.hash.slice(1));
-        if (!id) return;
-        var i = panels.findIndex(function (p) {
-          return p.id === id || p.getAttribute("data-hash") === id;
-        });
-        if (i >= 0) {
-          select(i, false);
-          box.scrollIntoView({ block: "start" });
-        }
+      tabBoxes.push({ box: box, panels: panels, select: select });
+    });
+    openHash();
+  }
+
+  // Open every tab panel on the way to the #hash target, outermost first, then scroll to it.
+  function openHash() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var target = id && document.getElementById(id);
+    if (!target) return;
+    var opened = false;
+    tabBoxes.forEach(function (t) {
+      if (!document.contains(t.box) || !t.box.contains(target)) return;
+      var i = t.panels.findIndex(function (p) {
+        return p === target || p.contains(target);
+      });
+      if (i >= 0) {
+        t.select(i, false);
+        opened = true;
       }
-      window.addEventListener("hashchange", fromHash);
-      fromHash();
+    });
+    if (!opened) return;
+    // A panel scrolls to its own tab bar; anything inside a panel scrolls to itself.
+    var dest = target.getAttribute("role") === "tabpanel" ? target.closest("[data-tabs]") : target;
+    requestAnimationFrame(function () {
+      dest.scrollIntoView({ block: "start" });
     });
   }
+  window.addEventListener("hashchange", openHash);
+  // Next.js links change the hash with pushState, which fires no hashchange event.
+  ["pushState", "replaceState"].forEach(function (name) {
+    var original = history[name];
+    history[name] = function () {
+      var result = original.apply(this, arguments);
+      if (location.hash) setTimeout(openHash, 0);
+      return result;
+    };
+  });
 
   /* ---------------- Quiz wizard ---------------- */
   function initQuiz(root) {
@@ -361,7 +389,7 @@
           '<div class="on-dark relative overflow-hidden rounded-[var(--radius-panel)] bg-moss-deep p-8 text-on-dark sm:p-12">' +
           moments[level] +
           '<div class="orb" style="--orb-color:#ff9c4c;--orb-opacity:.35;width:420px;height:420px;right:-140px;top:-160px" aria-hidden="true"></div>' +
-          '<div class="relative"><p class="text-[15px] text-on-dark-muted">Tổng điểm của chị</p>' +
+          '<div class="relative"><p class="text-[15px] text-on-dark-muted">Tổng điểm của bạn</p>' +
           '<p class="tabular text-[72px] font-extrabold leading-none tracking-tight text-petal-yellow"><span data-score>0</span><span class="text-[28px] text-on-dark-muted">/100</span></p>' +
           '<p class="mt-4 inline-block rounded-full bg-on-dark/10 px-4 py-1.5 text-sm font-semibold">' +
           r.range +

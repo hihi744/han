@@ -2,21 +2,29 @@ import type { ReactNode } from "react";
 
 /**
  * Accessible tabs rendered on the server; public/js/site.js wires up clicks,
- * arrow keys and #hash deep links (e.g. /san-pham/tai-chinh#goi-3).
+ * arrow keys and #hash deep links. Tabs can nest: a link to an inner panel
+ * (e.g. /san-pham#goi-3) also opens the outer panel that holds it.
  */
 export function Tabs({
   label,
   items,
+  sticky = true,
+  size = "md",
 }: {
   label: string;
   items: { id: string; tab: ReactNode; panel: ReactNode }[];
+  sticky?: boolean;
+  size?: "md" | "lg";
 }) {
+  const big = size === "lg";
   return (
     <div data-tabs className="scroll-mt-40">
       <div
         role="tablist"
         aria-label={label}
-        className="glass sticky top-[84px] z-20 mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-full p-1.5 [scrollbar-width:none]"
+        className={`glass z-20 mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-full p-1.5 [scrollbar-width:none] ${
+          sticky ? "sticky top-[84px]" : "relative"
+        }`}
       >
         {items.map((it, i) => (
           <button
@@ -27,14 +35,16 @@ export function Tabs({
             aria-controls={it.id}
             aria-selected={i === 0}
             tabIndex={i === 0 ? 0 : -1}
-            className="min-h-11 shrink-0 cursor-pointer whitespace-nowrap rounded-full px-4 text-[14px] font-semibold text-ink-muted transition-[background-color,color,box-shadow] duration-300 hover:text-moss-ink aria-selected:bg-moss aria-selected:text-on-dark aria-selected:shadow-[0_8px_20px_-10px_rgba(36,51,32,0.7)] sm:px-5 sm:text-[15px]"
+            className={`shrink-0 cursor-pointer whitespace-nowrap rounded-full font-semibold text-ink-muted transition-[background-color,color,box-shadow] duration-300 hover:text-moss-ink aria-selected:bg-moss aria-selected:text-on-dark aria-selected:shadow-[0_8px_20px_-10px_rgba(36,51,32,0.7)] ${
+              big ? "min-h-12 px-5 text-[15px] sm:min-h-14 sm:px-8 sm:text-[17px]" : "min-h-11 px-4 text-[14px] sm:px-5 sm:text-[15px]"
+            }`}
           >
             {it.tab}
           </button>
         ))}
       </div>
       {items.map((it, i) => (
-        <div key={it.id} role="tabpanel" id={it.id} aria-labelledby={`tab-${it.id}`} hidden={i !== 0} tabIndex={0} className="mt-12 outline-none">
+        <div key={it.id} role="tabpanel" id={it.id} aria-labelledby={`tab-${it.id}`} hidden={i !== 0} tabIndex={0} className="scroll-mt-40 pt-12 outline-none">
           {it.panel}
         </div>
       ))}

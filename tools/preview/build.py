@@ -46,7 +46,7 @@ HERO_DELAYS = [0.15, 0.45, 0.8, 0.95, 1.35, 0.35, 0.65, 1.1, 1.55, 1.8]
 
 def page_file(path: str) -> str:
     """Map a site route to its preview file name. Nested routes are flattened
-    (/san-pham/tai-chinh -> san-pham-tai-chinh.html) so every page sits side by side."""
+    (/gioi-thieu/cau-chuyen -> gioi-thieu-cau-chuyen.html) so every page sits side by side."""
     if path in ("", "/"):
         return "trang-chu.html"
     return path.strip("/").replace("/", "-") + ".html"

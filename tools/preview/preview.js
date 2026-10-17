@@ -83,18 +83,18 @@
   const PACKAGES = {
     "goi-1": {
       min: 5e6, max: 30e6, terms: [6, 9, 12], amount: 10e6, term: 12,
-      rate: (a) => (a <= 15e6 ? 0.008 : 0.01),
-      note: (a) => (a <= 15e6 ? "Chu kỳ đầu (5–15 triệu): 0,8%/tháng" : "Chu kỳ tiếp theo (15–30 triệu): 1,0%/tháng"),
+      rate: (a) => (a <= 15e6 ? 0.008 : 0.0075),
+      note: (a) => (a <= 15e6 ? "Chu kỳ đầu (5–15 triệu): 0,8%/tháng" : "Chu kỳ tiếp theo (15–30 triệu): 0,75%/tháng"),
     },
     "goi-3": {
       min: 3e6, max: 15e6, terms: [6, 9, 12], amount: 8e6, term: 12,
       rate: () => 0.005,
-      note: () => "0,5%/tháng trong thời gian học. Miễn toàn bộ lãi nếu hoàn thành khóa học và đạt chứng nhận nghề.",
+      note: () => "0,5%/tháng trong thời gian vay. Miễn toàn bộ tiền lãi nếu hoàn thành khóa học và đạt chứng nhận nghề.",
     },
     "goi-4": {
       min: 15e6, max: 50e6, terms: [12, 18, 24], amount: 30e6, term: 18,
-      rate: () => 0.0116,
-      note: () => "Khung 1,0%–1,16%/tháng. Kết quả tính theo mức cao nhất của khung.",
+      rate: () => 0.01,
+      note: () => "1,0%/tháng, tính trên dư nợ gốc thực tế còn lại.",
     },
   };
 
@@ -278,10 +278,10 @@
       const checks = [
         ["c-fullName", !v("fullName") && "Vui lòng cho biết tên để cán bộ xưng hô."],
         ["c-phone", !isPhone(v("phone")) && "Số điện thoại chưa đúng. Ví dụ: 0912 345 678"],
-        ["c-need", !v("need") && "Vui lòng chọn nhu cầu của chị."],
-        ["c-area", !v("area") && "Vui lòng chọn khu vực chị đang sống."],
+        ["c-need", !v("need") && "Vui lòng chọn nhu cầu của bạn."],
+        ["c-area", !v("area") && "Vui lòng chọn khu vực bạn đang sống."],
         ["c-callTime", !v("callTime") && "Vui lòng chọn giờ thuận tiện để nghe máy."],
-        ["c-consent", !fd.get("consent") && "Vui lòng đồng ý để Đơm Hoa liên hệ với chị."],
+        ["c-consent", !fd.get("consent") && "Vui lòng đồng ý để Đơm Hoa liên hệ với bạn."],
       ];
       checks.forEach(([id, msg]) => setError(id, msg, anchors[id]()));
       const bad = checks.find(([, msg]) => msg);
@@ -296,7 +296,7 @@
         const done = document.createElement("div");
         done.setAttribute("role", "status");
         done.className = "rounded-[var(--radius-panel)] bg-paper p-8 ring-1 ring-sprout-line sm:p-10";
-        done.innerHTML = `<svg width="48" height="48" viewBox="0 0 256 256" fill="currentColor" class="text-moss" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"></path></svg><h3 tabindex="-1" class="mt-5 text-[28px] text-moss-ink outline-none">Đã nhận. Cảm ơn ${esc(v("fullName"))}.</h3><p class="mt-3 text-lg text-ink-muted">Cán bộ tín dụng nữ của Đơm Hoa sẽ gọi cho chị vào ${esc(v("callTime").toLowerCase())} trong giờ làm việc. Nếu cần gấp, chị có thể gọi hotline 024-68 686 868.</p><p class="mt-4 text-sm text-ink-muted">Bản xem thử: form chưa nối hệ thống nên thông tin chưa được gửi đi.</p>`;
+        done.innerHTML = `<svg width="48" height="48" viewBox="0 0 256 256" fill="currentColor" class="text-moss" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"></path></svg><h3 tabindex="-1" class="mt-5 text-[28px] text-moss-ink outline-none">Đã nhận. Cảm ơn ${esc(v("fullName"))}.</h3><p class="mt-3 text-lg text-ink-muted">Cán bộ tín dụng nữ của Đơm Hoa sẽ gọi cho bạn vào ${esc(v("callTime").toLowerCase())} trong giờ làm việc. Nếu cần gấp, bạn có thể gọi hotline 024-68 686 868.</p><p class="mt-4 text-sm text-ink-muted">Bản xem thử: form chưa nối hệ thống nên thông tin chưa được gửi đi.</p>`;
         form.replaceWith(done);
         $("h3", done).focus();
       }, 900);
