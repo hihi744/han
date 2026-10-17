@@ -370,7 +370,7 @@ export const loanPackages = [
     audience:
       "Dành cho doanh nghiệp siêu nhỏ, hộ kinh doanh và cơ sở sản xuất cần bổ sung vốn, cam kết tuyển dụng và duy trì việc làm an toàn, ổn định cho phụ nữ thuộc diện được Đơm Hoa đồng hành.",
     highlight: { amount: "50–200 triệu", rate: "0,5–0,8%/tháng" },
-    calculator: false,
+    calculator: true,
     actions: [{ label: "Đăng ký tư vấn cho doanh nghiệp", href: "/lien-he#dang-ky" }] as Action[],
     blocks: [
       {

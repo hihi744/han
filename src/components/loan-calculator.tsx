@@ -2,7 +2,7 @@
 
 import { useId, useMemo, useState } from "react";
 import Link from "next/link";
-import { calculatorPackages, formatRate, formatVnd, summarize } from "@/lib/loan";
+import { calculatorPackages, formatRate, formatVnd, goi2Tiers, summarize } from "@/lib/loan";
 import { buttonClass } from "./ui";
 
 type PackageId = (typeof calculatorPackages)[number]["id"];
@@ -17,11 +17,12 @@ export function LoanCalculator({ initial = "goi-1" }: { initial?: PackageId }) {
   const [terms, setTerms] = useState<Record<string, number>>(() =>
     Object.fromEntries(calculatorPackages.map((p) => [p.id, p.defaultTerm])),
   );
+  const [tier, setTier] = useState(0);
   const [showTable, setShowTable] = useState(false);
 
   const amount = amounts[pkg.id];
   const term = terms[pkg.id];
-  const rate = pkg.rate(amount);
+  const rate = pkg.rate(amount, tier);
   const result = useMemo(() => summarize(amount, term, rate), [amount, term, rate]);
   const pct = ((amount - pkg.min) / (pkg.max - pkg.min)) * 100;
 
@@ -75,7 +76,7 @@ export function LoanCalculator({ initial = "goi-1" }: { initial?: PackageId }) {
             <span>{formatVnd(pkg.max).replace(".000.000 đ", " triệu")}</span>
           </div>
 
-          <fieldset className="mt-8">
+          <fieldset data-terms className="mt-8">
             <legend className="text-[15px] font-medium text-ink-muted">Kỳ hạn</legend>
             <div className="mt-3 flex flex-wrap gap-2">
               {pkg.terms.map((m) => (
@@ -96,8 +97,30 @@ export function LoanCalculator({ initial = "goi-1" }: { initial?: PackageId }) {
             </div>
           </fieldset>
 
+          {/* Gói 2 only; always rendered so the static preview can show it without React. */}
+          <fieldset data-tiers hidden={!pkg.tiers} className="mt-8">
+            <legend className="text-[15px] font-medium text-ink-muted">Tỷ lệ lao động thuộc diện Đơm Hoa đồng hành</legend>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {goi2Tiers.map((t, i) => (
+                <label key={t.label} className="cursor-pointer">
+                  <input
+                    type="radio"
+                    name={`${id}-tier`}
+                    value={i}
+                    checked={tier === i}
+                    onChange={() => setTier(i)}
+                    className="peer sr-only"
+                  />
+                  <span className="inline-flex min-h-11 items-center rounded-full px-5 text-[15px] font-medium ring-1 ring-inset ring-sprout-line transition-colors duration-150 hover:bg-sprout peer-checked:bg-moss peer-checked:text-on-dark peer-checked:ring-moss peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-blossom-deep">
+                    {t.label}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
           <p className="mt-8 rounded-xl bg-pollen-tint px-4 py-3 text-[15px] text-[#5c4d0e]">
-            <span className="font-semibold">Lãi suất {formatRate(rate)}.</span> {pkg.rateNote(amount)}
+            <span className="font-semibold">Lãi suất {formatRate(rate)}{pkg.tiers ? ` (${pkg.tiers[tier].note.toLowerCase()})` : ""}.</span> {pkg.rateNote(amount)}
           </p>
           <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">
             Gốc chia đều mỗi tháng, lãi tính trên dư nợ giảm dần, nên số tiền phải trả giảm dần qua từng tháng.
@@ -171,7 +194,7 @@ export function LoanCalculator({ initial = "goi-1" }: { initial?: PackageId }) {
               Đăng ký tư vấn khoản vay này
             </Link>
             <p className="mt-4 text-[13px] leading-snug text-on-dark-muted">
-              Kết quả để tham khảo. Hạn mức và lịch trả nợ thực tế được xác định sau buổi tư vấn và thẩm định, và được giải thích rõ trước khi ký hợp đồng. Gói 2 (Đồng hành tạo việc làm) dành cho doanh nghiệp và hộ kinh doanh, lãi suất theo tỷ lệ lao động thuộc diện Đơm Hoa đồng hành, vui lòng liên hệ để được tư vấn.
+              Kết quả để tham khảo. Hạn mức và lịch trả nợ thực tế được xác định sau buổi tư vấn và thẩm định, và được giải thích rõ trước khi ký hợp đồng.
             </p>
           </div>
         </div>

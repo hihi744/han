@@ -86,6 +86,11 @@
       rate: (a) => (a <= 15e6 ? 0.008 : 0.0075),
       note: (a) => (a <= 15e6 ? "Chu kỳ đầu (5–15 triệu): 0,8%/tháng" : "Chu kỳ tiếp theo (15–30 triệu): 0,75%/tháng"),
     },
+    "goi-2": {
+      min: 50e6, max: 200e6, terms: [12, 18, 24, 36], amount: 100e6, term: 24, tiered: true,
+      rate: (a, t) => [0.008, 0.007, 0.005][t],
+      note: () => "Lãi suất áp dụng theo tỷ lệ lao động thuộc diện Đơm Hoa đồng hành được xác minh; kỳ hạn thực tế căn cứ phương án kinh doanh và khả năng trả nợ.",
+    },
     "goi-3": {
       min: 3e6, max: 15e6, terms: [6, 9, 12], amount: 8e6, term: 12,
       rate: () => 0.005,
@@ -115,11 +120,20 @@
     const state = {};
     Object.keys(PACKAGES).forEach((k) => (state[k] = { amount: PACKAGES[k].amount, term: PACKAGES[k].term }));
     let current = "goi-1";
+    let tier = 0;
+    const tierNotes = ["ưu đãi cơ bản", "ưu đãi nâng cao", "ưu đãi tối đa"];
+    const tierFieldset = $("fieldset[data-tiers]", root);
+    $$("input[type=radio]", tierFieldset).forEach((input) =>
+      input.addEventListener("change", () => {
+        tier = Number(input.value);
+        render();
+      }),
+    );
 
     const range = $("input.range", root);
     const amountOut = $("output", root);
     const limits = range.nextElementSibling;
-    const termFieldset = $$("fieldset", root)[1];
+    const termFieldset = $("fieldset[data-terms]", root);
     const chipBox = $("div", termFieldset);
     const chipTemplate = chipBox.firstElementChild.cloneNode(true);
     const rateBox = $("p.bg-pollen-tint", root);
@@ -150,10 +164,11 @@
     function render() {
       const p = PACKAGES[current];
       const st = state[current];
-      const rate = p.rate(st.amount);
+      const rate = p.rate(st.amount, tier);
+      tierFieldset.hidden = !p.tiered;
       range.min = p.min;
       range.max = p.max;
-      range.step = p.max - p.min > 30e6 ? 1e6 : 5e5;
+      range.step = p.max - p.min > 100e6 ? 5e6 : p.max - p.min > 30e6 ? 1e6 : 5e5;
       range.value = st.amount;
       range.style.setProperty("--pct", `${((st.amount - p.min) / (p.max - p.min)) * 100}%`);
       range.setAttribute("aria-valuetext", money(st.amount));
@@ -175,7 +190,7 @@
         chipBox.appendChild(chip);
       });
 
-      rateBox.innerHTML = `<span class="font-semibold">Lãi suất ${rateText(rate)}.</span> ${esc(p.note(st.amount))}`;
+      rateBox.innerHTML = `<span class="font-semibold">Lãi suất ${rateText(rate)}${p.tiered ? ` (${tierNotes[tier]})` : ""}.</span> ${esc(p.note(st.amount))}`;
 
       const rows = schedule(st.amount, st.term, rate);
       const interest = rows.reduce((s, r) => s + r.interest, 0);

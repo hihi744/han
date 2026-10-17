@@ -44,9 +44,18 @@ export function formatRate(monthlyRate: number) {
 }
 
 /**
- * Calculator settings per individual loan package, from the official product sheet.
- * Gói 2 (Đồng hành tạo việc làm) is a business loan priced per hiring tier, so it is quoted, not calculated.
+ * Calculator settings per loan package, from the official product sheet.
+ * Gói 2 (Đồng hành tạo việc làm) is priced by the share of supported workers the business employs,
+ * so it carries tiers; the other packages ignore the tier argument.
  */
+export type RateTier = { label: string; rate: number; note: string };
+
+export const goi2Tiers: RateTier[] = [
+  { label: "Từ 10% đến dưới 15%", rate: 0.008, note: "Ưu đãi cơ bản" },
+  { label: "Từ 15% đến dưới 20%", rate: 0.007, note: "Ưu đãi nâng cao" },
+  { label: "Từ 20% trở lên", rate: 0.005, note: "Ưu đãi tối đa" },
+];
+
 export const calculatorPackages = [
   {
     id: "goi-1",
@@ -58,9 +67,24 @@ export const calculatorPackages = [
     defaultAmount: 10_000_000,
     defaultTerm: 12,
     // 0,8%/tháng for the first cycle (5–15 triệu), 0,75%/tháng for later cycles (15–30 triệu)
-    rate: (amount: number) => (amount <= 15_000_000 ? 0.008 : 0.0075),
+    tiers: null,
+    rate: (amount: number, _tier = 0) => (amount <= 15_000_000 ? 0.008 : 0.0075),
     rateNote: (amount: number) =>
       amount <= 15_000_000 ? "Chu kỳ đầu (5–15 triệu): 0,8%/tháng" : "Chu kỳ tiếp theo (15–30 triệu): 0,75%/tháng",
+  },
+  {
+    id: "goi-2",
+    label: "Gói 2: Đồng hành tạo việc làm",
+    min: 50_000_000,
+    max: 200_000_000,
+    step: 5_000_000,
+    terms: [12, 18, 24, 36],
+    defaultAmount: 100_000_000,
+    defaultTerm: 24,
+    tiers: goi2Tiers,
+    rate: (_amount: number, tier = 0) => goi2Tiers[tier].rate,
+    rateNote: () =>
+      "Lãi suất áp dụng theo tỷ lệ lao động thuộc diện Đơm Hoa đồng hành được xác minh; kỳ hạn thực tế căn cứ phương án kinh doanh và khả năng trả nợ.",
   },
   {
     id: "goi-3",
@@ -71,7 +95,8 @@ export const calculatorPackages = [
     terms: [6, 9, 12],
     defaultAmount: 8_000_000,
     defaultTerm: 12,
-    rate: () => 0.005,
+    tiers: null,
+    rate: (_amount: number, _tier = 0) => 0.005,
     rateNote: () => "0,5%/tháng trong thời gian vay. Miễn toàn bộ tiền lãi nếu hoàn thành khóa học và đạt chứng nhận nghề.",
   },
   {
@@ -83,7 +108,8 @@ export const calculatorPackages = [
     terms: [12, 18, 24],
     defaultAmount: 30_000_000,
     defaultTerm: 18,
-    rate: () => 0.01,
+    tiers: null,
+    rate: (_amount: number, _tier = 0) => 0.01,
     rateNote: () => "1,0%/tháng, tính trên dư nợ gốc thực tế còn lại.",
   },
 ] as const;
