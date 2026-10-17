@@ -1149,9 +1149,9 @@ export const photos: Record<number, Photo> = {
   6: { file: "/photos/anh-06.jpg", alt: "Xưởng may gia công", want: "Câu chuyện chị H: may gia công", size: "1200×1500 (4:5)" },
   7: { file: "/photos/anh-07.jpg", alt: "Tủ bánh trên phố buổi tối", want: "Câu chuyện chị X: tiệm bánh", size: "1200×1500 (4:5)" },
   8: { file: "/photos/anh-08.jpg", alt: "Đan macramé thủ công", want: "Câu chuyện chị N: đồ thủ công", size: "1200×1500 (4:5)" },
-  9: { alt: "Buổi sinh hoạt nhóm tại Đơm Hoa", want: "Văn phòng hoặc sinh hoạt nhóm", size: "2400×1000 (12:5)" },
-  10: { alt: "Đội ngũ Đơm Hoa", want: "Ảnh tập thể đội ngũ", size: "1600×1000 (16:10)" },
-  11: { alt: "Sổ ghi chép thu chi", want: "Sổ thu chi, tiết kiệm", size: "2400×1000 (12:5)" },
+  9: { file: "/photos/anh-09.jpg", alt: "Buổi sinh hoạt nhóm quanh bàn trà", want: "Văn phòng hoặc sinh hoạt nhóm", size: "2400×1000 (12:5)" },
+  10: { file: "/photos/anh-10.jpg", alt: "Đội ngũ Đơm Hoa trong buổi họp", want: "Ảnh tập thể đội ngũ", size: "1600×1000 (16:10)" },
+  11: { file: "/photos/anh-11.jpg", alt: "Ghi chép thu chi bên hũ tiết kiệm và mầm cây", want: "Sổ thu chi, tiết kiệm", size: "2400×1000 (12:5)" },
   12: { alt: "Lớp giáo dục tài chính và khởi nghiệp", want: "Lớp giáo dục tài chính", size: "1600×1200 (4:3)" },
   13: { alt: "Lớp may gia công của dự án", want: "Lớp may gia công", size: "2400×1200 (2:1)" },
 };
