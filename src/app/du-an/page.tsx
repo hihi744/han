@@ -4,6 +4,7 @@ import { ArrowRight, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import { CheckList, InfoTable, Orbs, Photo } from "@/components/blocks";
 import { DataTable, TermsGrid } from "@/components/content-blocks";
 import { Tabs } from "@/components/tabs";
+import { CycleRing } from "@/components/cycle-ring";
 import { org, project, projectEmailHref } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -100,11 +101,13 @@ function OverviewPanel() {
 
       <Block title="Vì sao cần dự án này?">
         <p className="max-w-3xl text-ink-muted">{project.why.body}</p>
-        <div className="on-dark relative mt-8 overflow-hidden rounded-[var(--radius-panel)] bg-moss-deep p-7 text-on-dark sm:p-10">
+        <div className="on-dark relative mt-8 overflow-hidden rounded-[var(--radius-panel)] bg-moss-deep p-6 text-on-dark sm:p-10">
           <Orbs variant="dark" />
-          <h3 className="relative text-[18px] font-bold text-petal-yellow">Vòng luẩn quẩn cần được tháo gỡ</h3>
-          <div className="relative mt-5">
-            <Chain steps={project.why.cycle} tone="dark" />
+          <div className="relative grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <h3 className="text-[24px] font-bold text-petal-yellow md:text-[30px]">Vòng luẩn quẩn cần được tháo gỡ</h3>
+            </div>
+            <CycleRing steps={project.why.cycle} center="Vòng luẩn quẩn" />
           </div>
         </div>
         <h3 className="mt-10 text-[20px] font-bold text-moss-ink">Ba hạn chế của các khóa học nghề thông thường</h3>
