@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowUpRight, Brain, HandHeart, LockKey, Storefront, Student, UserCircleCheck } from "@phosphor-icons/react/dist/ssr";
-import { HeroBlossom } from "@/components/hero-blossom";
 import { CtaBand, Orbs, Photo } from "@/components/blocks";
 import { Journey } from "@/components/journey";
 import { LinkButton } from "@/components/ui";
@@ -42,9 +41,10 @@ export default function HomePage() {
       <section className="px-3 pt-3" aria-labelledby="hero-title">
         <div className="on-dark relative isolate mx-auto max-w-[1400px] overflow-hidden rounded-[var(--radius-panel)] bg-moss-deep text-on-dark">
           <Photo n={1} tone="dark" parallax={0.08} priority sizes="100vw" className="absolute inset-0 -z-20" />
-          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(31,45,27,0.96)_0%,rgba(31,45,27,0.86)_45%,rgba(31,45,27,0.55)_100%)]" />
-          <Orbs variant="dark" />
-          <div className="container-site relative grid items-center gap-12 pb-14 pt-16 md:pt-24 lg:grid-cols-[1.1fr_1fr] lg:gap-6 lg:pb-24">
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(31,45,27,0.88)_0%,rgba(31,45,27,0.62)_38%,rgba(31,45,27,0.12)_68%,rgba(31,45,27,0)_100%)]" />
+          {/* On narrow screens the text spans the whole photo, so it needs an even wash. */}
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-moss-ink/45 lg:hidden" />
+          <div className="container-site relative grid items-center gap-12 pb-14 pt-16 md:min-h-[640px] md:pt-24 lg:grid-cols-[1.1fr_1fr] lg:gap-6 lg:pb-24">
             <div>
               <h1 id="hero-title" className="text-[44px] font-bold leading-[1.06] tracking-[-0.04em] text-on-dark sm:text-[60px] lg:text-[76px]">
                 {home.quote}
@@ -71,7 +71,6 @@ export default function HomePage() {
                 ))}
               </ul>
             </div>
-            <HeroBlossom treatment="aura" auraStrength={0.5} />
           </div>
         </div>
       </section>
