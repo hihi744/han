@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "Kiểm tra nhanh mức độ phù hợp với các gói hỗ trợ của Đơm Hoa trong khoảng 2 phút. Không hỏi thông tin cá nhân, không lưu câu trả lời.",
 };
 
-const levelTone = ["bg-petal-yellow", "bg-sprout", "bg-mist"];
+const levelTone = ["bg-petal-yellow", "bg-sprout", "bg-blossom-tint"];
 
 export default function AssessmentPage() {
   const { basics } = assessment;

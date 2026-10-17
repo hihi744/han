@@ -1141,9 +1141,9 @@ export const footer = {
 export type Photo = { file?: string; alt: string; want: string; size: string };
 
 export const photos: Record<number, Photo> = {
-  1: { alt: "Đôi tay chăm một mầm cây", want: "Ảnh nền hero: đôi tay chăm mầm cây, nắng sớm (sẽ phủ lớp màu xanh)", size: "2400×1350 (16:9)" },
-  2: { alt: "Một buổi tư vấn riêng", want: "Buổi tư vấn, chụp từ sau lưng", size: "1200×1500 (4:5)" },
-  3: { alt: "Không gian lớp học của Đơm Hoa", want: "Lớp học hoặc xưởng, toàn cảnh", size: "2400×1200 (2:1)" },
+  1: { file: "/photos/anh-01.jpg", alt: "Một người phụ nữ đứng ở ngưỡng cửa, nhìn ra thành phố trong nắng sớm", want: "Ảnh nền hero: đôi tay chăm mầm cây, nắng sớm (sẽ phủ lớp màu xanh)", size: "2400×1350 (16:9)" },
+  2: { file: "/photos/anh-02.jpg", alt: "Buổi tư vấn riêng với cán bộ tín dụng Đơm Hoa", want: "Buổi tư vấn, chụp từ sau lưng", size: "1200×1500 (4:5)" },
+  3: { file: "/photos/anh-03.jpg", alt: "Lớp quản lý tài chính cá nhân của Đơm Hoa", want: "Lớp học hoặc xưởng, toàn cảnh", size: "2400×1200 (2:1)" },
   4: { alt: "Quán nước của chị P", want: "Câu chuyện chị P: quán nước", size: "1200×1500 (4:5)" },
   5: { alt: "Hàng online của chị H", want: "Câu chuyện chị H: bán hàng online", size: "1200×1500 (4:5)" },
   6: { alt: "Đường may của chị H", want: "Câu chuyện chị H: may gia công", size: "1200×1500 (4:5)" },
