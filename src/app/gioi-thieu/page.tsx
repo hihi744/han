@@ -6,6 +6,7 @@ import { Journey } from "@/components/journey";
 import { SectionHeading } from "@/components/ui";
 import { about, expansion, funding, goals2031, goalsNote, legal, locations, org, partners } from "@/content/site";
 import { FundingDonut } from "@/components/funding-donut";
+import { phaseColours, VietnamMap } from "@/components/vietnam-map";
 
 export const metadata: Metadata = {
   title: "Về chúng tôi",
@@ -112,27 +113,36 @@ export default function AboutPage() {
       {/* Locations & expansion */}
       <section id="pham-vi" className="container-site mt-24 scroll-mt-40" aria-labelledby="scope-title">
         <SectionHeading id="scope-title" title="Phạm vi hoạt động" intro="Thí điểm tại 2 địa phương, mở rộng theo mô hình “điểm – cụm – vùng”." />
-        <div data-reveal-group="120" className="mt-12 grid gap-5 md:grid-cols-2">
-          {locations.map((l) => (
-            <article key={l.place} data-reveal className="card-lift rounded-[var(--radius-card)] bg-paper p-8 shadow-soft ring-1 ring-sprout-line">
-              <p className="flex items-center gap-2 text-[15px] font-semibold text-blossom-deep">
-                <MapPin size={20} weight="fill" aria-hidden="true" /> {l.role}
-              </p>
-              <h3 className="mt-3 text-[30px] text-moss-ink">{l.place}</h3>
-              <p className="mt-3 text-ink-muted">{l.body}</p>
-            </article>
-          ))}
+        <div className="mt-12 grid items-start gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16 [&>*]:min-w-0">
+          <div data-reveal="left" className="rounded-[var(--radius-panel)] bg-paper p-5 shadow-soft ring-1 ring-sprout-line sm:p-8">
+            <VietnamMap />
+          </div>
+          <div className="space-y-10">
+            <ol data-reveal-group="120" className="space-y-6">
+              {expansion.map((e, i) => (
+                <li key={e.phase} data-reveal className="flex gap-4">
+                  <span aria-hidden="true" className="mt-1.5 size-4 shrink-0 rounded-full ring-4 ring-mist" style={{ background: Object.values(phaseColours)[i] }} />
+                  <div>
+                    <p className="tabular text-sm font-semibold text-ink-muted">{e.time}</p>
+                    <h3 className="shout text-[24px] text-moss-ink">{e.phase}</h3>
+                    <p className="mt-1 text-[15px] text-ink-muted">{e.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <div data-reveal-group="120" className="grid gap-4 sm:grid-cols-2">
+              {locations.map((l) => (
+                <article key={l.place} data-reveal className="rounded-[var(--radius-card)] bg-sprout p-6">
+                  <p className="flex items-center gap-2 text-[14px] font-semibold text-blossom-deep">
+                    <MapPin size={18} weight="fill" aria-hidden="true" /> {l.role}
+                  </p>
+                  <h3 className="mt-2 text-[24px] text-moss-ink">{l.place}</h3>
+                  <p className="mt-2 text-[15px] text-ink-muted">{l.body}</p>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
-        <ol data-reveal-group="120" className="mt-12 grid gap-8 md:grid-cols-3 md:gap-6">
-          {expansion.map((e) => (
-            <li key={e.phase} data-reveal className="relative border-t-2 border-moss pt-6">
-              <span className="absolute -top-[9px] left-0 size-4 rounded-full bg-petal-orange ring-4 ring-mist" aria-hidden="true" />
-              <p className="tabular text-sm font-semibold text-ink-muted">{e.time}</p>
-              <h3 className="shout mt-1 text-[26px] text-moss-ink">{e.phase}</h3>
-              <p className="mt-2 text-[15px] text-ink-muted">{e.body}</p>
-            </li>
-          ))}
-        </ol>
       </section>
 
       {/* Goals */}

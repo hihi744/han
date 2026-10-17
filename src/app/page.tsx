@@ -81,10 +81,6 @@ export default function HomePage() {
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
           <div data-reveal="left" className="relative">
             <Photo n={2} parallax={0.06} className="aspect-[4/5] rounded-[var(--radius-panel)]" />
-            <p className="glass absolute -bottom-6 right-4 max-w-[260px] rounded-2xl p-4 text-[15px] font-semibold text-moss-ink sm:-right-8">
-              <LockKey size={20} className="mb-1 text-moss" aria-hidden="true" />
-              Mọi thông tin riêng tư đều được giữ kín.
-            </p>
           </div>
           <div data-reveal>
             <h2 id="intro-title" className="text-[36px] font-bold leading-[1.1] tracking-[-0.035em] text-moss-ink md:text-[56px]">

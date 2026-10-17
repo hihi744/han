@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Clock, EnvelopeSimple, Handshake, MapPin, Phone, Plant } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight, Clock, EnvelopeSimple, Handshake, MapPin, MapTrifold, Phone, Plant } from "@phosphor-icons/react/dist/ssr";
 import { ContactForm } from "@/components/contact-form";
-import { Orbs, Photo } from "@/components/blocks";
-import { contact, org, projectEmailHref } from "@/content/site";
+import { Orbs } from "@/components/blocks";
+import { contact, mapEmbedSrc, mapLinkHref, org, projectEmailHref } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Liên hệ",
@@ -63,7 +63,26 @@ export default function ContactPage() {
               Đăng ký tư vấn
             </h2>
             <p className="mt-4 text-lg text-ink-muted">{contact.borrowers.body}</p>
-            <Photo n={14} className="mt-8 aspect-[4/3] rounded-[var(--radius-card)]" sizes="(min-width: 1024px) 35vw, 100vw" />
+            <div data-map className="mt-8 overflow-hidden rounded-[var(--radius-card)] bg-sprout ring-1 ring-sprout-line">
+              <iframe
+                title={`Bản đồ: ${org.address}`}
+                src={mapEmbedSrc}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="block aspect-[4/3] w-full border-0"
+              />
+              <a
+                href={mapLinkHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between gap-3 bg-paper px-5 py-4 text-[15px] font-semibold text-moss hover:text-blossom-deep"
+              >
+                <span className="flex items-center gap-2">
+                  <MapTrifold size={20} aria-hidden="true" /> Mở trong Google Maps
+                </span>
+                <ArrowUpRight size={16} weight="bold" aria-hidden="true" />
+              </a>
+            </div>
             <dl className="mt-10 space-y-6">
               {details.map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex gap-4">

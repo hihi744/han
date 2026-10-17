@@ -70,6 +70,8 @@ def clean(html: str) -> str:
     html = re.sub(r'<link rel="stylesheet" href="/_next/[^"]+"[^>]*/?>', "", html)
     html = re.sub(r'<link rel="preload" as="image"[^>]*/?>', "", html)
     html = re.sub(r'<link rel="icon"[^>]*/?>', '<link rel="icon" href="icon.png" type="image/png">', html)
+    # The artifact viewer blocks third-party iframes; keep only the "open in Google Maps" link.
+    html = re.sub(r"<iframe\b[^>]*>(?:</iframe>)?", "", html)
     # Relative links and assets.
     html = re.sub(r'\b(href|src)="(/[^"]*)"', rewrite_href, html)
     # Motion's server render starts hidden; swap that for a CSS entrance animation.

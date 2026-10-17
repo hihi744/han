@@ -1086,6 +1086,11 @@ export const contact = {
   },
 };
 
+const mapQuery = encodeURIComponent("207 Giải Phóng, Bạch Mai, Hà Nội");
+/** Google Maps for the office: an embeddable map and a link that opens the app or site. */
+export const mapEmbedSrc = `https://maps.google.com/maps?q=${mapQuery}&z=16&output=embed`;
+export const mapLinkHref = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
 export const projectEmailHref = `mailto:${"domhoa@gmail.com"}?subject=${encodeURIComponent(
   "Đề nghị nhận hồ sơ dự án Hạt mầm trong tay",
 )}`;
@@ -1128,7 +1133,7 @@ export const footer = {
   ],
 };
 
-/* ---------------- Ảnh (14 vị trí) ----------------
+/* ---------------- Ảnh (13 vị trí) ----------------
  * Khi có ảnh: đặt file vào public/photos/ rồi điền `file`, ví dụ file: "/photos/01-hero.jpg".
  * Ô nào chưa có file sẽ hiện khung chờ ghi rõ số ảnh và kích thước cần.
  * Không dùng ảnh lộ mặt học viên nếu chưa có đồng ý bằng văn bản.
@@ -1149,7 +1154,6 @@ export const photos: Record<number, Photo> = {
   11: { alt: "Sổ ghi chép thu chi", want: "Sổ thu chi, tiết kiệm", size: "2400×1000 (12:5)" },
   12: { alt: "Lớp giáo dục tài chính và khởi nghiệp", want: "Lớp giáo dục tài chính", size: "1600×1200 (4:3)" },
   13: { alt: "Lớp may gia công của dự án", want: "Lớp may gia công", size: "2400×1200 (2:1)" },
-  14: { alt: "Văn phòng Đơm Hoa tại 207 Giải Phóng", want: "Văn phòng 207 Giải Phóng", size: "1600×1200 (4:3)" },
 };
 
 /** Photo number used by each customer story, in the order of `stories`. */
