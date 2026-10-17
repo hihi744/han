@@ -1152,8 +1152,8 @@ export const photos: Record<number, Photo> = {
   9: { file: "/photos/anh-09.jpg", alt: "Buổi sinh hoạt nhóm quanh bàn trà", want: "Văn phòng hoặc sinh hoạt nhóm", size: "2400×1000 (12:5)" },
   10: { file: "/photos/anh-10.jpg", alt: "Đội ngũ Đơm Hoa trong buổi họp", want: "Ảnh tập thể đội ngũ", size: "1600×1000 (16:10)" },
   11: { file: "/photos/anh-11.jpg", alt: "Ghi chép thu chi bên hũ tiết kiệm và mầm cây", want: "Sổ thu chi, tiết kiệm", size: "2400×1000 (12:5)" },
-  12: { alt: "Lớp giáo dục tài chính và khởi nghiệp", want: "Lớp giáo dục tài chính", size: "1600×1200 (4:3)" },
-  13: { alt: "Lớp may gia công của dự án", want: "Lớp may gia công", size: "2400×1200 (2:1)" },
+  12: { file: "/photos/anh-12.jpg", alt: "Lớp giáo dục tài chính và khởi nghiệp của Đơm Hoa", want: "Lớp giáo dục tài chính", size: "1600×1200 (4:3)" },
+  13: { file: "/photos/anh-13.jpg", alt: "Khóa đào tạo may gia công của dự án Hạt mầm trong tay", want: "Lớp may gia công", size: "2400×1200 (2:1)" },
 };
 
 /** Photo number used by each customer story, in the order of `stories`. */
