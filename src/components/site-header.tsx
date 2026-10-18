@@ -76,7 +76,7 @@ export function SiteHeader() {
   const groupIsCurrent = (children: NavLink[]) => children.some((c) => pathOf(c.href) === pathname);
 
   const pill = (active: boolean) =>
-    `inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-full px-3.5 text-[15px] font-medium transition-colors duration-200 cursor-pointer ${
+    `inline-flex min-h-11 items-center gap-1 whitespace-nowrap rounded-full px-2.5 text-[14px] font-medium xl:px-3.5 xl:text-[15px] transition-colors duration-200 cursor-pointer ${
       active ? "bg-sprout text-moss-ink" : "text-ink-muted hover:bg-sprout/60 hover:text-moss-ink"
     }`;
 
@@ -88,10 +88,10 @@ export function SiteHeader() {
         }`}
       >
         <Link href="/" className="shrink-0 rounded-full" aria-label="Đơm Hoa, về trang chủ">
-          <Image src="/brand/dom-hoa-logo.png" alt="" width={827} height={180} priority className="h-9 w-auto sm:h-11" />
+          <Image src="/brand/dom-hoa-logo.png" alt="" width={827} height={180} priority className="h-9 w-auto sm:h-11 lg:h-9 xl:h-11" />
         </Link>
 
-        <nav ref={desktopNav} aria-label="Điều hướng chính" className="hidden xl:block">
+        <nav ref={desktopNav} aria-label="Điều hướng chính" className="hidden lg:block">
           <ul className="flex items-center gap-0.5">
             {nav.map((item) =>
               "children" in item ? (
@@ -152,7 +152,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href="/lien-he#dang-ky" className={buttonClass("primary", "max-sm:hidden min-h-11 px-5 whitespace-nowrap")}>
+          <Link href="/lien-he#dang-ky" className={buttonClass("primary", "max-sm:hidden min-h-11 px-5 whitespace-nowrap lg:px-4 xl:px-5")}>
             Đăng ký tư vấn
           </Link>
           <button
@@ -161,7 +161,7 @@ export function SiteHeader() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="grid size-12 cursor-pointer place-items-center rounded-full text-moss-ink hover:bg-sprout xl:hidden"
+            className="grid size-12 cursor-pointer place-items-center rounded-full text-moss-ink hover:bg-sprout lg:hidden"
           >
             <span className="sr-only">{open ? "Đóng menu" : "Mở menu"}</span>
             {open ? <X size={24} aria-hidden="true" /> : <List size={24} aria-hidden="true" />}
@@ -173,7 +173,7 @@ export function SiteHeader() {
         id="mobile-menu"
         ref={panel}
         hidden={!open}
-        className="mx-auto mt-2 max-h-[calc(100dvh-96px)] max-w-[1280px] overflow-y-auto rounded-[24px] bg-paper p-3 shadow-[0_24px_60px_-24px_rgba(27,38,23,0.35)] ring-1 ring-sprout-line xl:hidden"
+        className="mx-auto mt-2 max-h-[calc(100dvh-96px)] max-w-[1280px] overflow-y-auto rounded-[24px] bg-paper p-3 shadow-[0_24px_60px_-24px_rgba(27,38,23,0.35)] ring-1 ring-sprout-line lg:hidden"
       >
         <nav aria-label="Điều hướng trên di động">
           <ul className="flex flex-col">
