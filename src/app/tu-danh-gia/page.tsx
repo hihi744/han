@@ -10,8 +10,6 @@ export const metadata: Metadata = {
     "Kiểm tra nhanh mức độ phù hợp với các gói hỗ trợ của Đơm Hoa trong khoảng 2 phút. Không hỏi thông tin cá nhân, không lưu câu trả lời.",
 };
 
-const levelTone = ["bg-petal-yellow", "bg-sprout", "bg-blossom-tint"];
-
 export default function AssessmentPage() {
   const { basics } = assessment;
   return (
@@ -59,24 +57,6 @@ export default function AssessmentPage() {
         </div>
       </section>
 
-      {/* Step 3 */}
-      <section className="container-site mt-20" aria-labelledby="buoc-3-title">
-        <h2 id="buoc-3-title" className="text-[26px] text-moss-ink md:text-[32px]">
-          <span className="text-blossom-deep">Bước 3.</span> Kết quả
-        </h2>
-        <p className="mt-3 max-w-3xl text-ink-muted">Kết quả theo tổng điểm của 5 câu trả lời:</p>
-        <ol data-reveal-group="100" className="mt-8 grid gap-4 md:grid-cols-3">
-          {assessment.results.map((r, i) => (
-            <li key={r.title} data-reveal className={`rounded-[var(--radius-card)] p-6 ${levelTone[i]}`}>
-              <p className="tabular text-[14px] font-bold text-moss">
-                Mức {i + 1}: {r.range}
-              </p>
-              <h3 className="mt-2 text-[19px] font-bold text-moss-ink">{r.title}</h3>
-            </li>
-          ))}
-        </ol>
-        <p className="mt-6 max-w-3xl text-[15px] text-ink-muted">{assessment.resultNote}</p>
-      </section>
     </>
   );
 }
