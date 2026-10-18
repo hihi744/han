@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { ArrowRight, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
+import { EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import { CheckList, InfoTable, Orbs, Photo } from "@/components/blocks";
 import { DataTable, TermsGrid } from "@/components/content-blocks";
 import { Tabs } from "@/components/tabs";
@@ -60,17 +60,30 @@ function MoneyTable({
   );
 }
 
-/** A short chain of steps joined by arrows: a real sequence, so order carries meaning. */
-function Chain({ steps, tone = "sprout" }: { steps: readonly string[]; tone?: "sprout" | "dark" }) {
-  const dark = tone === "dark";
+/** A top-to-bottom sequence: numbered nodes joined by a line that ends in an arrow. */
+function VerticalFlow({ steps }: { steps: readonly string[] }) {
   return (
-    <ol className="flex flex-wrap items-center gap-2">
-      {steps.map((s, i) => (
-        <li key={s} className="flex items-center gap-2">
-          <span className={`rounded-full px-4 py-2 text-[15px] font-semibold ${dark ? "bg-on-dark/10 text-on-dark" : "bg-sprout text-moss-ink"}`}>{s}</span>
-          {i < steps.length - 1 && <ArrowRight size={18} className={dark ? "text-petal-yellow" : "text-moss"} aria-hidden="true" />}
-        </li>
-      ))}
+    <ol className="relative">
+      {steps.map((s, i) => {
+        const last = i === steps.length - 1;
+        return (
+          <li key={s} className="relative flex gap-4 pb-6 last:pb-0">
+            {!last && (
+              <span aria-hidden="true" className="absolute left-[19px] top-10 bottom-1 w-0.5 bg-gradient-to-b from-moss/40 to-moss/15">
+                <span className="absolute -bottom-1 left-1/2 size-2 -translate-x-1/2 rotate-45 border-b-2 border-r-2 border-moss/40" />
+              </span>
+            )}
+            <span
+              className={`tabular relative grid size-10 shrink-0 place-items-center rounded-full text-[15px] font-bold ${
+                last ? "bg-petal-red text-on-dark" : i === 0 ? "bg-moss text-on-dark" : "bg-paper text-moss ring-2 ring-moss/30"
+              }`}
+            >
+              {i + 1}
+            </span>
+            <span className="flex min-h-10 items-center rounded-2xl bg-paper px-5 py-2.5 font-semibold text-moss-ink shadow-soft ring-1 ring-sprout-line">{s}</span>
+          </li>
+        );
+      })}
     </ol>
   );
 }
@@ -147,14 +160,21 @@ function OverviewPanel() {
       </div>
 
       <Block title="Mô hình chung">
-        <Chain steps={project.structure} />
-        <CheckList items={project.model} className="mt-8 max-w-4xl text-[16px]" />
-        <div className="mt-10 rounded-[var(--radius-card)] bg-paper p-6 ring-1 ring-sprout-line sm:p-8">
-          <h3 className="text-[18px] font-bold text-moss-ink">Chu trình một đợt</h3>
-          <div className="mt-4">
-            <Chain steps={project.cycle} />
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-[var(--radius-panel)] bg-sprout p-6 sm:p-8">
+            <h3 className="text-[18px] font-bold text-moss-ink">Lộ trình của học viên</h3>
+            <div className="mt-6">
+              <VerticalFlow steps={project.structure} />
+            </div>
+          </div>
+          <div className="rounded-[var(--radius-panel)] bg-petal-yellow/60 p-6 sm:p-8">
+            <h3 className="text-[18px] font-bold text-moss-ink">Chu trình một đợt</h3>
+            <div className="mt-6">
+              <VerticalFlow steps={project.cycle} />
+            </div>
           </div>
         </div>
+        <CheckList items={project.model} className="mt-10 max-w-4xl text-[16px]" />
       </Block>
     </div>
   );
