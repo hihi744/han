@@ -1,0 +1,7 @@
+# Netlify: build the site as plain static files (out/), no server needed.
+[build]
+  command = "PREVIEW_EXPORT=1 npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"
