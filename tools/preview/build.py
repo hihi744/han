@@ -54,7 +54,7 @@ def page_file(path: str) -> str:
 
 def rewrite_href(match: re.Match) -> str:
     attr, url = match.group(1), match.group(2)
-    if url.startswith(("/brand/", "/photos/", "/icon.png")):
+    if url.startswith(("/brand/", "/photos/", "/maps/", "/icon.png")):
         return f'{attr}="{url.lstrip("/").split("?")[0]}"'
     path, sep, frag = url.partition("#")
     path, qsep, query = path.partition("?")
@@ -115,8 +115,9 @@ def main():
     shutil.copy(os.path.join(HERE, "preview.js"), os.path.join(DEST, "assets/preview.js"))
     shutil.copy(os.path.join(OUT, "js/site.js"), os.path.join(DEST, "assets/site.js"))
     shutil.copytree(os.path.join(OUT, "brand"), os.path.join(DEST, "brand"))
-    if os.path.isdir(os.path.join(OUT, "photos")):
-        shutil.copytree(os.path.join(OUT, "photos"), os.path.join(DEST, "photos"))
+    for folder in ("photos", "maps"):
+        if os.path.isdir(os.path.join(OUT, folder)):
+            shutil.copytree(os.path.join(OUT, folder), os.path.join(DEST, folder))
     shutil.copy(os.path.join(OUT, "icon.png"), os.path.join(DEST, "icon.png"))
 
     for src in glob.glob(os.path.join(OUT, "**/*.html"), recursive=True):

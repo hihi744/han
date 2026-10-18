@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { ArrowUpRight, Clock, EnvelopeSimple, Handshake, MapPin, MapTrifold, Phone, Plant } from "@phosphor-icons/react/dist/ssr";
 import { ContactForm } from "@/components/contact-form";
 import { Orbs } from "@/components/blocks";
-import { contact, mapEmbedSrc, mapLinkHref, org, projectEmailHref } from "@/content/site";
+import { contact, mapLinkHref, org, projectEmailHref } from "@/content/site";
+import { OfficeMap } from "@/components/office-map";
 
 export const metadata: Metadata = {
   title: "Liên hệ",
@@ -64,13 +65,7 @@ export default function ContactPage() {
             </h2>
             <p className="mt-4 text-lg text-ink-muted">{contact.borrowers.body}</p>
             <div data-map className="mt-8 overflow-hidden rounded-[var(--radius-card)] bg-sprout ring-1 ring-sprout-line">
-              <iframe
-                title={`Bản đồ: ${org.address}`}
-                src={mapEmbedSrc}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="block aspect-[4/3] w-full border-0"
-              />
+              <OfficeMap address={org.address} directionsHref={mapLinkHref} />
               <a
                 href={mapLinkHref}
                 target="_blank"

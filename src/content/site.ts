@@ -1086,8 +1086,7 @@ export const contact = {
 };
 
 const mapQuery = encodeURIComponent("207 Giải Phóng, Bạch Mai, Hà Nội");
-/** Google Maps for the office: an embeddable map and a link that opens the app or site. */
-export const mapEmbedSrc = `https://maps.google.com/maps?q=${mapQuery}&z=16&output=embed`;
+/** Opens the office in Google Maps (app or site) for directions. */
 export const mapLinkHref = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
 export const projectEmailHref = `mailto:${"domhoa@gmail.com"}?subject=${encodeURIComponent(
