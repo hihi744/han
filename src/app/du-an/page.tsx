@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import { CheckList, InfoTable, Orbs, Photo } from "@/components/blocks";
 import { DataTable, TermsGrid } from "@/components/content-blocks";
+import { ShowMore } from "@/components/show-more";
 import { Tabs } from "@/components/tabs";
 import { CycleRing } from "@/components/cycle-ring";
 import { org, project, projectEmailHref } from "@/content/site";
@@ -129,6 +130,8 @@ function OverviewPanel() {
         </div>
       </Block>
 
+      <ShowMore>
+      <div className="space-y-24">
       <div className="grid gap-5 lg:grid-cols-2">
         <div data-reveal className="rounded-[var(--radius-panel)] bg-sprout p-8 sm:p-10">
           <h2 className="text-[24px] font-bold text-moss-ink">Vì sao chọn Hà Nội?</h2>
@@ -176,6 +179,8 @@ function OverviewPanel() {
         </div>
         <CheckList items={project.model} className="mt-10 max-w-4xl text-[16px]" />
       </Block>
+      </div>
+      </ShowMore>
     </div>
   );
 }
@@ -202,6 +207,8 @@ function ProcessPanel() {
         </ol>
       </div>
 
+      <ShowMore>
+      <div className="space-y-20">
       <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] [&>*]:min-w-0">
         <Block title="Giai đoạn đào tạo: nội dung theo tuần">
           <p className="mb-5 text-ink-muted">Mỗi tuần có 4 buổi đào tạo nghề.</p>
@@ -216,6 +223,8 @@ function ProcessPanel() {
         <DataTable head={["Thời điểm", "Giai đoạn", "Hoạt động chính", "Kết quả mong đợi"]} rows={project.roadmap.map((r) => [r.time, r.phase, r.work, r.result])} minWidth={720} />
         <p className="mt-5 text-[15px] text-ink-muted">{project.parallelNote}</p>
       </Block>
+      </div>
+      </ShowMore>
     </div>
   );
 }
@@ -266,6 +275,8 @@ function ResultsPanel() {
           ))}
         </dl>
       </Block>
+      <ShowMore>
+      <div className="space-y-20">
       <Block title="Quản trị, giám sát và đánh giá">
         <TermsGrid items={project.governance} />
       </Block>
@@ -275,6 +286,8 @@ function ResultsPanel() {
       <Block title="Tính bền vững và khả năng nhân rộng">
         <TermsGrid items={project.sustainability} />
       </Block>
+      </div>
+      </ShowMore>
     </div>
   );
 }

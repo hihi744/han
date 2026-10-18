@@ -3,6 +3,7 @@ import { Brain, Calculator, Storefront, Student } from "@phosphor-icons/react/di
 import { CheckList, CtaBand, InfoTable, Orbs, PageIntro, Photo } from "@/components/blocks";
 import { BlockView, DataTable, SectionQuote, TermsGrid } from "@/components/content-blocks";
 import { LoanCalculator } from "@/components/loan-calculator";
+import { ShowMore } from "@/components/show-more";
 import { Stepper, Tabs } from "@/components/tabs";
 import { LinkButton, SectionHeading } from "@/components/ui";
 import {
@@ -67,10 +68,22 @@ function PackagePanel({ p }: { p: (typeof loanPackages)[number] }) {
           </a>
         )}
       </div>
-      <div className="space-y-14">
-        {p.blocks.map((b) => (
-          <BlockView key={b.title} block={b} />
-        ))}
+      <div>
+        {/* The package sheet stays visible; everything else waits behind one button. */}
+        {p.blocks
+          .filter((b) => b.title === "Thông tin gói vay")
+          .map((b) => (
+            <BlockView key={b.title} block={b} />
+          ))}
+        <ShowMore className="mt-10">
+          <div className="space-y-14">
+            {p.blocks
+              .filter((b) => b.title !== "Thông tin gói vay")
+              .map((b) => (
+                <BlockView key={b.title} block={b} />
+              ))}
+          </div>
+        </ShowMore>
       </div>
     </article>
   );
@@ -191,12 +204,12 @@ function SavingsSection() {
             </h2>
             <p className="mt-4 text-ink-muted">{goal.intro}</p>
           </div>
-          <div className="space-y-12">
+          <div>
             <InfoTable rows={goal.rows} caption={goal.title} />
-            <div>
+            <ShowMore className="mt-8">
               <h3 className="text-[22px] font-bold text-moss-ink">{goal.commitments.title}</h3>
               <TermsGrid items={goal.commitments.items} className="mt-5" />
-            </div>
+            </ShowMore>
           </div>
         </div>
       </article>
@@ -290,8 +303,10 @@ function CommunitySection() {
       <article id={counselling.id} className="mt-24 scroll-mt-40" aria-labelledby={`${counselling.id}-title`}>
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.5fr] lg:gap-14 [&>*]:min-w-0">
           <ProgrammeHead n={1} id={counselling.id} title={counselling.title} quote={counselling.quote} intro={counselling.intro} />
-          <div className="space-y-12">
+          <div>
             <InfoTable rows={counselling.rows} caption={counselling.title} />
+            <ShowMore className="mt-8">
+              <div className="space-y-12">
             <div>
               <h3 className="text-[22px] font-bold text-moss-ink">Quy trình hỗ trợ gồm 7 bước</h3>
               <ol data-reveal-group="70" className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -307,6 +322,8 @@ function CommunitySection() {
               </ol>
             </div>
             <Commitments items={counselling.commitments} />
+              </div>
+            </ShowMore>
           </div>
         </div>
       </article>
@@ -320,6 +337,8 @@ function CommunitySection() {
               <Photo n={12} parallax={0.05} className="aspect-[4/3] rounded-[var(--radius-panel)]" sizes="(min-width: 1024px) 55vw, 100vw" />
             </div>
             <InfoTable rows={financeEducation.rows} caption={financeEducation.title} />
+            <ShowMore>
+              <div className="space-y-12">
             <div>
               <h3 className="text-[22px] font-bold text-moss-ink">Nội dung đào tạo</h3>
               <div className="mt-5">
@@ -332,6 +351,8 @@ function CommunitySection() {
               <p className="mt-4 text-[15px] text-ink-muted">{financeEducation.modulesNote}</p>
             </div>
             <Commitments items={financeEducation.commitments} />
+              </div>
+            </ShowMore>
           </div>
         </div>
       </article>
@@ -340,8 +361,10 @@ function CommunitySection() {
       <article id={socialShop.id} className="mt-24 scroll-mt-40" aria-labelledby={`${socialShop.id}-title`}>
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.5fr] lg:gap-14 [&>*]:min-w-0">
           <ProgrammeHead n={3} id={socialShop.id} title={socialShop.title} quote={socialShop.quote} intro={socialShop.intro} />
-          <div className="space-y-12">
+          <div>
             <InfoTable rows={socialShop.rows} caption={socialShop.title} />
+            <ShowMore className="mt-8">
+              <div className="space-y-12">
             <Commitments items={socialShop.commitments} />
             <div>
               <h3 className="text-[22px] font-bold text-moss-ink">Định hướng triển khai</h3>
@@ -351,6 +374,8 @@ function CommunitySection() {
                 ))}
               </div>
             </div>
+              </div>
+            </ShowMore>
           </div>
         </div>
       </article>

@@ -226,6 +226,8 @@
     var id = decodeURIComponent(location.hash.slice(1));
     var target = id && document.getElementById(id);
     if (!target) return;
+    // Open any "Xem chi tiết" sections that hide the target.
+    for (var d = target.closest("details"); d; d = d.parentElement && d.parentElement.closest("details")) d.open = true;
     var opened = false;
     tabBoxes.forEach(function (t) {
       if (!document.contains(t.box) || !t.box.contains(target)) return;
