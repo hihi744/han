@@ -765,8 +765,6 @@ export const project = {
   sections: [
     { id: "tong-quan", label: "Tổng quan" },
     { id: "quy-trinh", label: "Quy trình" },
-    { id: "kinh-phi", label: "Kinh phí" },
-    { id: "ket-qua", label: "Kết quả và quản trị" },
     { id: "dong-hanh", label: "Đồng hành cùng dự án" },
   ],
   proposer: "Tổ chức Tài chính Vi mô Đơm Hoa",

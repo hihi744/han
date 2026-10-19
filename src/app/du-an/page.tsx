@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
 import { CheckList, InfoTable, Orbs, Photo } from "@/components/blocks";
-import { DataTable, TermsGrid } from "@/components/content-blocks";
+import { DataTable } from "@/components/content-blocks";
 import { ShowMore } from "@/components/show-more";
 import { Tabs } from "@/components/tabs";
 import { CycleRing } from "@/components/cycle-ring";
@@ -14,54 +14,6 @@ export const metadata: Metadata = {
     "Dự án “Hạt mầm trong tay” của Đơm Hoa: đào tạo nghề gắn với việc làm chờ sẵn tại Hà Nội. Đợt đầu còn cần khoảng 89 triệu đồng.",
 };
 
-function MoneyTable({
-  caption,
-  head,
-  rows,
-  total,
-}: {
-  caption: string;
-  head: [string, string, string];
-  rows: readonly { item: string; calc: string; amount: string }[];
-  total: { label: string; amount: string; note?: string; emphasis?: boolean }[];
-}) {
-  return (
-    <div className="overflow-x-auto rounded-[var(--radius-card)] bg-paper ring-1 ring-sprout-line">
-      <table className="w-full min-w-[520px] text-left text-[15px]">
-        <caption className="px-5 pb-1 pt-5 text-left text-[18px] font-bold text-moss-ink">{caption}</caption>
-        <thead>
-          <tr className="text-sm text-ink-muted">
-            <th scope="col" className="px-5 py-3 font-medium">{head[0]}</th>
-            <th scope="col" className="px-5 py-3 font-medium">{head[1]}</th>
-            <th scope="col" className="px-5 py-3 text-right font-medium">{head[2]}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r) => (
-            <tr key={r.item} className="border-t border-sprout-line">
-              <th scope="row" className="px-5 py-3 font-medium text-moss-ink">{r.item}</th>
-              <td className="px-5 py-3 text-ink-muted">{r.calc}</td>
-              <td className="tabular px-5 py-3 text-right font-medium">{r.amount}</td>
-            </tr>
-          ))}
-          {total.map((t) => (
-            <tr key={t.label} className={`border-t-2 border-moss-ink/15 ${t.emphasis ? "bg-petal-yellow" : "bg-sprout/60"}`}>
-              <th scope="row" colSpan={2} className="px-5 py-3 font-bold text-moss-ink">
-                {t.label}
-              </th>
-              <td className="tabular px-5 py-3 text-right font-extrabold text-moss-ink">
-                {t.amount}
-                {t.note && <span className="block text-[13px] font-medium text-ink-muted">{t.note}</span>}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-/** A top-to-bottom sequence: numbered nodes joined by a line that ends in an arrow. */
 function VerticalFlow({ steps }: { steps: readonly string[] }) {
   return (
     <ol className="relative">
@@ -229,69 +181,6 @@ function ProcessPanel() {
   );
 }
 
-function BudgetPanel() {
-  return (
-    <div>
-      <h2 className="text-[26px] font-bold tracking-[-0.03em] text-moss-ink md:text-[34px]">Dự toán kinh phí cho 1 lớp 15 học viên</h2>
-      <p className="mt-2 text-ink-muted">Đơn vị: triệu đồng.</p>
-      <div className="mt-10 grid gap-5 lg:grid-cols-2 [&>*]:min-w-0">
-        <MoneyTable
-          caption="Chi phí"
-          head={["Khoản chi", "Cách tính", "Thành tiền"]}
-          rows={project.costs}
-          total={[{ label: "Tổng chi phí", amount: project.costTotal.amount, note: project.costTotal.note }]}
-        />
-        <MoneyTable
-          caption="Nguồn đối ứng và phần cần tài trợ"
-          head={["Khoản", "Cách tính", "Thành tiền"]}
-          rows={project.contributions}
-          total={[
-            { label: "Tổng từ đối tác", amount: project.contributionTotal },
-            { label: `Cần tài trợ hoặc ngân sách xã hội (${project.gap.calc})`, amount: project.gap.amount, note: project.gap.note, emphasis: true },
-          ]}
-        />
-      </div>
-      <div className="mt-8 max-w-4xl space-y-3 text-ink-muted">
-        {project.costNotes.map((n) => (
-          <p key={n}>{n}</p>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ResultsPanel() {
-  return (
-    <div className="space-y-20">
-      <Block title="Chỉ số đánh giá mỗi đợt">
-        <dl data-reveal-group="80" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {project.kpis.map((k) => (
-            <div key={k.name} data-reveal className="card-lift flex flex-col rounded-[var(--radius-card)] bg-paper p-6 shadow-soft ring-1 ring-sprout-line">
-              <dt className="order-2 mt-3 font-medium text-moss-ink">{k.name}</dt>
-              <dd className={`order-1 tabular font-extrabold leading-none tracking-tight ${k.target === "Theo dõi" ? "text-[26px] text-ink-muted" : "text-[36px] text-petal-red"}`}>
-                {k.target}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </Block>
-      <ShowMore>
-      <div className="space-y-20">
-      <Block title="Quản trị, giám sát và đánh giá">
-        <TermsGrid items={project.governance} />
-      </Block>
-      <Block title="Cách Đơm Hoa giảm thiểu rủi ro">
-        <DataTable head={["Rủi ro", "Giải pháp"]} rows={project.risks.map((r) => [r.risk, r.fix])} />
-      </Block>
-      <Block title="Tính bền vững và khả năng nhân rộng">
-        <TermsGrid items={project.sustainability} />
-      </Block>
-      </div>
-      </ShowMore>
-    </div>
-  );
-}
-
 function SponsorPanel() {
   return (
     <div>
@@ -374,8 +263,6 @@ export default function ProjectPage() {
           items={[
             { id: "tong-quan", tab: "Tổng quan", panel: <OverviewPanel /> },
             { id: "quy-trinh", tab: "Quy trình", panel: <ProcessPanel /> },
-            { id: "kinh-phi", tab: "Kinh phí", panel: <BudgetPanel /> },
-            { id: "ket-qua", tab: "Kết quả và quản trị", panel: <ResultsPanel /> },
             { id: "dong-hanh", tab: "Đồng hành cùng dự án", panel: <SponsorPanel /> },
           ]}
         />
