@@ -29,7 +29,7 @@ export const nav: NavItem[] = [
   {
     label: "Sản phẩm",
     children: [
-      { href: "/san-pham#vay-von", label: "Vay vốn", description: "Bốn gói vay, thẩm định và quy trình" },
+      { href: "/san-pham#vay-von", label: "Vay vốn", description: "Ba gói vay, thẩm định và quy trình" },
       { href: "/san-pham#tiet-kiem", label: "Tiết kiệm", description: "Tiết kiệm mục tiêu và tiết kiệm trung tâm" },
       { href: "/san-pham#dong-hanh", label: "Đồng hành cộng đồng", description: "Tham vấn, giáo dục tài chính, cửa hàng thực hành" },
     ],
@@ -264,7 +264,7 @@ export type Block =
 export const productsPage = {
   title: "Mỗi hạt mầm cần một loại đất riêng",
   intro:
-    "Đơm Hoa có bốn gói vay, hai hình thức tiết kiệm và ba chương trình đồng hành. Mỗi cá nhân, mỗi nhóm chọn gói phù hợp với kế hoạch và hoàn cảnh của mình, rồi cùng bắt đầu từ những bước nhỏ.",
+    "Đơm Hoa có ba gói vay, hai hình thức tiết kiệm và ba chương trình đồng hành. Mỗi cá nhân, mỗi nhóm chọn gói phù hợp với kế hoạch và hoàn cảnh của mình, rồi cùng bắt đầu từ những bước nhỏ.",
   sections: [
     { id: "vay-von", label: "Vay vốn" },
     { id: "tiet-kiem", label: "Tiết kiệm" },
@@ -494,65 +494,6 @@ export const loanPackages = [
         body: [
           "Gói “Học nghề, vững bước tương lai” giúp mỗi người tiếp cận cơ hội học nghề, nâng cao năng lực tự chủ tài chính và từng bước xây dựng cuộc sống ổn định. Việc kết hợp vốn vay ưu đãi với đào tạo và kết nối việc làm giúp giảm rào cản khi bắt đầu lại, đồng thời tránh để người học gánh khoản nợ vượt quá khả năng chi trả.",
           "Hiệu quả được đánh giá qua tỷ lệ hoàn thành khóa học, tỷ lệ tìm được việc làm, mức ổn định thu nhập sau đào tạo và khả năng hoàn trả khoản vay.",
-        ],
-      },
-    ] as Block[],
-  },
-  {
-    id: "goi-4",
-    number: 4,
-    title: "Phát triển sinh kế, tăng trưởng bền vững",
-    audience:
-      "Dành cho phụ nữ thuộc diện được Đơm Hoa đồng hành, đã có hoạt động kinh doanh hoặc hành nghề tạo thu nhập thực tế và có nhu cầu mở rộng sinh kế.",
-    highlight: { amount: "15–50 triệu", rate: "1,0%/tháng" },
-    calculator: true,
-    actions: [selfCheck, consult] as Action[],
-    blocks: [
-      {
-        kind: "rows",
-        title: "Thông tin gói vay",
-        rows: [
-          { label: "Mục đích vay", value: "Bổ sung vốn nhập hàng, mua nguyên liệu, trang thiết bị, mở rộng kênh bán hàng trực tiếp hoặc trực tuyến, phát triển hoạt động kinh doanh có cơ sở" },
-          { label: "Hạn mức", value: "15–50 triệu đồng, căn cứ nhu cầu vốn, quy mô hoạt động và khả năng trả nợ" },
-          { label: "Thời hạn", value: "12–24 tháng, phù hợp chu kỳ kinh doanh và dòng tiền dự kiến" },
-          { label: "Lãi suất", value: "1,0%/tháng, tính trên dư nợ gốc thực tế còn lại" },
-          { label: "Giải ngân", value: "Vay cá nhân; giải ngân một lần hoặc nhiều đợt tùy phương án sử dụng vốn và tiến độ triển khai" },
-          { label: "Cách trả nợ", value: "Trả gốc và lãi theo lịch đã thỏa thuận, phù hợp với dòng tiền kinh doanh thực tế" },
-          { label: "Hỗ trợ đi kèm", value: "Tư vấn định giá sản phẩm, tính lợi nhuận, quản lý hàng tồn kho, quản lý thu chi và kết nối đầu ra" },
-        ],
-      },
-      {
-        kind: "list",
-        title: "Điều kiện xét duyệt",
-        items: [
-          "Đã có hoạt động kinh doanh hoặc hành nghề tạo thu nhập thực tế.",
-          "Có thông tin thu chi, đơn hàng, doanh thu hoặc bằng chứng phù hợp khác để đánh giá tình hình kinh doanh.",
-          "Có phương án sử dụng vốn cụ thể, xác định được nhu cầu vốn và khả năng tạo thêm dòng tiền.",
-          "Được xem xét tổng thể về dư nợ hiện tại, lịch sử trả nợ, chi phí sinh hoạt và khả năng trả nợ.",
-          "Cam kết sử dụng vốn đúng mục đích và phối hợp cung cấp thông tin để theo dõi hiệu quả khoản vay.",
-        ],
-      },
-      {
-        kind: "text",
-        title: "Nguyên tắc cấp vốn",
-        body: [
-          "Hạn mức vay không tự động tăng khi khách hàng hoàn thành khoản vay trước đó. Đơm Hoa đánh giá lại từng đề nghị vay dựa trên tình hình kinh doanh, khả năng trả nợ và mức độ cần thiết của khoản vốn mới.",
-          "Với khoản vay phục vụ mở rộng kinh doanh, Đơm Hoa xem xét dòng tiền tăng thêm dự kiến có đủ bù đắp nghĩa vụ nợ mới hay không. Nếu hoạt động kinh doanh chưa ổn định hoặc khoản vay có nguy cơ vượt quá khả năng chi trả, Đơm Hoa có thể điều chỉnh hạn mức hoặc chưa cấp thêm vốn.",
-        ],
-      },
-      {
-        kind: "text",
-        title: "Hỗ trợ phát triển sinh kế",
-        body: [
-          "Bên cạnh nguồn vốn, khách hàng được hướng dẫn lập kế hoạch kinh doanh, xác định giá bán, kiểm soát chi phí, quản lý hàng tồn kho và tìm kênh tiêu thụ phù hợp. Đơm Hoa có thể kết nối khách hàng với các chương trình đào tạo, hội chợ, mạng lưới bán hàng và đối tác tiêu thụ sản phẩm.",
-        ],
-      },
-      {
-        kind: "text",
-        title: "Ý nghĩa xã hội",
-        body: [
-          "Gói “Phát triển sinh kế, tăng trưởng bền vững” giúp mỗi người củng cố hoạt động tạo thu nhập đã hình thành, mở rộng kinh doanh có kiểm soát và từng bước nâng cao khả năng tự chủ tài chính.",
-          "Hiệu quả được đánh giá qua sự thay đổi về doanh thu, lợi nhuận, tính ổn định của dòng tiền, khả năng trả nợ và mức độ duy trì sinh kế sau khi nhận vốn.",
         ],
       },
     ] as Block[],

@@ -134,19 +134,19 @@ export default function HomePage() {
 
       {/* Financial products */}
       <section className="container-site mt-32" aria-labelledby="finance-title">
-        <div className="grid gap-12 lg:grid-cols-[0.8fr_2fr] lg:gap-16">
-          <div className="lg:sticky lg:top-32 lg:self-start" data-reveal>
+        <div className="grid gap-12 xl:grid-cols-[0.8fr_2fr] xl:gap-16">
+          <div className="xl:sticky xl:top-32 xl:self-start" data-reveal>
             <h2 id="finance-title" className="shout text-[36px] text-moss-ink md:text-[48px]">
               Vay vốn và tiết kiệm
             </h2>
             <p className="mt-5 text-lg text-ink-muted">
-              Bốn gói vay và hai hình thức tiết kiệm tự nguyện. Lãi tính trên dư nợ giảm dần, lịch trả nợ được giải thích rõ trước khi ký.
+              Ba gói vay và hai hình thức tiết kiệm tự nguyện. Lãi tính trên dư nợ giảm dần, lịch trả nợ được giải thích rõ trước khi ký.
             </p>
             <LinkButton href="/san-pham#vay-von" variant="primary" className="mt-8">
               Xem các gói vay
             </LinkButton>
           </div>
-          <ul data-reveal-group="100" className="grid gap-6 sm:grid-cols-2">
+          <ul data-reveal-group="100" className="grid gap-6 md:grid-cols-3">
             {loanPackages.map((p, i) => (
               <li key={p.id} data-reveal>
                 <Link href={`/san-pham#${p.id}`} className="card-lift group flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] bg-paper shadow-soft ring-1 ring-sprout-line">
@@ -160,14 +160,14 @@ export default function HomePage() {
                   </div>
                   <div className="flex flex-1 flex-col p-7 pt-5">
                     <h3 className="text-[22px] font-bold tracking-[-0.02em] text-moss-ink">{p.title}</h3>
-                    <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-sprout-line pt-5">
-                      <div>
+                    <dl className="mt-6 grid gap-3 border-t border-sprout-line pt-5">
+                      <div className="flex items-baseline justify-between gap-3">
                         <dt className="text-sm text-ink-muted">Hạn mức</dt>
-                        <dd className="tabular mt-1 text-lg font-bold text-moss-ink">{p.highlight.amount}</dd>
+                        <dd className="tabular text-lg font-bold text-moss-ink">{p.highlight.amount}</dd>
                       </div>
-                      <div>
+                      <div className="flex items-baseline justify-between gap-3">
                         <dt className="text-sm text-ink-muted">Lãi suất</dt>
-                        <dd className="tabular mt-1 whitespace-nowrap text-lg font-bold text-moss-ink">{p.highlight.rate}</dd>
+                        <dd className="tabular whitespace-nowrap text-lg font-bold text-moss-ink">{p.highlight.rate}</dd>
                       </div>
                     </dl>
                     <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[15px] font-semibold text-moss group-hover:text-blossom-deep">

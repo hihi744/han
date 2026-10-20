@@ -24,7 +24,7 @@ import {
 export const metadata: Metadata = {
   title: "Sản phẩm",
   description:
-    "Bốn gói vay, hai hình thức tiết kiệm và ba chương trình đồng hành của Đơm Hoa. Lãi suất tính trên dư nợ giảm dần, tiết kiệm và các chương trình đồng hành hoàn toàn tự nguyện.",
+    "Ba gói vay, hai hình thức tiết kiệm và ba chương trình đồng hành của Đơm Hoa. Lãi suất tính trên dư nợ giảm dần, tiết kiệm và các chương trình đồng hành hoàn toàn tự nguyện.",
 };
 
 function Actions({ items, className = "" }: { items: readonly Action[]; className?: string }) {
@@ -140,7 +140,7 @@ function LoansSection() {
   return (
     <div>
       {/* Overview of the four packages; each card opens its tab below */}
-      <ul data-reveal-group="90" className="grid gap-px overflow-hidden rounded-[var(--radius-card)] bg-sprout-line shadow-soft ring-1 ring-sprout-line sm:grid-cols-2 lg:grid-cols-4">
+      <ul data-reveal-group="90" className="grid gap-px overflow-hidden rounded-[var(--radius-card)] bg-sprout-line shadow-soft ring-1 ring-sprout-line sm:grid-cols-3">
         {loanPackages.map((p) => (
           <li key={p.id} data-reveal className="bg-paper">
             <a href={`#${p.id}`} className="block h-full p-6 hover:bg-sprout/50">

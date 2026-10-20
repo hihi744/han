@@ -96,11 +96,6 @@
       rate: () => 0.005,
       note: () => "0,5%/tháng trong thời gian vay. Miễn toàn bộ tiền lãi nếu hoàn thành khóa học và đạt chứng nhận nghề.",
     },
-    "goi-4": {
-      min: 15e6, max: 50e6, terms: [12, 18, 24], amount: 30e6, term: 18,
-      rate: () => 0.01,
-      note: () => "1,0%/tháng, tính trên dư nợ gốc thực tế còn lại.",
-    },
   };
 
   function schedule(amount, months, rate) {

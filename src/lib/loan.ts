@@ -99,17 +99,4 @@ export const calculatorPackages = [
     rate: (_amount: number, _tier = 0) => 0.005,
     rateNote: () => "0,5%/tháng trong thời gian vay. Miễn toàn bộ tiền lãi nếu hoàn thành khóa học và đạt chứng nhận nghề.",
   },
-  {
-    id: "goi-4",
-    label: "Gói 4: Phát triển sinh kế",
-    min: 15_000_000,
-    max: 50_000_000,
-    step: 1_000_000,
-    terms: [12, 18, 24],
-    defaultAmount: 30_000_000,
-    defaultTerm: 18,
-    tiers: null,
-    rate: (_amount: number, _tier = 0) => 0.01,
-    rateNote: () => "1,0%/tháng, tính trên dư nợ gốc thực tế còn lại.",
-  },
 ] as const;
