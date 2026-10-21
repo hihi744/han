@@ -44,7 +44,7 @@ export const nav: NavItem[] = [
 export const home = {
   quote: "Nảy mầm hy vọng, đơm hoa cuộc đời",
   lead:
-    "ĐƠM HOA là tổ chức tài chính vi mô phi lợi nhuận, đồng hành cùng những người phụ nữ đang khao khát làm lại cuộc sống. Đơm Hoa trao nguồn vốn nhỏ không cần tài sản thế chấp, kiến thức kinh doanh và sự đồng hành thấu hiểu để mỗi người có thể tự đứng vững bằng chính đôi tay của mình.",
+    "ĐƠM HOA là tổ chức tài chính vi mô đồng hành cùng những người phụ nữ đang khao khát làm lại cuộc sống. Đơm Hoa trao nguồn vốn nhỏ không cần tài sản thế chấp, kiến thức kinh doanh và sự đồng hành thấu hiểu để mỗi người có thể tự đứng vững bằng chính đôi tay của mình.",
   intro:
     "Sau những ngày nhiều biến động, điều mỗi người phụ nữ cần nhất là một cơ hội để bắt đầu lại, được lắng nghe và được trao niềm tin. Đơm Hoa trao cơ hội ấy qua khoản vay nhỏ phù hợp với kế hoạch sinh kế của riêng từng người, cùng những buổi học nghề, kiến thức tài chính, sự sẻ chia tinh thần và những cánh cửa việc làm rộng mở.",
   closing: { quote: "Mỗi hạt giống đều xứng đáng được đơm hoa, dù đã từng rơi vào bùn đất.", cta: "Liên hệ ngay" },
