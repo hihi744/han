@@ -282,7 +282,7 @@ export const loanPackages = [
     title: "Vốn khởi sự sinh kế theo nhóm",
     audience:
       "Dành cho cá nhân có kế hoạch tạo thu nhập từ tự doanh, nghề thủ công hoặc kinh doanh tại nhà. Nhóm vay là không gian chia sẻ kinh nghiệm và hỗ trợ lẫn nhau, hoàn toàn tự nguyện. Mỗi thành viên vẫn được xem xét khả năng trả nợ riêng.",
-    highlight: { amount: "5–15 triệu", rate: "0,8%/tháng" },
+    highlight: { amount: "5–15 triệu", rate: "0,55%/tháng" },
     calculator: true,
     actions: [] as Action[],
     blocks: [
@@ -305,11 +305,11 @@ export const loanPackages = [
         title: "Thông tin gói vay",
         rows: [
           { label: "Hạn mức lần đầu", value: "5–15 triệu đồng/khách hàng, theo kế hoạch vốn và dòng tiền" },
-          { label: "Hạn mức chu kỳ tiếp theo", value: "15–30 triệu đồng; tối đa 50 triệu đồng trong trường hợp phù hợp, sau khi xem xét lại thu nhập, dư nợ và lịch sử trả nợ" },
+          { label: "Hạn mức chu kỳ tiếp theo", value: "Từ 15 đến tối đa 50 triệu đồng" },
           { label: "Kỳ hạn", value: "6–12 tháng; khoản đầu tư công cụ có thể dài hơn" },
           { label: "Lịch trả nợ", value: "Hằng tuần hoặc hằng tháng, theo mùa vụ nếu có căn cứ. Lịch trả luôn phù hợp với khả năng thu tiền thực tế" },
           { label: "Ân hạn gốc", value: "Có thể 2–4 tuần đầu. Lãi trong thời gian ân hạn và tổng nghĩa vụ phải trả được nêu rõ từ đầu" },
-          { label: "Lãi suất", value: "0,8%/tháng (chu kỳ đầu, 5–15 triệu); 0,75%/tháng (chu kỳ tiếp theo, 15–30 triệu); tính trên dư nợ giảm dần" },
+          { label: "Lãi suất", value: "Mức lãi suất đề xuất theo chu kỳ, tính theo dư nợ giảm dần: chu kỳ đầu 0,55%/tháng; chu kỳ tiếp theo 0,52%/tháng" },
         ],
       },
       {
@@ -771,15 +771,15 @@ export const project = {
     "Đối tác từng đợt: một doanh nghiệp nhận đầu ra và một cơ sở dạy nghề, ký biên bản hợp tác trước khi mở lớp.",
     "Đầu ra từng đợt: tỷ lệ có việc làm; thu nhập ổn định sau tốt nghiệp trong vòng 1–3 tháng; số hợp đồng ký được.",
   ],
-  cycle: ["Tuyển chọn", "Đào tạo (2 tháng)", "Sát hạch", "Phân luồng A hoặc B", "Đồng hành (2 tháng)", "Tổng kết (tháng 6)", "Vay vốn hoặc tự chủ"],
+  cycle: ["Tuyển chọn", "Đào tạo (2 tháng)", "Sát hạch", "Phân luồng A hoặc B", "Làm việc tại xưởng (2 tháng)", "Tổng kết (tháng 6)", "Vay vốn hoặc tự chủ"],
   phases: [
     {
       phase: "Giai đoạn 0. Chuẩn bị",
       time: "1 tháng trước khi bắt đầu",
       items: [
-        "Ký biên bản hợp tác ba bên. Điều kiện tiên quyết là xưởng cam kết: nhận tối thiểu 2/3 số học viên đạt sát hạch; ký hợp đồng lao động đúng luật (có bảo hiểm) hoặc hợp đồng gia công có đơn giá rõ ràng; cử thợ cả hướng dẫn và cho học viên thực hành trên dây chuyền thật.",
-        "Tuyển chọn học viên: qua giới thiệu của địa phương, phỏng vấn nhu cầu, nguyện vọng và thái độ, khám sức khỏe cơ bản; ưu tiên người có con nhỏ hoặc là trụ cột kinh tế.",
-        "Chuẩn bị chương trình: tay nghề, kỹ năng mềm, kỷ luật lao động, giao tiếp nơi làm việc, quản lý tiền cơ bản.",
+        "Ký biên bản hợp tác ba bên.",
+        "Tuyển chọn học viên.",
+        "Chuẩn bị chương trình: giáo án liên quan đến tay nghề, kỹ năng mềm, kỷ luật lao động, giao tiếp nơi làm việc, quản lý tiền cơ bản.",
       ],
     },
     {
@@ -788,16 +788,15 @@ export const project = {
       items: [
         "Mỗi tuần có 4 buổi đào tạo nghề.",
         "Song song với các buổi học nghề, có 4 buổi sinh hoạt nhóm (2 tuần một lần) nhằm tăng gắn kết cộng đồng, hỗ trợ tinh thần và giúp học viên hòa nhập, gồm cách đối diện kỳ thị, quản lý căng thẳng và quản lý chi tiêu.",
-        "Phân luồng đầu ra vào cuối tháng thứ 2.",
       ],
     },
     {
-      phase: "Giai đoạn 2. Đồng hành",
+      phase: "Giai đoạn 2. Làm việc tại xưởng",
       time: "2 tháng tiếp theo",
       items: [
-        "Cán bộ dự án thăm xưởng và họp nhóm hằng tháng, xử lý sớm mâu thuẫn, nghỉ việc hoặc khó khăn cá nhân.",
-        "Theo dõi thu nhập, chuyên cần và tỷ lệ lỗi.",
-        "Học viên luồng A được khuyến khích gửi tiết kiệm định kỳ để tạo hồ sơ tích lũy, đủ điều kiện vay sau này.",
+        "Học viên đủ điều kiện tốt nghiệp đầu ra được làm việc tại xưởng hợp tác.",
+        "Cán bộ dự án đồng thời thăm xưởng và họp nhóm hằng tháng, sớm xử lý các vấn đề về nghỉ việc hoặc khó khăn cá nhân.",
+        "Học viên được khuyến khích gửi tiết kiệm định kỳ để tạo hồ sơ tích lũy, đủ điều kiện vay sau này.",
       ],
     },
     {
@@ -819,7 +818,7 @@ export const project = {
   roadmap: [
     { time: "Trước tháng 1 (1 tháng)", phase: "0. Chuẩn bị", work: "Ký biên bản hợp tác; tuyển chọn học viên; chuẩn bị chương trình", result: "Đủ đối tác và danh sách học viên" },
     { time: "Tháng 1–2", phase: "1. Đào tạo", work: "4 buổi/tuần; 4 buổi sinh hoạt nhóm; sát hạch tuần 8", result: "Học viên đạt chuẩn tay nghề; phân luồng A, B" },
-    { time: "Tháng 3–4", phase: "2. Đồng hành", work: "Thăm xưởng, họp nhóm hằng tháng; theo dõi chỉ số", result: "Học viên ổn định việc làm, bắt đầu tích lũy" },
+    { time: "Tháng 3–4", phase: "2. Làm việc tại xưởng", work: "Thăm xưởng, họp nhóm hằng tháng; theo dõi chỉ số", result: "Học viên ổn định việc làm, bắt đầu tích lũy" },
     { time: "Tháng 6", phase: "3. Tổng kết", work: "Đánh giá chỉ số, họp rút kinh nghiệm", result: "Quyết định mở đợt tiếp theo" },
   ],
   parallelNote:
@@ -876,12 +875,12 @@ export const project = {
     { label: "Nhân rộng", value: "Sau đợt thử nghiệm đầu tiên, dự án mở thêm nghề (nấu ăn, cắt tóc, bán hàng online), thêm xưởng và cơ sở dạy nghề đối tác, tăng số đợt trong năm và có thể mở rộng sang các quận, huyện khác của Hà Nội." },
     { label: "Gắn với tín dụng vi mô", value: "Học viên có hồ sơ tích lũy tốt được ưu tiên xét vay vốn, tạo đầu vào chất lượng cho các sản phẩm tín dụng của Đơm Hoa." },
   ] as Row[],
-  appeal: "Đợt đầu còn cần khoảng 89 triệu đồng. Quý doanh nghiệp, nhà tài trợ có thể đồng hành theo cách phù hợp:",
+  appeal: "Quý doanh nghiệp, nhà tài trợ có thể đồng hành theo cách phù hợp:",
   packages: [
-    { name: "Nhà tài trợ Vàng", value: "89 triệu đồng", meaning: "Tài trợ toàn bộ phần kinh phí còn thiếu của cả lớp (15 học viên)" },
-    { name: "Nhà tài trợ Bạc", value: "6 triệu đồng/học viên", meaning: "Trọn gói chi phí đào tạo cho một học viên, cho đến khi có việc làm" },
-    { name: "Đồng hành theo hạng mục", value: "Theo thực tế", meaning: "Nguyên vật liệu, sinh hoạt phí, đồng phục, bảo hộ lao động hoặc thù lao giảng viên" },
-    { name: "Hiện vật, hiện diện", value: "Không quy định", meaning: "Máy may, nguyên phụ liệu, chỗ thực hành hoặc nhận lao động sau đào tạo" },
+    { name: "Nhà tài trợ Vàng", value: "80 triệu đồng" },
+    { name: "Nhà tài trợ Bạc", value: "50 triệu đồng" },
+    { name: "Nhà tài trợ theo hạng mục", meaning: "Các hạng mục bao gồm nguyên vật liệu, sinh hoạt phí, đồng phục, bảo hộ lao động, thù lao giảng viên" },
+    { name: "Nhà tài trợ đồng hành", value: "3 triệu đồng + Hiện vật" },
   ],
   sponsorBenefits:
     "Được ghi nhận là đơn vị đồng hành trong tài liệu, báo cáo và truyền thông; nhận báo cáo tiến độ và kết quả đầu ra (tốt nghiệp, việc làm, thu nhập); được mời dự lễ khai giảng và tổng kết. Mọi khoản tài trợ được dùng đúng mục đích, có chứng từ minh bạch và theo quy định pháp luật.",

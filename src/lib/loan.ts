@@ -61,16 +61,16 @@ export const calculatorPackages = [
     id: "goi-1",
     label: "Gói 1: Vốn khởi sự theo nhóm",
     min: 5_000_000,
-    max: 30_000_000,
+    max: 50_000_000,
     step: 500_000,
     terms: [6, 9, 12],
     defaultAmount: 10_000_000,
     defaultTerm: 12,
-    // 0,8%/tháng for the first cycle (5–15 triệu), 0,75%/tháng for later cycles (15–30 triệu)
+    // 0,55%/tháng for the first cycle (5–15 triệu), 0,52%/tháng for later cycles (15–50 triệu)
     tiers: null,
-    rate: (amount: number, _tier = 0) => (amount <= 15_000_000 ? 0.008 : 0.0075),
+    rate: (amount: number, _tier = 0) => (amount <= 15_000_000 ? 0.0055 : 0.0052),
     rateNote: (amount: number) =>
-      amount <= 15_000_000 ? "Chu kỳ đầu (5–15 triệu): 0,8%/tháng" : "Chu kỳ tiếp theo (15–30 triệu): 0,75%/tháng",
+      amount <= 15_000_000 ? "Chu kỳ đầu (5–15 triệu): 0,55%/tháng" : "Chu kỳ tiếp theo (15–50 triệu): 0,52%/tháng",
   },
   {
     id: "goi-2",

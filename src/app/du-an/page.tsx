@@ -193,8 +193,8 @@ function SponsorPanel() {
             {project.packages.map((p, i) => (
               <li key={p.name} data-reveal className={`card-lift flex flex-col rounded-[var(--radius-card)] p-7 shadow-soft ${i === 0 ? "on-dark bg-moss-deep text-on-dark" : "bg-paper"}`}>
                 <h3 className={`text-[19px] ${i === 0 ? "text-on-dark" : "text-moss-ink"}`}>{p.name}</h3>
-                <p className={`tabular mt-4 text-[24px] font-extrabold tracking-tight ${i === 0 ? "text-petal-yellow" : "text-petal-red"}`}>{p.value}</p>
-                <p className={`mt-3 text-[15px] ${i === 0 ? "text-on-dark-muted" : "text-ink-muted"}`}>{p.meaning}</p>
+                {p.value && <p className={`tabular mt-4 text-[24px] font-extrabold tracking-tight ${i === 0 ? "text-petal-yellow" : "text-petal-red"}`}>{p.value}</p>}
+                {p.meaning && <p className={`mt-3 text-[15px] ${i === 0 ? "text-on-dark-muted" : "text-ink-muted"}`}>{p.meaning}</p>}
               </li>
             ))}
           </ul>

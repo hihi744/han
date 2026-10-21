@@ -82,9 +82,9 @@
   /* ---------- Loan calculator (equal principal, declining balance) ---------- */
   const PACKAGES = {
     "goi-1": {
-      min: 5e6, max: 30e6, terms: [6, 9, 12], amount: 10e6, term: 12,
-      rate: (a) => (a <= 15e6 ? 0.008 : 0.0075),
-      note: (a) => (a <= 15e6 ? "Chu kỳ đầu (5–15 triệu): 0,8%/tháng" : "Chu kỳ tiếp theo (15–30 triệu): 0,75%/tháng"),
+      min: 5e6, max: 50e6, terms: [6, 9, 12], amount: 10e6, term: 12,
+      rate: (a) => (a <= 15e6 ? 0.0055 : 0.0052),
+      note: (a) => (a <= 15e6 ? "Chu kỳ đầu (5–15 triệu): 0,55%/tháng" : "Chu kỳ tiếp theo (15–50 triệu): 0,52%/tháng"),
     },
     "goi-2": {
       min: 50e6, max: 200e6, terms: [12, 18, 24, 36], amount: 100e6, term: 24, tiered: true,

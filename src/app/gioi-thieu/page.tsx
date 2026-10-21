@@ -4,8 +4,7 @@ import { ArrowUpRight, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { CheckList, CtaBand, PageIntro, Photo } from "@/components/blocks";
 import { Journey } from "@/components/journey";
 import { SectionHeading } from "@/components/ui";
-import { about, expansion, funding, goals2031, goalsNote, legal, locations, org, partners } from "@/content/site";
-import { FundingDonut } from "@/components/funding-donut";
+import { about, expansion, goals2031, goalsNote, legal, locations, org, partners } from "@/content/site";
 import { phaseColours, VietnamMap } from "@/components/vietnam-map";
 
 export const metadata: Metadata = {
@@ -21,7 +20,6 @@ const sectionNav = [
   { href: "#pham-vi", label: "Phạm vi hoạt động" },
   { href: "#muc-tieu", label: "Mục tiêu" },
   { href: "#doi-tac", label: "Đối tác" },
-  { href: "#nguon-luc", label: "Nguồn lực" },
   { href: "#phap-ly", label: "Pháp lý và bảo mật" },
 ];
 
@@ -189,35 +187,6 @@ export default function AboutPage() {
               ))}
             </ul>
           </div>
-        </div>
-      </section>
-
-      {/* Funding */}
-      <section id="nguon-luc" className="container-site mt-24 scroll-mt-40" aria-labelledby="funding-title">
-        <div data-reveal className="grid gap-10 rounded-[var(--radius-panel)] bg-paper p-8 shadow-soft ring-1 ring-sprout-line sm:p-12 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
-          <div>
-            <h2 id="funding-title" className="text-[30px] text-moss-ink md:text-[38px]">
-              Nguồn lực và nhà tài trợ
-            </h2>
-            {funding.intro.map((t) => (
-              <p key={t} className="mt-4 text-ink-muted">
-                {t}
-              </p>
-            ))}
-            <h3 className="mt-10 text-[15px] font-semibold tracking-normal text-ink-muted">Cơ cấu nguồn thu dự kiến</h3>
-            <div className="mt-6">
-              <FundingDonut mix={funding.mix} />
-            </div>
-            <p className="mt-6 text-[15px] text-ink-muted">{funding.outlook}</p>
-          </div>
-          <ul className="space-y-6">
-            {funding.sources.map((s) => (
-              <li key={s.title} className="border-l-2 border-petal-orange pl-5">
-                <h3 className="text-[19px] text-moss-ink">{s.title}</h3>
-                <p className="mt-1 text-ink-muted">{s.body}</p>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 

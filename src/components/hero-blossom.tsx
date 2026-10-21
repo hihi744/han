@@ -22,8 +22,8 @@ const labels = [
   { text: "Nở", sub: "Tự chủ", className: "right-[6%] top-[-2%]", delay: 1.55 },
 ];
 
-// Gói 1 (group start-up loan), first cycle: 0,8%/tháng on the declining balance.
-const example = summarize(10_000_000, 12, 0.008);
+// Gói 1 (group start-up loan), first cycle: 0,55%/tháng on the declining balance.
+const example = summarize(10_000_000, 12, 0.0055);
 
 export type HeroTreatment = "none" | "glow" | "shadow" | "glass" | "aura" | "soft-white";
 
@@ -143,7 +143,7 @@ export function HeroBlossom({
           </div>
         </dl>
         <p className="mt-3 border-t border-sprout-line pt-3 text-[13px] leading-snug text-ink-muted">
-          Lãi suất 0,8%/tháng, tính trên dư nợ giảm dần. Không cần tài sản thế chấp.
+          Lãi suất 0,55%/tháng, tính trên dư nợ giảm dần. Không cần tài sản thế chấp.
         </p>
       </motion.figure>
     </div>
